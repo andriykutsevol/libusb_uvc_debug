@@ -11,6 +11,7 @@ autoreconf -fiv
 
 mkdir ./build
 cd ./build
+cmake ..
 make
 
 
