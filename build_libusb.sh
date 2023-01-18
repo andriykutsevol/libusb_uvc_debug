@@ -8,6 +8,7 @@ cd ./${working_dir}
 rm -Rf ./build
 
 autoreconf -fiv
+./configure
 
 mkdir ./build
 cd ./build
