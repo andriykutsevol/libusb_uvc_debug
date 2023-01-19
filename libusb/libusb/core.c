@@ -41,7 +41,6 @@ static libusb_log_cb log_handler;
 #endif
 
 struct libusb_context *usbi_default_context;
-struct libusb_context *usbi_fallback_context;
 static int default_context_refcnt;
 static usbi_mutex_static_t default_context_lock = USBI_MUTEX_INITIALIZER;
 static struct usbi_option default_context_options[LIBUSB_OPTION_MAX];
@@ -2285,7 +2284,7 @@ int API_EXPORTED libusb_init(libusb_context **ctx)
 
 	usbi_mutex_static_lock(&default_context_lock);
 
-	if (!ctx && default_context_refcnt > 0) {
+	if (!ctx && usbi_default_context) {
 		usbi_dbg(usbi_default_context, "reusing default context");
 		default_context_refcnt++;
 		usbi_mutex_static_unlock(&default_context_lock);
@@ -2347,23 +2346,16 @@ int API_EXPORTED libusb_init(libusb_context **ctx)
 	list_add(&_ctx->list, &active_contexts_list);
 	usbi_mutex_static_unlock(&active_contexts_lock);
 
+	usbi_hotplug_init(_ctx);
+
 	if (usbi_backend.init) {
 		r = usbi_backend.init(_ctx);
 		if (r)
 			goto err_io_exit;
 	}
 
-	/* Initialize hotplug after the initial enumeration is done. */
-	usbi_hotplug_init(_ctx);
-
-	if (ctx) {
+	if (ctx)
 		*ctx = _ctx;
-
-		if (!usbi_fallback_context) {
-			usbi_fallback_context = _ctx;
-			usbi_warn(usbi_fallback_context, "installing new context as implicit default");
-		}
-	}
 
 	usbi_mutex_static_unlock(&default_context_lock);
 
@@ -2437,8 +2429,6 @@ void API_EXPORTED libusb_exit(libusb_context *ctx)
 
 	if (!ctx)
 		usbi_default_context = NULL;
-	if (ctx == usbi_fallback_context)
-		usbi_fallback_context = NULL;
 
 	usbi_mutex_static_unlock(&default_context_lock);
 
@@ -2451,7 +2441,6 @@ void API_EXPORTED libusb_exit(libusb_context *ctx)
 	for_each_device(_ctx, dev) {
 		usbi_warn(_ctx, "device %d.%d still referenced",
 			dev->bus_number, dev->device_address);
-		DEVICE_CTX(dev) = NULL;
 	}
 
 	if (!list_empty(&_ctx->open_devs))
@@ -2585,8 +2574,7 @@ static void log_v(struct libusb_context *ctx, enum libusb_log_level level,
 #else
 	enum libusb_log_level ctx_level;
 
-	ctx = ctx ? ctx : usbi_default_context;
-	ctx = ctx ? ctx : usbi_fallback_context;
+	ctx = usbi_get_context(ctx);
 	if (ctx)
 		ctx_level = ctx->debug;
 	else

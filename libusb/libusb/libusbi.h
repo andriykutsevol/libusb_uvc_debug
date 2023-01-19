@@ -329,11 +329,10 @@ void usbi_log(struct libusb_context *ctx, enum libusb_log_level level,
 #endif /* ENABLE_LOGGING */
 
 #define DEVICE_CTX(dev)		((dev)->ctx)
-#define HANDLE_CTX(handle)	((handle) ? DEVICE_CTX((handle)->dev) : NULL)
+#define HANDLE_CTX(handle)	(DEVICE_CTX((handle)->dev))
+#define TRANSFER_CTX(transfer)	(HANDLE_CTX((transfer)->dev_handle))
 #define ITRANSFER_CTX(itransfer) \
-	((itransfer)->dev ? DEVICE_CTX((itransfer)->dev) : NULL)
-#define TRANSFER_CTX(transfer) \
-	(ITRANSFER_CTX(LIBUSB_TRANSFER_TO_USBI_TRANSFER(transfer)))
+	(TRANSFER_CTX(USBI_TRANSFER_TO_LIBUSB_TRANSFER(itransfer)))
 
 #define IS_EPIN(ep)		(0 != ((ep) & LIBUSB_ENDPOINT_IN))
 #define IS_EPOUT(ep)		(!IS_EPIN(ep))
@@ -436,26 +435,13 @@ struct libusb_context {
 };
 
 extern struct libusb_context *usbi_default_context;
-extern struct libusb_context *usbi_fallback_context;
 
 extern struct list_head active_contexts_list;
 extern usbi_mutex_static_t active_contexts_lock;
 
 static inline struct libusb_context *usbi_get_context(struct libusb_context *ctx)
 {
-	static int warned = 0;
-
-	if (!ctx) {
-		ctx = usbi_default_context;
-	}
-	if (!ctx) {
-		ctx = usbi_fallback_context;
-		if (ctx && warned == 0) {
-			usbi_err(ctx, "API misuse! Using non-default context as implicit default.");
-			warned = 1;
-		}
-	}
-	return ctx;
+	return ctx ? ctx : usbi_default_context;
 }
 
 enum usbi_event_flags {
@@ -575,10 +561,6 @@ struct usbi_transfer {
 	uint32_t stream_id;
 	uint32_t state_flags;   /* Protected by usbi_transfer->lock */
 	uint32_t timeout_flags; /* Protected by the flying_stransfers_lock */
-
-	/* The device reference is held until destruction for logging
-	 * even after dev_handle is set to NULL.  */
-	struct libusb_device *dev;
 
 	/* this lock is held during libusb_submit_transfer() and
 	 * libusb_cancel_transfer() (allowing the OS backend to prevent duplicate

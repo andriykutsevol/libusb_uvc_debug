@@ -523,10 +523,6 @@ static int windows_assign_endpoints(struct libusb_device_handle *dev_handle, uin
 		return r;
 	}
 
-	if (iface >= conf_desc->bNumInterfaces) {
-		usbi_err(HANDLE_CTX(dev_handle), "interface %d out of range for device", iface);
-		return LIBUSB_ERROR_NOT_FOUND;
-	}
 	if_desc = &conf_desc->interface[iface].altsetting[altsetting];
 	safe_free(priv->usb_interface[iface].endpoint);
 
@@ -2990,11 +2986,7 @@ static int winusbx_submit_iso_transfer(int sub_api, struct usbi_transfer *itrans
 			// WinUSB only supports isoch transfers spanning a full USB frames. Later, we might be smarter about this
 			// and allocate a temporary buffer. However, this is harder than it seems as its destruction would depend on overlapped
 			// IO...
-			if (transfer->dev_handle->dev->speed >= LIBUSB_SPEED_HIGH) // Microframes (125us)
-				iso_transfer_size_multiple = (pipe_info_ex.MaximumBytesPerInterval * 8) / interval;
-			else // Normal Frames (1ms)
-				iso_transfer_size_multiple = pipe_info_ex.MaximumBytesPerInterval / interval;
-
+			iso_transfer_size_multiple = (pipe_info_ex.MaximumBytesPerInterval * 8) / interval;
 			if (transfer->length % iso_transfer_size_multiple != 0) {
 				usbi_err(TRANSFER_CTX(transfer), "length of isoch buffer must be a multiple of the MaximumBytesPerInterval * 8 / Interval");
 				return LIBUSB_ERROR_INVALID_PARAM;
@@ -3233,25 +3225,12 @@ static enum libusb_transfer_status winusbx_copy_transfer_data(int sub_api, struc
 	int i;
 
 	if (transfer->type == LIBUSB_TRANSFER_TYPE_ISOCHRONOUS) {
-		struct winusb_device_priv *priv = usbi_get_device_priv(transfer->dev_handle->dev);
-
-		if (sub_api == SUB_API_NOTSET)
-			sub_api = priv->sub_api;
-		if (WinUSBX[sub_api].hDll == NULL)
-			return LIBUSB_TRANSFER_ERROR;
-
 		// for isochronous, need to copy the individual iso packet actual_lengths and statuses
 		if ((sub_api == SUB_API_LIBUSBK) || (sub_api == SUB_API_LIBUSB0)) {
 			// iso only supported on libusbk-based backends for now
 			PKISO_CONTEXT iso_context = transfer_priv->iso_context;
 			for (i = 0; i < transfer->num_iso_packets; i++) {
-				if (IS_XFERIN(transfer)) {
-					transfer->iso_packet_desc[i].actual_length = iso_context->IsoPackets[i].actual_length;
-				} else {
-					// On Windows the usbd Length field is not used for OUT transfers.
-					// Copy the requested value back for consistency with other platforms.
-					transfer->iso_packet_desc[i].actual_length = transfer->iso_packet_desc[i].length;
-				}
+				transfer->iso_packet_desc[i].actual_length = iso_context->IsoPackets[i].actual_length;
 				// TODO translate USDB_STATUS codes http://msdn.microsoft.com/en-us/library/ff539136(VS.85).aspx to libusb_transfer_status
 				//transfer->iso_packet_desc[i].status = transfer_priv->iso_context->IsoPackets[i].status;
 			}
@@ -3272,9 +3251,6 @@ static enum libusb_transfer_status winusbx_copy_transfer_data(int sub_api, struc
 			} else {
 				for (i = 0; i < transfer->num_iso_packets; i++) {
 					transfer->iso_packet_desc[i].status = LIBUSB_TRANSFER_COMPLETED;
-					// On Windows the usbd Length field is not used for OUT transfers.
-					// Copy the requested value back for consistency with other platforms.
-					transfer->iso_packet_desc[i].actual_length = transfer->iso_packet_desc[i].length;
 				}
 			}
 		} else {
@@ -3884,10 +3860,7 @@ static int hid_open(int sub_api, struct libusb_device_handle *dev_handle)
 
 		priv->hid->string_index[1] = dev->device_descriptor.iProduct;
 		if (priv->hid->string_index[1] != 0)
-			// Using HidD_GetIndexedString() instead of HidD_GetProductString(), as the latter would otherwise return the name
-			// of the interface instead of the iProduct string whenever the iInterface member of the USB_INTERFACE_DESCRIPTOR
-			// structure for the interface is nonzero (see Remarks section in the documentation of the HID API routines)
-			HidD_GetIndexedString(hid_handle, priv->hid->string_index[1], priv->hid->string[1], sizeof(priv->hid->string[1]));
+			HidD_GetProductString(hid_handle, priv->hid->string[1], sizeof(priv->hid->string[1]));
 		else
 			priv->hid->string[1][0] = 0;
 

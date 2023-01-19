@@ -26,9 +26,6 @@
 #define LIBUSB_H
 
 #if defined(_MSC_VER)
-#pragma warning(push)
-/* Disable: warning C4200: nonstandard extension used : zero-sized array in struct/union */
-#pragma warning(disable:4200)
 /* on MS environments, the inline keyword is available in C++ only */
 #if !defined(__cplusplus)
 #define inline __inline
@@ -2130,10 +2127,6 @@ enum libusb_option {
 };
 
 int LIBUSB_CALL libusb_set_option(libusb_context *ctx, enum libusb_option option, ...);
-
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 
 #if defined(__cplusplus)
 }
