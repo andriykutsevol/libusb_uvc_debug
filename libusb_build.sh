@@ -1,7 +1,16 @@
 #!/bin/bash
 set -e
-
 clear
+
+
+#===================================
+# sudo apt update
+# sudo apt upgrade
+# sudo apt-get install build-essential
+# sudo apt-get install autoconf
+# sudo apt-get install libtool
+# sudo apt install libudev-dev
+#===================================
 
 current_dir=`pwd`
 working_dir=${current_dir}"/libusb"
