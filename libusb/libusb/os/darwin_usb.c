@@ -43,7 +43,7 @@
 
 /* Default timeout to 10s for reenumerate. This is needed because USBDeviceReEnumerate
  * does not return error status on macOS. */
-#define DARWIN_REENUMERATE_TIMEOUT_US 10000000
+#define DARWIN_REENUMERATE_TIMEOUT_US (10 * USEC_PER_SEC)
 
 #include <AvailabilityMacros.h>
 #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1060 && MAC_OS_X_VERSION_MIN_REQUIRED < 101200
@@ -86,6 +86,7 @@ static int darwin_release_interface(struct libusb_device_handle *dev_handle, uin
 static int darwin_reenumerate_device(struct libusb_device_handle *dev_handle, bool capture);
 static int darwin_clear_halt(struct libusb_device_handle *dev_handle, unsigned char endpoint);
 static int darwin_reset_device(struct libusb_device_handle *dev_handle);
+static int darwin_detach_kernel_driver (struct libusb_device_handle *dev_handle, uint8_t interface);
 static void darwin_async_io_callback (void *refcon, IOReturn result, void *arg0);
 
 static enum libusb_error darwin_scan_devices(struct libusb_context *ctx);
@@ -493,6 +494,7 @@ static void *darwin_event_thread_main (void *arg0) {
   io_iterator_t          libusb_rem_device_iterator;
   io_iterator_t          libusb_add_device_iterator;
 
+  /* ctx must only be used for logging during thread startup */
   usbi_dbg (ctx, "creating hotplug event source");
 
   runloop = CFRunLoopGetCurrent ();
@@ -514,7 +516,7 @@ static void *darwin_event_thread_main (void *arg0) {
   kresult = IOServiceAddMatchingNotification (libusb_notification_port, kIOTerminatedNotification,
                                               IOServiceMatching(darwin_device_class),
                                               darwin_devices_detached,
-                                              ctx, &libusb_rem_device_iterator);
+                                              NULL, &libusb_rem_device_iterator);
 
   if (kresult != kIOReturnSuccess) {
     usbi_err (ctx, "could not add hotplug event source: %s", darwin_error_str (kresult));
@@ -527,7 +529,7 @@ static void *darwin_event_thread_main (void *arg0) {
   kresult = IOServiceAddMatchingNotification(libusb_notification_port, kIOFirstMatchNotification,
                                               IOServiceMatching(darwin_device_class),
                                               darwin_devices_attached,
-                                              ctx, &libusb_add_device_iterator);
+                                              NULL, &libusb_add_device_iterator);
 
   if (kresult != kIOReturnSuccess) {
     usbi_err (ctx, "could not add hotplug event source: %s", darwin_error_str (kresult));
@@ -552,7 +554,7 @@ static void *darwin_event_thread_main (void *arg0) {
   /* run the runloop */
   CFRunLoopRun();
 
-  usbi_dbg (ctx, "darwin event thread exiting");
+  usbi_dbg (NULL, "darwin event thread exiting");
 
   /* signal the main thread that the hotplug runloop has finished. */
   pthread_mutex_lock (&libusb_darwin_at_mutex);
@@ -1389,12 +1391,16 @@ static enum libusb_error get_endpoints (struct libusb_device_handle *dev_handle,
 
   /* current interface */
   struct darwin_interface *cInterface = &priv->interfaces[iface];
+#if InterfaceVersion >= 550
+  IOUSBEndpointProperties pipeProperties = {.bVersion = kUSBEndpointPropertiesVersion3};
+#else
+  UInt8 dont_care1, dont_care3;
+  UInt16 dont_care2;
+#endif
 
   IOReturn kresult;
 
   UInt8 numep, direction, number;
-  UInt8 dont_care1, dont_care3;
-  UInt16 dont_care2;
   int rc;
   struct libusb_context *ctx = HANDLE_CTX (dev_handle);
 
@@ -1410,9 +1416,14 @@ static enum libusb_error get_endpoints (struct libusb_device_handle *dev_handle,
 
   /* iterate through pipe references */
   for (UInt8 i = 1 ; i <= numep ; i++) {
+#if InterfaceVersion >= 550
+    kresult = (*(cInterface->interface))->GetPipePropertiesV3 (cInterface->interface, i, &pipeProperties);
+    number = pipeProperties.bEndpointNumber;
+    direction = pipeProperties.bDirection;
+#else
     kresult = (*(cInterface->interface))->GetPipeProperties(cInterface->interface, i, &direction, &number, &dont_care1,
                                                             &dont_care2, &dont_care3);
-
+#endif
     if (kresult != kIOReturnSuccess) {
       /* probably a buggy device. try to get the endpoint address from the descriptors */
       struct libusb_config_descriptor *config;
@@ -1430,6 +1441,10 @@ static enum libusb_error get_endpoints (struct libusb_device_handle *dev_handle,
         return rc;
       }
 
+      if (iface >= config->bNumInterfaces) {
+        usbi_err (HANDLE_CTX (dev_handle), "interface %d out of range for device", iface);
+        return LIBUSB_ERROR_NOT_FOUND;
+      }
       endpoint_desc = config->interface[iface].altsetting[alt_setting].endpoint + i - 1;
 
       cInterface->endpoint_addrs[i - 1] = endpoint_desc->bEndpointAddress;
@@ -1801,17 +1816,18 @@ static int darwin_reenumerate_device (struct libusb_device_handle *dev_handle, b
   usbi_dbg (ctx, "darwin/reenumerate_device: waiting for re-enumeration to complete...");
 
   struct timespec start;
-  clock_gettime(CLOCK_MONOTONIC, &start);
+  usbi_get_monotonic_time(&start);
 
   while (dpriv->in_reenumerate) {
     struct timespec delay = {.tv_sec = 0, .tv_nsec = 1000};
     nanosleep (&delay, NULL);
 
     struct timespec now;
-    clock_gettime(CLOCK_MONOTONIC, &now);
-    UInt32 elapsed = (now.tv_sec - start.tv_sec) * 1000000 + (now.tv_nsec - start.tv_nsec) / 1000;
+    usbi_get_monotonic_time(&now);
+    unsigned long elapsed_us = (now.tv_sec - start.tv_sec) * USEC_PER_SEC +
+                                (now.tv_nsec - start.tv_nsec) / 1000;
 
-    if (elapsed >= DARWIN_REENUMERATE_TIMEOUT_US) {
+    if (elapsed_us >= DARWIN_REENUMERATE_TIMEOUT_US) {
       usbi_err (ctx, "darwin/reenumerate_device: timeout waiting for reenumerate");
       dpriv->in_reenumerate = false;
       return LIBUSB_ERROR_TIMEOUT;
@@ -1843,14 +1859,40 @@ static int darwin_reenumerate_device (struct libusb_device_handle *dev_handle, b
 static int darwin_reset_device (struct libusb_device_handle *dev_handle) {
   struct darwin_cached_device *dpriv = DARWIN_CACHED_DEVICE(dev_handle->dev);
   IOReturn kresult;
+  enum libusb_error ret;
 
+#if !defined(TARGET_OS_OSX) || TARGET_OS_OSX == 1
   if (dpriv->capture_count > 0) {
     /* we have to use ResetDevice as USBDeviceReEnumerate() loses the authorization for capture */
     kresult = (*(dpriv->device))->ResetDevice (dpriv->device);
-    return darwin_to_libusb (kresult);
+    ret = darwin_to_libusb (kresult);
   } else {
-    return darwin_reenumerate_device (dev_handle, false);
+    ret = darwin_reenumerate_device (dev_handle, false);
   }
+#else
+  /* ResetDevice() is missing on non-macOS platforms */
+  ret = darwin_reenumerate_device (dev_handle, false);
+  if ((ret == LIBUSB_SUCCESS || ret == LIBUSB_ERROR_NOT_FOUND) && dpriv->capture_count > 0) {
+    int capture_count;
+    int8_t active_config = dpriv->active_config;
+    unsigned long claimed_interfaces = dev_handle->claimed_interfaces;
+
+    /* save old capture_count */
+    capture_count = dpriv->capture_count;
+    /* reset capture count */
+    dpriv->capture_count = 0;
+    /* attempt to detach kernel driver again as it is now re-attached */
+    ret = darwin_detach_kernel_driver (dev_handle, 0);
+    if (ret != LIBUSB_SUCCESS) {
+      return ret;
+    }
+    /* restore capture_count */
+    dpriv->capture_count = capture_count;
+    /* restore configuration */
+    ret = darwin_restore_state (dev_handle, active_config, claimed_interfaces);
+  }
+#endif
+  return ret;
 }
 
 static io_service_t usb_find_interface_matching_location (const io_name_t class_name, UInt8 interface_number, UInt32 location) {
@@ -2019,11 +2061,17 @@ static int submit_iso_transfer(struct usbi_transfer *itransfer) {
   struct darwin_transfer_priv *tpriv = usbi_get_transfer_priv(itransfer);
 
   IOReturn kresult;
-  uint8_t direction, number, interval, pipeRef, transferType;
-  uint16_t maxPacketSize;
+  uint8_t pipeRef, interval;
   UInt64 frame;
   AbsoluteTime atTime;
   int i;
+#if InterfaceVersion >= 550
+  IOUSBEndpointProperties pipeProperties = {.bVersion = kUSBEndpointPropertiesVersion3};
+#else
+  /* None of the values below are used in libusb for iso transfers */
+  uint8_t direction, number, transferType;
+  uint16_t maxPacketSize;
+#endif
 
   struct darwin_interface *cInterface;
 
@@ -2055,8 +2103,20 @@ static int submit_iso_transfer(struct usbi_transfer *itransfer) {
   }
 
   /* determine the properties of this endpoint and the speed of the device */
-  (*(cInterface->interface))->GetPipeProperties (cInterface->interface, pipeRef, &direction, &number,
+#if InterfaceVersion >= 550
+  kresult = (*(cInterface->interface))->GetPipePropertiesV3 (cInterface->interface, pipeRef, &pipeProperties);
+  interval = pipeProperties.bInterval;
+#else
+  kresult = (*(cInterface->interface))->GetPipeProperties (cInterface->interface, pipeRef, &direction, &number,
                                                  &transferType, &maxPacketSize, &interval);
+#endif
+  if (kresult != kIOReturnSuccess) {
+    usbi_err (TRANSFER_CTX (transfer), "failed to get pipe properties: %d", kresult);
+    free(tpriv->isoc_framelist);
+    tpriv->isoc_framelist = NULL;
+
+    return darwin_to_libusb (kresult);
+  }
 
   /* Last but not least we need the bus frame number */
   kresult = (*(cInterface->interface))->GetBusFrameNumber(cInterface->interface, &frame, &atTime);
@@ -2067,9 +2127,6 @@ static int submit_iso_transfer(struct usbi_transfer *itransfer) {
 
     return darwin_to_libusb (kresult);
   }
-
-  (*(cInterface->interface))->GetPipeProperties (cInterface->interface, pipeRef, &direction, &number,
-                                                 &transferType, &maxPacketSize, &interval);
 
   /* schedule for a frame a little in the future */
   frame += 4;
@@ -2417,7 +2474,7 @@ static int darwin_free_streams (struct libusb_device_handle *dev_handle, unsigne
 
 /* macOS APIs for getting entitlement values */
 
-#if TARGET_OS_OSX
+#if !defined(TARGET_OS_OSX) || TARGET_OS_OSX == 1
 #include <Security/Security.h>
 #else
 typedef struct __SecTask *SecTaskRef;

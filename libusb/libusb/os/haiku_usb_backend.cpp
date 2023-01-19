@@ -61,7 +61,6 @@ USBTransfer::IsCancelled()
 	return fCancelled;
 }
 
-
 void
 USBTransfer::Do(int fRawFD)
 {

@@ -848,10 +848,7 @@ static int usbfs_get_active_config(struct libusb_device *dev, int fd)
 		.data = &active_config
 	};
 
-
-	printf("LIBUSB: linux_usbfs.c: usbfs_get_active_config(); IOCTL_USBFS_CONTROL \n");
 	r = ioctl(fd, IOCTL_USBFS_CONTROL, &ctrl);
-
 	if (r < 0) {
 		if (errno == ENODEV)
 			return LIBUSB_ERROR_NO_DEVICE;
@@ -885,9 +882,7 @@ static enum libusb_speed usbfs_get_speed(struct libusb_context *ctx, int fd)
 {
 	int r;
 
-	printf("LIBUSB: linux_usbfs.c: usbfs_get_speed(); IOCTL_USBFS_GET_SPEED \n");
 	r = ioctl(fd, IOCTL_USBFS_GET_SPEED, NULL);
-
 	switch (r) {
 	case USBFS_SPEED_UNKNOWN:	return LIBUSB_SPEED_UNKNOWN;
 	case USBFS_SPEED_LOW:		return LIBUSB_SPEED_LOW;
@@ -1330,9 +1325,7 @@ static int initialize_handle(struct libusb_device_handle *handle, int fd)
 
 	hpriv->fd = fd;
 
-	printf("LIBUSB: linux_usbfs.c: initialize_handle(); IOCTL_USBFS_GET_CAPABILITIES \n");
 	r = ioctl(fd, IOCTL_USBFS_GET_CAPABILITIES, &hpriv->caps);
-
 	if (r < 0) {
 		if (errno == ENOTTY)
 			usbi_dbg(HANDLE_CTX(handle), "getcap not available");
@@ -1356,10 +1349,7 @@ static int op_wrap_sys_device(struct libusb_context *ctx,
 
 	r = linux_get_device_address(ctx, 1, &busnum, &devaddr, NULL, NULL, fd);
 	if (r < 0) {
-
-		printf("LIBUSB: linux_usbfs.c: linux_get_device_address(); IOCTL_USBFS_CONNECTINFO \n");
 		r = ioctl(fd, IOCTL_USBFS_CONNECTINFO, &ci);
-
 		if (r < 0) {
 			usbi_err(ctx, "connectinfo failed, errno=%d", errno);
 			return LIBUSB_ERROR_IO;
@@ -1439,7 +1429,7 @@ static int op_get_configuration(struct libusb_device_handle *handle,
 	uint8_t *config)
 {
 	struct linux_device_priv *priv = usbi_get_device_priv(handle->dev);
-	int active_config;
+	int active_config = -1; /* to please compiler */
 	int r;
 
 	if (priv->sysfs_dir) {
@@ -1469,8 +1459,6 @@ static int op_set_configuration(struct libusb_device_handle *handle, int config)
 	struct linux_device_priv *priv = usbi_get_device_priv(handle->dev);
 	struct linux_device_handle_priv *hpriv = usbi_get_device_handle_priv(handle);
 	int fd = hpriv->fd;
-
-	printf("LIBUSB: linux_usbfs.c: op_set_configuration(); IOCTL_USBFS_SETCONFIGURATION \n");
 	int r = ioctl(fd, IOCTL_USBFS_SETCONFIGURATION, &config);
 
 	if (r < 0) {
@@ -1500,10 +1488,7 @@ static int claim_interface(struct libusb_device_handle *handle, unsigned int ifa
 {
 	struct linux_device_handle_priv *hpriv = usbi_get_device_handle_priv(handle);
 	int fd = hpriv->fd;
-
-	printf("LIBUSB: linux_usbfs.c: claim_interface(); IOCTL_USBFS_CLAIMINTERFACE \n");
 	int r = ioctl(fd, IOCTL_USBFS_CLAIMINTERFACE, &iface);
-
 
 	if (r < 0) {
 		if (errno == ENOENT)
@@ -1523,8 +1508,6 @@ static int release_interface(struct libusb_device_handle *handle, unsigned int i
 {
 	struct linux_device_handle_priv *hpriv = usbi_get_device_handle_priv(handle);
 	int fd = hpriv->fd;
-
-	printf("LIBUSB: linux_usbfs.c: release_interface(); IOCTL_USBFS_RELEASEINTERFACE \n");
 	int r = ioctl(fd, IOCTL_USBFS_RELEASEINTERFACE, &iface);
 
 	if (r < 0) {
@@ -1547,11 +1530,7 @@ static int op_set_interface(struct libusb_device_handle *handle, uint8_t interfa
 
 	setintf.interface = interface;
 	setintf.altsetting = altsetting;
-
-	printf("LIBUSB: linux_usbfs.c: op_set_interface(); IOCTL_USBFS_SETINTERFACE: interface: %d, altsetting: %d\n", interface, altsetting);
 	r = ioctl(fd, IOCTL_USBFS_SETINTERFACE, &setintf);
-
-
 	if (r < 0) {
 		if (errno == EINVAL)
 			return LIBUSB_ERROR_NOT_FOUND;
@@ -1571,8 +1550,6 @@ static int op_clear_halt(struct libusb_device_handle *handle,
 	struct linux_device_handle_priv *hpriv = usbi_get_device_handle_priv(handle);
 	int fd = hpriv->fd;
 	unsigned int _endpoint = endpoint;
-
-	printf("LIBUSB: linux_usbfs.c: op_clear_halt(); IOCTL_USBFS_CLEAR_HALT \n");
 	int r = ioctl(fd, IOCTL_USBFS_CLEAR_HALT, &_endpoint);
 
 	if (r < 0) {
@@ -1606,9 +1583,6 @@ static int op_reset_device(struct libusb_device_handle *handle)
 	}
 
 	usbi_mutex_lock(&handle->lock);
-
-	printf("LIBUSB: linux_usbfs.c: op_reset_device(); IOCTL_USBFS_RESET \n");
-
 	r = ioctl(fd, IOCTL_USBFS_RESET, NULL);
 	if (r < 0) {
 		if (errno == ENODEV) {
@@ -1663,7 +1637,6 @@ static int do_streams_ioctl(struct libusb_device_handle *handle, long req,
 
 	r = ioctl(fd, req, streams);
 
-
 	free(streams);
 
 	if (r < 0) {
@@ -1683,9 +1656,6 @@ static int do_streams_ioctl(struct libusb_device_handle *handle, long req,
 static int op_alloc_streams(struct libusb_device_handle *handle,
 	uint32_t num_streams, unsigned char *endpoints, int num_endpoints)
 {
-	
-	printf("LIBUSB: linux_usbfs.c: op_alloc_streams(); IOCTL_USBFS_ALLOC_STREAMS \n");
-	
 	return do_streams_ioctl(handle, IOCTL_USBFS_ALLOC_STREAMS,
 				num_streams, endpoints, num_endpoints);
 }
@@ -1693,9 +1663,6 @@ static int op_alloc_streams(struct libusb_device_handle *handle,
 static int op_free_streams(struct libusb_device_handle *handle,
 		unsigned char *endpoints, int num_endpoints)
 {
-	
-	printf("LIBUSB: linux_usbfs.c: op_free_streams(); IOCTL_USBFS_FREE_STREAMS \n");
-	
 	return do_streams_ioctl(handle, IOCTL_USBFS_FREE_STREAMS, 0,
 				endpoints, num_endpoints);
 }
@@ -1704,8 +1671,6 @@ static void *op_dev_mem_alloc(struct libusb_device_handle *handle, size_t len)
 {
 	struct linux_device_handle_priv *hpriv = usbi_get_device_handle_priv(handle);
 	void *buffer;
-
-	printf("LIBUSB: linux_usbfs.c: *op_dev_mem_alloc(); MMAP; buffer = mmap(NULL, len, PROT_READ | PROT_WRITE, MAP_SHARED, hpriv->fd, 0);\n");
 
 	buffer = mmap(NULL, len, PROT_READ | PROT_WRITE, MAP_SHARED, hpriv->fd, 0);
 	if (buffer == MAP_FAILED) {
@@ -1718,9 +1683,6 @@ static void *op_dev_mem_alloc(struct libusb_device_handle *handle, size_t len)
 static int op_dev_mem_free(struct libusb_device_handle *handle, void *buffer,
 	size_t len)
 {
-	
-	printf("LIBUSB: linux_usbfs.c: *op_dev_mem_free(); MMAP; munmap(buffer, len) != 0 \n");
-	
 	if (munmap(buffer, len) != 0) {
 		usbi_err(HANDLE_CTX(handle), "free dev mem failed, errno=%d", errno);
 		return LIBUSB_ERROR_OTHER;
@@ -1738,9 +1700,6 @@ static int op_kernel_driver_active(struct libusb_device_handle *handle,
 	int r;
 
 	getdrv.interface = interface;
-
-	printf("LIBUSB: linux_usbfs.c: op_kernel_driver_active(); IOCTL_USBFS_GETDRIVER \n");
-
 	r = ioctl(fd, IOCTL_USBFS_GETDRIVER, &getdrv);
 	if (r < 0) {
 		if (errno == ENODATA)
@@ -1769,15 +1728,9 @@ static int op_detach_kernel_driver(struct libusb_device_handle *handle,
 	command.data = NULL;
 
 	getdrv.interface = interface;
-
-	printf("LIBUSB: linux_usbfs.c: op_detach_kernel_driver(); IOCTL_USBFS_GETDRIVER \n");
-
 	r = ioctl(fd, IOCTL_USBFS_GETDRIVER, &getdrv);
 	if (r == 0 && !strcmp(getdrv.driver, "usbfs"))
 		return LIBUSB_ERROR_NOT_FOUND;
-
-
-	printf("LIBUSB: linux_usbfs.c: op_detach_kernel_driver(); IOCTL_USBFS_IOCTL \n");
 
 	r = ioctl(fd, IOCTL_USBFS_IOCTL, &command);
 	if (r < 0) {
@@ -1807,10 +1760,7 @@ static int op_attach_kernel_driver(struct libusb_device_handle *handle,
 	command.ioctl_code = IOCTL_USBFS_CONNECT;
 	command.data = NULL;
 
-	printf("LIBUSB: linux_usbfs.c: op_attach_kernel_driver(); IOCTL_USBFS_IOCTL \n");
-
 	r = ioctl(fd, IOCTL_USBFS_IOCTL, &command);
-
 	if (r < 0) {
 		if (errno == ENODATA)
 			return LIBUSB_ERROR_NOT_FOUND;
@@ -1840,9 +1790,6 @@ static int detach_kernel_driver_and_claim(struct libusb_device_handle *handle,
 	dc.interface = interface;
 	strcpy(dc.driver, "usbfs");
 	dc.flags = USBFS_DISCONNECT_CLAIM_EXCEPT_DRIVER;
-
-	printf("LIBUSB: linux_usbfs.c: detach_kernel_driver_and_claim(); IOCTL_USBFS_DISCONNECT_CLAIM \n");
-
 	r = ioctl(fd, IOCTL_USBFS_DISCONNECT_CLAIM, &dc);
 	if (r == 0)
 		return 0;
@@ -1916,9 +1863,6 @@ static int discard_urbs(struct usbi_transfer *itransfer, int first, int last_plu
 			urb = tpriv->iso_urbs[i];
 		else
 			urb = &tpriv->urbs[i];
-
-
-		printf("LIBUSB: linux_usbfs.c: discard_urbs(); IOCTL_USBFS_DISCARDURB \n");	                                                                                  
 
 		if (ioctl(hpriv->fd, IOCTL_USBFS_DISCARDURB, urb) == 0)
 			continue;
@@ -2067,8 +2011,6 @@ static int submit_bulk_transfer(struct usbi_transfer *itransfer)
 		if (is_out && i == num_urbs - 1 &&
 		    (transfer->flags & LIBUSB_TRANSFER_ADD_ZERO_PACKET))
 			urb->flags |= USBFS_URB_ZERO_PACKET;
-
-		printf("LIBUSB: linux_usbfs.c: submit_bulk_transfer(); IOCTL_USBFS_SUBMITURB \n");
 
 		r = ioctl(hpriv->fd, IOCTL_USBFS_SUBMITURB, urb);
 		if (r == 0)
@@ -2221,9 +2163,6 @@ static int submit_iso_transfer(struct usbi_transfer *itransfer)
 
 	/* submit URBs */
 	for (i = 0; i < num_urbs; i++) {
-
-		printf("LIBUSB: linux_usbfs.c: submit_iso_transfer(); IOCTL_USBFS_SUBMITURB \n");
-
 		int r = ioctl(hpriv->fd, IOCTL_USBFS_SUBMITURB, urbs[i]);
 
 		if (r == 0)
@@ -2303,8 +2242,6 @@ static int submit_control_transfer(struct usbi_transfer *itransfer)
 	urb->endpoint = transfer->endpoint;
 	urb->buffer = transfer->buffer;
 	urb->buffer_length = transfer->length;
-
-	printf("LIBUSB: linux_usbfs.c: submit_control_transfer(); IOCTL_USBFS_SUBMITURB \n");
 
 	r = ioctl(hpriv->fd, IOCTL_USBFS_SUBMITURB, urb);
 	if (r < 0) {
@@ -2534,9 +2471,6 @@ completed:
 static int handle_iso_completion(struct usbi_transfer *itransfer,
 	struct usbfs_urb *urb)
 {
-	
-	printf("LIBUSB: linux_usbfs.c: handle_iso_completion() 0 \n");
-	
 	struct libusb_transfer *transfer =
 		USBI_TRANSFER_TO_LIBUSB_TRANSFER(itransfer);
 	struct linux_transfer_priv *tpriv = usbi_get_transfer_priv(itransfer);
@@ -2717,14 +2651,11 @@ static int handle_control_completion(struct usbi_transfer *itransfer,
 
 static int reap_for_handle(struct libusb_device_handle *handle)
 {
-	
 	struct linux_device_handle_priv *hpriv = usbi_get_device_handle_priv(handle);
 	int r;
 	struct usbfs_urb *urb = NULL;
 	struct usbi_transfer *itransfer;
 	struct libusb_transfer *transfer;
-
-	printf("LIBUSB: linux_usbfs.c: reap_for_handle(); IOCTL_USBFS_REAPURBNDELAY \n");
 
 	r = ioctl(hpriv->fd, IOCTL_USBFS_REAPURBNDELAY, &urb);
 	if (r < 0) {
@@ -2760,10 +2691,6 @@ static int reap_for_handle(struct libusb_device_handle *handle)
 static int op_handle_events(struct libusb_context *ctx,
 	void *event_data, unsigned int count, unsigned int num_ready)
 {
-	
-	printf("LIBUSB: linux_usbfs.c: op_handle_events() 0 \n");
-	
-	
 	struct pollfd *fds = event_data;
 	unsigned int n;
 	int r;
