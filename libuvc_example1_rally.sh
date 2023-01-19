@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-
+# ./libuvc_example1_rally.sh
 
 ex_num=1
 

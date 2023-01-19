@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e 
+# ./libuvc_build.sh
 
 #===================================
 # sudo apt update
