@@ -6,7 +6,10 @@ set -e
 # sudo apt update
 # sudo apt upgrade
 # sudo apt install libusb-1.0-0-dev
-# sudo snap install v4l2tools
+# sudo apt install v4l-utils
+# sudo apt install tcpdump
+# sudo apt install ffmpeg
+# sudo apt install vlc
 #===================================
 
 
