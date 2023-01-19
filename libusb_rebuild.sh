@@ -12,10 +12,10 @@ cd ${working_dir}
 #===================================
 
 
-rm -Rf ${build_dir}
+rm -Rf ./build
 autoreconf -fiv
-mkdir ${build_dir}
-cd ${build_dir}
+mkdir ./build
+cd ./build
 
 
 echo "=============================="
