@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e 
 
+#===================================
+# sudo apt update
+# sudo apt upgrade
+# sudo apt install libusb-1.0-0-dev
+#===================================
+
+
 current_dir=`pwd`
 working_dir=${current_dir}"/libuvc_debug"
 build_dir=${working_dir}/build
@@ -24,13 +31,3 @@ echo "=============================="
 make ..
 
 
-# root_dir=`pwd`
-
-# rm -R ./libuvc_debug
-# git clone https://github.com/andriykutsevol/libuvc_debug.git --branch hdmi
-
-# cd ./libuvc_debug
-# mkdir ./build
-# cd ./build
-# cmake ..
-# make
