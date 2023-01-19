@@ -6,6 +6,7 @@ set -e
 # sudo apt update
 # sudo apt upgrade
 # sudo apt install libusb-1.0-0-dev
+# sudo snap install v4l2tools
 #===================================
 
 
