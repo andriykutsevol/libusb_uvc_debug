@@ -41,7 +41,7 @@ echo "binary_path:          " ${binary_path}
 #output_dir:            /home/dgnet/experiment/3/c270/libuvc/1/640x480
 #binary_path:           /home/dgnet/experiment/3/libuvc_debug/build
 
-
+mkdir -p ${outpud_dir}
 rm -f ${output_dir}/*
 rm -f ${binary_path}/out
 
