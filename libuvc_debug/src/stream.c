@@ -232,29 +232,29 @@ uvc_error_t uvc_query_stream_ctrl(
   }
 
 
-  printf("UVCLIB: uvc_query_stream_ctrl(): REQUEST CODE: %x\n", req);
+  printf("!!!dgnet: UVCLIB: uvc_query_stream_ctrl(): REQUEST CODE: %x\n", req);
 
-  printf("UVCLIB: probe: %d\n", probe);
-  printf("UVCLIB: ctrl->bmHint: %d\n", ctrl->bmHint);
-  printf("UVCLIB: ctrl->bFormatIndex: %d\n", ctrl->bFormatIndex);
-  printf("UVCLIB: ctrl->bFrameIndex: %d\n", ctrl->bFrameIndex);
-  printf("UVCLIB: ctrl->dwFrameInterval: %d\n", ctrl->dwFrameInterval);
-  printf("UVCLIB: ctrl->wKeyFrameRate: %d\n", ctrl->wKeyFrameRate);
-  printf("UVCLIB: ctrl->wPFrameRate: %d\n", ctrl->wPFrameRate);
-  printf("UVCLIB: ctrl->wCompQuality: %d\n", ctrl->wCompQuality);
-  printf("UVCLIB: ctrl->wCompWindowSize: %d\n", ctrl->wCompWindowSize);
-  printf("UVCLIB: ctrl->wDelay: %d\n", ctrl->wDelay);
-  printf("UVCLIB: ctrl->dwMaxVideoFrameSize: %d\n", ctrl->dwMaxVideoFrameSize);
-  printf("UVCLIB: ctrl->dwMaxPayloadTransferSize: %d\n", ctrl->dwMaxPayloadTransferSize);
-  printf("UVCLIB: ctrl->bInterfaceNumber: %d\n", ctrl->bInterfaceNumber);
+  printf("!!!dgnet: UVCLIB: probe: %d\n", probe);
+  printf("!!!dgnet: UVCLIB: ctrl->bmHint: %d\n", ctrl->bmHint);
+  printf("!!!dgnet: UVCLIB: ctrl->bFormatIndex: %d\n", ctrl->bFormatIndex);
+  printf("!!!dgnet: UVCLIB: ctrl->bFrameIndex: %d\n", ctrl->bFrameIndex);
+  printf("!!!dgnet: UVCLIB: ctrl->dwFrameInterval: %d\n", ctrl->dwFrameInterval);
+  printf("!!!dgnet: UVCLIB: ctrl->wKeyFrameRate: %d\n", ctrl->wKeyFrameRate);
+  printf("!!!dgnet: UVCLIB: ctrl->wPFrameRate: %d\n", ctrl->wPFrameRate);
+  printf("!!!dgnet: UVCLIB: ctrl->wCompQuality: %d\n", ctrl->wCompQuality);
+  printf("!!!dgnet: UVCLIB: ctrl->wCompWindowSize: %d\n", ctrl->wCompWindowSize);
+  printf("!!!dgnet: UVCLIB: ctrl->wDelay: %d\n", ctrl->wDelay);
+  printf("!!!dgnet: UVCLIB: ctrl->dwMaxVideoFrameSize: %d\n", ctrl->dwMaxVideoFrameSize);
+  printf("!!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize: %d\n", ctrl->dwMaxPayloadTransferSize);
+  printf("!!!dgnet: UVCLIB: ctrl->bInterfaceNumber: %d\n", ctrl->bInterfaceNumber);
 
   if (len == 34) {
 
-    printf("UVCLIB: ctrl->dwClockFrequency: %d\n", ctrl->dwClockFrequency);
-    printf("UVCLIB: ctrl->bmFramingInfo: %d\n", ctrl->bmFramingInfo);
-    printf("UVCLIB: ctrl->bPreferredVersion: %d\n", ctrl->bPreferredVersion);
-    printf("UVCLIB: ctrl->bMinVersion: %d\n", ctrl->bMinVersion);
-    printf("UVCLIB: ctrl->bMaxVersion: %d\n", ctrl->bMaxVersion);
+    printf("!!!dgnet: UVCLIB: ctrl->dwClockFrequency: %d\n", ctrl->dwClockFrequency);
+    printf("!!!dgnet: UVCLIB: ctrl->bmFramingInfo: %d\n", ctrl->bmFramingInfo);
+    printf("!!!dgnet: UVCLIB: ctrl->bPreferredVersion: %d\n", ctrl->bPreferredVersion);
+    printf("!!!dgnet: UVCLIB: ctrl->bMinVersion: %d\n", ctrl->bMinVersion);
+    printf("!!!dgnet: UVCLIB: ctrl->bMaxVersion: %d\n", ctrl->bMaxVersion);
 
   }
 
@@ -429,7 +429,7 @@ uvc_error_t uvc_stream_ctrl(uvc_stream_handle_t *strmh, uvc_stream_ctrl_t *ctrl)
   if (strmh->running)
     return UVC_ERROR_BUSY;
 
-  printf("UVCLIB: uvc_stream_ctrl()\n");
+  printf("!!!dgnet: UVCLIB: uvc_stream_ctrl()\n");
   ret = uvc_query_stream_ctrl(strmh->devh, ctrl, 0, UVC_SET_CUR);
   if (ret != UVC_SUCCESS)
     return ret;
@@ -526,7 +526,7 @@ uvc_error_t uvc_get_stream_ctrl_format_size(
         UVC_DEBUG("claiming streaming interface %d", stream_if->bInterfaceNumber );
         uvc_claim_if(devh, ctrl->bInterfaceNumber);
         /* get the max values */
-        printf("UVCLIB: uvc_get_stream_ctrl_format_size()\n");
+        printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size()\n");
         uvc_query_stream_ctrl( devh, ctrl, 1, UVC_GET_MAX);
 
         if (frame->intervals) {
@@ -643,9 +643,9 @@ uvc_error_t uvc_probe_stream_ctrl(
     uvc_stream_ctrl_t *ctrl) {
   uvc_stream_ctrl_t required_ctrl = *ctrl;
 
-  printf("UVCLIB: uvc_probe_stream_ctrl() 1\n");
+  printf("!!!dgnet: UVCLIB: uvc_probe_stream_ctrl() 1\n");
   uvc_query_stream_ctrl( devh, ctrl, 1, UVC_SET_CUR );
-  printf("UVCLIB: uvc_probe_stream_ctrl() 2\n");
+  printf("!!!dgnet: UVCLIB: uvc_probe_stream_ctrl() 2\n");
   uvc_query_stream_ctrl( devh, ctrl, 1, UVC_GET_CUR );
 
   if(!_uvc_stream_params_negotiated(&required_ctrl, ctrl)) {
@@ -840,7 +840,7 @@ void _uvc_process_payload(uvc_stream_handle_t *strmh, uint8_t *payload, size_t p
 
 
 // void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
-//   printf("UVCLIB: _uvc_stream_callback BZBZBZBZBZBZBZxx\n");
+//   printf("!!!dgnet: UVCLIB: _uvc_stream_callback BZBZBZBZBZBZBZxx\n");
 //   libusb_submit_transfer(transfer);
 // }
 
@@ -848,7 +848,7 @@ void _uvc_process_payload(uvc_stream_handle_t *strmh, uint8_t *payload, size_t p
 void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
 
 
-  printf("UVCLIB: _uvc_stream_callback BZBZBZBZBZBZBZ\n");
+  printf("!!!dgnet: UVCLIB: _uvc_stream_callback BZBZBZBZBZBZBZ\n");
 
   uvc_stream_handle_t *strmh = transfer->user_data;
 
@@ -856,19 +856,19 @@ void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
 
   switch (transfer->status) {
   case LIBUSB_TRANSFER_COMPLETED:
-    printf("UVCLIB: CALLBACK _uvc_stream_callback 1: LIBUSB_TRANSFER_COMPLETED\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 1: LIBUSB_TRANSFER_COMPLETED\n");
     if (transfer->num_iso_packets == 0) {
-      printf("UVCLIB: CALLBACK _uvc_stream_callback 2: This is a BULK mode transfer\n");
+      printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 2: This is a BULK mode transfer\n");
       /* This is a bulk mode transfer, so it just has one payload transfer */
       _uvc_process_payload(strmh, transfer->buffer, transfer->actual_length);
     } else {
 
-      printf("UVCLIB: CALLBACK _uvc_stream_callback 3: This is a ISO mode transfer\n");
+      printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 3: This is a ISO mode transfer\n");
       /* This is an isochronous mode transfer, so each packet has a payload transfer */
       int packet_id;
 
       for (packet_id = 0; packet_id < transfer->num_iso_packets; ++packet_id) {
-        printf("UVCLIB: CALLBACK _uvc_stream_callback 4: packet_id: %d\n", packet_id);
+        printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 4: packet_id: %d\n", packet_id);
         uint8_t *pktbuf;
         struct libusb_iso_packet_descriptor *pkt;
 
@@ -879,7 +879,7 @@ void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
           continue;
         }
 
-        printf("UVCLIB: CALLBACK _uvc_stream_callback 5: libusb_get_iso_packet_buffer_simple()\n");
+        printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 5: libusb_get_iso_packet_buffer_simple()\n");
         pktbuf = libusb_get_iso_packet_buffer_simple(transfer, packet_id);
 
         _uvc_process_payload(strmh, pktbuf, pkt->actual_length);
@@ -888,11 +888,11 @@ void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
     }
     break;
   case LIBUSB_TRANSFER_CANCELLED: 
-    printf("UVCLIB: CALLBACK _uvc_stream_callback 6: LIBUSB_TRANSFER_CANCELLED\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 6: LIBUSB_TRANSFER_CANCELLED\n");
   case LIBUSB_TRANSFER_ERROR:
-    printf("UVCLIB: CALLBACK _uvc_stream_callback 7: LIBUSB_TRANSFER_ERROR\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 7: LIBUSB_TRANSFER_ERROR\n");
   case LIBUSB_TRANSFER_NO_DEVICE: {
-    printf("UVCLIB: CALLBACK _uvc_stream_callback 8: LIBUSB_TRANSFER_NO_DEVICE\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 8: LIBUSB_TRANSFER_NO_DEVICE\n");
     int i;
     UVC_DEBUG("not retrying transfer, status = %d", transfer->status);
     pthread_mutex_lock(&strmh->cb_mutex);
@@ -919,19 +919,19 @@ void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
     break;
   }
   case LIBUSB_TRANSFER_TIMED_OUT:
-    printf("UVCLIB: CALLBACK _uvc_stream_callback 9: LIBUSB_TRANSFER_TIMED_OUT\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 9: LIBUSB_TRANSFER_TIMED_OUT\n");
   case LIBUSB_TRANSFER_STALL:
-    printf("UVCLIB: CALLBACK _uvc_stream_callback 10: LIBUSB_TRANSFER_STALL\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 10: LIBUSB_TRANSFER_STALL\n");
   case LIBUSB_TRANSFER_OVERFLOW:
-    printf("UVCLIB: CALLBACK _uvc_stream_callback 11: LIBUSB_TRANSFER_OVERFLOW\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 11: LIBUSB_TRANSFER_OVERFLOW\n");
     UVC_DEBUG("retrying transfer, status = %d", transfer->status);
     break;
   }
   
   if ( resubmit ) {
-    printf("UVCLIB: CALLBACK _uvc_stream_callback 12: resubmit\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 12: resubmit\n");
     if ( strmh->running ) {
-      printf("UVCLIB: CALLBACK _uvc_stream_callback 13: resubmit\n");
+      printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 13: resubmit\n");
       int libusbRet = libusb_submit_transfer(transfer);
       if (libusbRet < 0)
       {
@@ -956,7 +956,7 @@ void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
         pthread_mutex_unlock(&strmh->cb_mutex);
       }
     } else {
-      printf("UVCLIB: CALLBACK _uvc_stream_callback 14: resubmit\n");
+      printf("!!!dgnet: UVCLIB: CALLBACK _uvc_stream_callback 14: resubmit\n");
       int i;
       pthread_mutex_lock(&strmh->cb_mutex);
 
@@ -1000,7 +1000,7 @@ uvc_error_t uvc_start_streaming(
   uvc_error_t ret;
   uvc_stream_handle_t *strmh;
 
-  printf("UVCLIB: uvc_start_streaming()\n");
+  printf("!!!dgnet: UVCLIB: uvc_start_streaming()\n");
   ret = uvc_stream_open_ctrl(devh, &strmh, ctrl);
   if (ret != UVC_SUCCESS)
     return ret;
@@ -1071,7 +1071,7 @@ uvc_error_t uvc_stream_open_ctrl(uvc_device_handle_t *devh, uvc_stream_handle_t 
   uvc_streaming_interface_t *stream_if;
   uvc_error_t ret;
 
-  printf("UVCLIB: uvc_stream_open_ctrl()\n");
+  printf("!!!dgnet: UVCLIB: uvc_stream_open_ctrl()\n");
 
   UVC_ENTER();
 
@@ -1149,7 +1149,7 @@ uvc_error_t uvc_stream_start(
     uint8_t flags
 ) {
   
-  printf("UVCLIB: START: uvc_stream_start()\n");
+  printf("!!!dgnet: UVCLIB: START: uvc_stream_start()\n");
   
   /* USB interface we'll be using */
   const struct libusb_interface *interface;
@@ -1202,7 +1202,7 @@ uvc_error_t uvc_stream_start(
 
   if (isochronous) {
 
-    printf("UVCLIB: -----START ISOCHRONOUS TRANSFER-----\n");
+    printf("!!!dgnet: UVCLIB: -----START ISOCHRONOUS TRANSFER-----\n");
 
     /* For isochronous streaming, we choose an appropriate altsetting for the endpoint
      * and set up several transfers */
@@ -1220,7 +1220,7 @@ uvc_error_t uvc_stream_start(
     
     config_bytes_per_packet = strmh->cur_ctrl.dwMaxPayloadTransferSize;
 
-    printf("UVCLIB: config_bytes_per_packet (== ctrl.dwMaxPayloadTransferSize?): %d\n", config_bytes_per_packet);
+    printf("!!!dgnet: UVCLIB: config_bytes_per_packet (== ctrl.dwMaxPayloadTransferSize?): %d\n", config_bytes_per_packet);
 
     /* Go through the altsettings and find one whose packets are at least
      * as big as our format's maximum per-packet usage. Assume that the
@@ -1259,13 +1259,13 @@ uvc_error_t uvc_stream_start(
         packets_per_transfer = (ctrl->dwMaxVideoFrameSize +
                                 endpoint_bytes_per_packet - 1) / endpoint_bytes_per_packet;
 
-        printf("UVCLIB: packets_per_transfer 1: %d\n", packets_per_transfer);
+        printf("!!!dgnet: UVCLIB: packets_per_transfer 1: %d\n", packets_per_transfer);
        
         /* But keep a reasonable limit: Otherwise we start dropping data */
         if (packets_per_transfer > 32)
           packets_per_transfer = 32;
 
-        printf("UVCLIB: packets_per_transfer 2 : %d\n", packets_per_transfer);  
+        printf("!!!dgnet: UVCLIB: packets_per_transfer 2 : %d\n", packets_per_transfer);  
         
         total_transfer_size = packets_per_transfer * endpoint_bytes_per_packet;
         break;
@@ -1278,8 +1278,8 @@ uvc_error_t uvc_stream_start(
       goto fail;
     }
 
-    printf("UVCLIB: libusb_set_interface_alt_setting(): altsetting->bInterfaceNumber %d\n", altsetting->bInterfaceNumber);
-    printf("UVCLIB: libusb_set_interface_alt_setting(): altsetting->bAlternateSetting %d\n", altsetting->bAlternateSetting);
+    printf("!!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bInterfaceNumber %d\n", altsetting->bInterfaceNumber);
+    printf("!!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bAlternateSetting %d\n", altsetting->bAlternateSetting);
 
 
     /* Select the altsetting */
@@ -1291,13 +1291,13 @@ uvc_error_t uvc_stream_start(
       goto fail;
     }
 
-    printf("UVCLIB: endpoint_bytes_per_packet: %d\n", endpoint_bytes_per_packet);
-    printf("UVCLIB: total_transfer_size: %d\n", total_transfer_size);
+    printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet: %d\n", endpoint_bytes_per_packet);
+    printf("!!!dgnet: UVCLIB: total_transfer_size: %d\n", total_transfer_size);
 
 
     /* Set up the transfers */
     for (transfer_id = 0; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; ++transfer_id) {
-      printf("UVCLIB: libusb_alloc_transfer(): %d, packets_per_transfer %d\n", transfer_id, packets_per_transfer);
+      printf("!!!dgnet: UVCLIB: libusb_alloc_transfer(): %d, packets_per_transfer %d\n", transfer_id, packets_per_transfer);
       transfer = libusb_alloc_transfer(packets_per_transfer);
       strmh->transfers[transfer_id] = transfer;      
       strmh->transfer_bufs[transfer_id] = malloc(total_transfer_size);
@@ -1353,13 +1353,13 @@ uvc_error_t uvc_stream_start(
 
   UVC_EXIT(ret);
 
-  printf("UVCLIB: END: uvc_stream_start()\n");
+  printf("!!!dgnet: UVCLIB: END: uvc_stream_start()\n");
 
   return ret;
 fail:
   strmh->running = 0;
   UVC_EXIT(ret);
-  printf("UVCLIB: END (FAILED): uvc_stream_start()\n");
+  printf("!!!dgnet: UVCLIB: END (FAILED): uvc_stream_start()\n");
   return ret;
 }
 
@@ -1390,7 +1390,7 @@ uvc_error_t uvc_stream_start_iso(
 void *_uvc_user_caller(void *arg) {
 
 
-  printf("UVCLIB: _uvc_user_caller(): GHGHGHGHGHGHGHGHGHGHGHGHGHGHGH\n");
+  printf("!!!dgnet: UVCLIB: _uvc_user_caller(): GHGHGHGHGHGHGHGHGHGHGHGHGHGHGH\n");
 
   uvc_stream_handle_t *strmh = (uvc_stream_handle_t *) arg;
 

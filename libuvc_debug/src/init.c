@@ -85,16 +85,16 @@ YUV stream from a UVC device such as a standard webcam.
  */
 void *_uvc_handle_events(void *arg) {
 
-  printf("UVCLIB: START _uvc_handle_events()\n");
+  printf("!!!dgnet: UVCLIB: START _uvc_handle_events()\n");
 
   uvc_context_t *ctx = (uvc_context_t *) arg;
 
   while (!ctx->kill_handler_thread){
-    printf("UVCLIB: libusb_handle_events_completed()\n");
+    printf("!!!dgnet: UVCLIB: libusb_handle_events_completed()\n");
     libusb_handle_events_completed(ctx->usb_ctx, &ctx->kill_handler_thread);
   }
 
-  printf("UVCLIB: END _uvc_handle_events()\n");  
+  printf("!!!dgnet: UVCLIB: END _uvc_handle_events()\n");  
   return NULL;
 }
 
@@ -144,22 +144,22 @@ uvc_error_t uvc_init(uvc_context_t **pctx, struct libusb_context *usb_ctx) {
  */
 void uvc_exit(uvc_context_t *ctx) {
 
-  printf("UVCLIB: START uvc_exit()\n");
+  printf("!!!dgnet: UVCLIB: START uvc_exit()\n");
 
   uvc_device_handle_t *devh;
 
   DL_FOREACH(ctx->open_devices, devh) {
-    printf("UVCLIB: uvc_exit() 1 uvc_close()\n");
+    printf("!!!dgnet: UVCLIB: uvc_exit() 1 uvc_close()\n");
     uvc_close(devh);
   }
 
   if (ctx->own_usb_ctx)
-    printf("UVCLIB: uvc_exit() 2 libusb_exit()\n");
+    printf("!!!dgnet: UVCLIB: uvc_exit() 2 libusb_exit()\n");
     libusb_exit(ctx->usb_ctx);
 
   free(ctx);
 
-  printf("UVCLIB: END uvc_exit()\n");
+  printf("!!!dgnet: UVCLIB: END uvc_exit()\n");
 
 }
 
@@ -173,12 +173,12 @@ void uvc_exit(uvc_context_t *ctx) {
  */
 void uvc_start_handler_thread(uvc_context_t *ctx) {
 
-  printf("UVCLIB: START uvc_start_handler_thread()\n");
+  printf("!!!dgnet: UVCLIB: START uvc_start_handler_thread()\n");
 
   if (ctx->own_usb_ctx)
     pthread_create(&ctx->handler_thread, NULL, _uvc_handle_events, (void*) ctx);
 
-  printf("UVCLIB: END uvc_start_handler_thread()\n");  
+  printf("!!!dgnet: UVCLIB: END uvc_start_handler_thread()\n");  
 
 }
 

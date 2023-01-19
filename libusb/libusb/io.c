@@ -22,6 +22,7 @@
  */
 
 #include "libusbi.h"
+#include "stdio.h"
 
 /**
  * \page libusb_io Synchronous and asynchronous device I/O
@@ -1657,6 +1658,9 @@ uint32_t API_EXPORTED libusb_transfer_get_stream_id(
 int usbi_handle_transfer_completion(struct usbi_transfer *itransfer,
 	enum libusb_transfer_status status)
 {
+	
+	printf("!!!dgnet: LIBUSB: io.c: usbi_handle_transfer_completion() 0 \n");
+	
 	struct libusb_transfer *transfer =
 		USBI_TRANSFER_TO_LIBUSB_TRANSFER(itransfer);
 	struct libusb_device_handle *dev_handle = transfer->dev_handle;
@@ -2173,6 +2177,9 @@ static int handle_timer_trigger(struct libusb_context *ctx)
  * doing the same thing. */
 static int handle_events(struct libusb_context *ctx, struct timeval *tv)
 {
+	
+	printf("!!!dgnet: LIBUSB: io.c: handle_events() 0 \n");
+	
 	struct usbi_reported_events reported_events;
 	int r, timeout_ms;
 
@@ -2315,6 +2322,9 @@ static int get_next_timeout(libusb_context *ctx, struct timeval *tv,
 int API_EXPORTED libusb_handle_events_timeout_completed(libusb_context *ctx,
 	struct timeval *tv, int *completed)
 {
+	
+	printf("!!!dgnet: LIBUSB: io.c: libusb_handle_events_timeout_completed() 0 \n");
+	
 	int r;
 	struct timeval poll_timeout;
 
@@ -2457,6 +2467,9 @@ int API_EXPORTED libusb_handle_events_completed(libusb_context *ctx,
 int API_EXPORTED libusb_handle_events_locked(libusb_context *ctx,
 	struct timeval *tv)
 {
+	
+	printf("!!!dgnet: LIBUSB: io.c: libusb_handle_events_locked() 0 \n");
+	
 	int r;
 	struct timeval poll_timeout;
 

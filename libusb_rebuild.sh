@@ -6,29 +6,14 @@ clear
 current_dir=`pwd`
 working_dir=${current_dir}"/libusb"
 build_dir=${working_dir}/build
-cd ${working_dir}
+cd ${build_dir}
 
-
-#===================================
-
-
-rm -Rf ./build
-autoreconf -fiv
-mkdir ./build
-cd ./build
-
-
-echo "=============================="
-echo "configure"
-echo "=============================="
-../configure --prefix=${build_dir}
 
 
 echo "=============================="
 echo "make"
 echo "=============================="
 make
-
 
 
 echo "=============================="

@@ -129,7 +129,7 @@ uvc_error_t uvc_find_device(
     uvc_context_t *ctx, uvc_device_t **dev,
     int vid, int pid, const char *sn) {
 
-  printf("UVCLIB: START uvc_find_device() \n");
+  printf("!!!dgnet: UVCLIB: START uvc_find_device() \n");
 
   uvc_error_t ret = UVC_SUCCESS;
 
@@ -142,7 +142,7 @@ uvc_error_t uvc_find_device(
 
   ret = uvc_get_device_list(ctx, &list);
 
-  printf("UVCLIB: uvc_find_device() 1 \n");
+  printf("!!!dgnet: UVCLIB: uvc_find_device() 1 \n");
 
   if (ret != UVC_SUCCESS) {
     UVC_EXIT(ret);
@@ -154,16 +154,16 @@ uvc_error_t uvc_find_device(
 
   while (!found_dev && (test_dev = list[dev_idx++]) != NULL) {
 
-    printf("UVCLIB: uvc_find_device() 2 \n");
+    printf("!!!dgnet: UVCLIB: uvc_find_device() 2 \n");
 
     uvc_device_descriptor_t *desc;
 
     if (uvc_get_device_descriptor(test_dev, &desc) != UVC_SUCCESS){
-      printf("UVCLIB: uvc_find_device() 3 \n");
+      printf("!!!dgnet: UVCLIB: uvc_find_device() 3 \n");
       continue;
     }
 
-    printf("UVCLIB: uvc_find_device() 4 \n");
+    printf("!!!dgnet: UVCLIB: uvc_find_device() 4 \n");
       
 
     if ((!vid || desc->idVendor == vid)
@@ -171,16 +171,16 @@ uvc_error_t uvc_find_device(
         && (!sn || (desc->serialNumber && !strcmp(desc->serialNumber, sn))))
       found_dev = 1;
 
-    printf("UVCLIB: uvc_find_device() 5 \n");
+    printf("!!!dgnet: UVCLIB: uvc_find_device() 5 \n");
 
     uvc_free_device_descriptor(desc);
 
-    printf("UVCLIB: uvc_find_device() 6 \n");
+    printf("!!!dgnet: UVCLIB: uvc_find_device() 6 \n");
 
   }
 
   if (found_dev){
-    printf("UVCLIB: uvc_find_device() 7 \n");
+    printf("!!!dgnet: UVCLIB: uvc_find_device() 7 \n");
     uvc_ref_device(test_dev);
   }
     
@@ -188,7 +188,7 @@ uvc_error_t uvc_find_device(
   uvc_free_device_list(list, 1);
 
 
-  printf("UVCLIB: END uvc_find_device() \n");
+  printf("!!!dgnet: UVCLIB: END uvc_find_device() \n");
 
   if (found_dev) {
     *dev = test_dev;
@@ -341,19 +341,19 @@ uvc_error_t uvc_open(
     uvc_device_t *dev,
     uvc_device_handle_t **devh) {
 
-  printf("UVCLIB: START uvc_open()\n");
+  printf("!!!dgnet: UVCLIB: START uvc_open()\n");
 
   uvc_error_t ret;
   struct libusb_device_handle *usb_devh;
 
   UVC_ENTER();
 
-  printf("UVCLIB: BEFORE libusb_open()\n");
+  printf("!!!dgnet: UVCLIB: BEFORE libusb_open()\n");
 
   ret = libusb_open(dev->usb_dev, &usb_devh);
   UVC_DEBUG("libusb_open() = %d", ret);
 
-  printf("UVCLIB: AFTER libusb_open()\n");
+  printf("!!!dgnet: UVCLIB: AFTER libusb_open()\n");
 
   if (ret != UVC_SUCCESS) {
     UVC_EXIT(ret);
@@ -363,7 +363,7 @@ uvc_error_t uvc_open(
   ret = uvc_open_internal(dev, usb_devh, devh);
   UVC_EXIT(ret);
 
-  printf("UVCLIB: END uvc_open()\n");
+  printf("!!!dgnet: UVCLIB: END uvc_open()\n");
 
   return ret;
 }
@@ -373,7 +373,7 @@ static uvc_error_t uvc_open_internal(
     struct libusb_device_handle *usb_devh,
     uvc_device_handle_t **devh) {
 
-  printf("UVCLIB: START uvc_open_internal()\n");
+  printf("!!!dgnet: UVCLIB: START uvc_open_internal()\n");
 
   uvc_error_t ret;
   uvc_device_handle_t *internal_devh;
@@ -387,20 +387,20 @@ static uvc_error_t uvc_open_internal(
   internal_devh->dev = dev;
   internal_devh->usb_devh = usb_devh;
 
-  printf("UVCLIB: uvc_open_internal() 1: uvc_get_device_info() \n");
+  printf("!!!dgnet: UVCLIB: uvc_open_internal() 1: uvc_get_device_info() \n");
 
   ret = uvc_get_device_info(internal_devh, &(internal_devh->info));
 
-  printf("UVCLIB: uvc_open_internal() 2 \n");
+  printf("!!!dgnet: UVCLIB: uvc_open_internal() 2 \n");
 
   if (ret != UVC_SUCCESS)
     goto fail;
 
   UVC_DEBUG("claiming control interface %d", internal_devh->info->ctrl_if.bInterfaceNumber);
 
-  printf("UVCLIB: uvc_open_internal() 3: uvc_claim_if(): bInterfaceNumber: %d \n", internal_devh->info->ctrl_if.bInterfaceNumber);
+  printf("!!!dgnet: UVCLIB: uvc_open_internal() 3: uvc_claim_if(): bInterfaceNumber: %d \n", internal_devh->info->ctrl_if.bInterfaceNumber);
   ret = uvc_claim_if(internal_devh, internal_devh->info->ctrl_if.bInterfaceNumber);
-  printf("UVCLIB: uvc_open_internal() 4 \n");
+  printf("!!!dgnet: UVCLIB: uvc_open_internal() 4 \n");
 
 
   if (ret != UVC_SUCCESS)
@@ -410,7 +410,7 @@ static uvc_error_t uvc_open_internal(
   libusb_get_device_descriptor(dev->usb_dev, &desc);
   internal_devh->is_isight = (desc.idVendor == 0x05ac && desc.idProduct == 0x8501);
 
-  printf("UVCLIB: uvc_open_internal() 5: libusb_alloc_transfer() \n");  
+  printf("!!!dgnet: UVCLIB: uvc_open_internal() 5: libusb_alloc_transfer() \n");  
 
   if (internal_devh->info->ctrl_if.bEndpointAddress) {
     internal_devh->status_xfer = libusb_alloc_transfer(0);
@@ -419,7 +419,7 @@ static uvc_error_t uvc_open_internal(
       goto fail;
     }
 
-    printf("UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer() \n");
+    printf("!!!dgnet: UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer() \n");
 
     libusb_fill_interrupt_transfer(internal_devh->status_xfer,
                                    usb_devh,
@@ -431,12 +431,12 @@ static uvc_error_t uvc_open_internal(
                                    0);
 
 
-    printf("UVCLIB: uvc_open_internal() 7: libusb_submit_transfer() \n");
+    printf("!!!dgnet: UVCLIB: uvc_open_internal() 7: libusb_submit_transfer() \n");
 
     ret = libusb_submit_transfer(internal_devh->status_xfer);
     UVC_DEBUG("libusb_submit_transfer() = %d", ret);
 
-    printf("UVCLIB: uvc_open_internal() 8 \n");
+    printf("!!!dgnet: UVCLIB: uvc_open_internal() 8 \n");
 
     if (ret) {
       fprintf(stderr,
@@ -450,7 +450,7 @@ static uvc_error_t uvc_open_internal(
     uvc_start_handler_thread(dev->ctx);
   }
 
-  printf("UVCLIB: uvc_open_internal() 9 \n");
+  printf("!!!dgnet: UVCLIB: uvc_open_internal() 9 \n");
 
 
   DL_APPEND(dev->ctx->open_devices, internal_devh);
@@ -458,7 +458,7 @@ static uvc_error_t uvc_open_internal(
 
   UVC_EXIT(ret);
 
-  printf("UVCLIB: END1 uvc_open_internal()\n");
+  printf("!!!dgnet: UVCLIB: END1 uvc_open_internal()\n");
 
   return ret;
 
@@ -472,7 +472,7 @@ static uvc_error_t uvc_open_internal(
 
   UVC_EXIT(ret);
 
-  printf("UVCLIB: END2 uvc_open_internal()\n");
+  printf("!!!dgnet: UVCLIB: END2 uvc_open_internal()\n");
 
   return ret;
 }
@@ -489,7 +489,7 @@ static uvc_error_t uvc_open_internal(
 uvc_error_t uvc_get_device_info(uvc_device_handle_t *devh,
 				uvc_device_info_t **info) {
 
-  printf("UVCLIB: START uvc_get_device_info()\n");
+  printf("!!!dgnet: UVCLIB: START uvc_get_device_info()\n");
 
   uvc_error_t ret;
   uvc_device_info_t *internal_info;
@@ -502,7 +502,7 @@ uvc_error_t uvc_get_device_info(uvc_device_handle_t *devh,
     return UVC_ERROR_NO_MEM;
   }
 
-  printf("UVCLIB: uvc_get_device_info() 1: libusb_get_config_descriptor() \n");
+  printf("!!!dgnet: UVCLIB: uvc_get_device_info() 1: libusb_get_config_descriptor() \n");
 
   if (libusb_get_config_descriptor(devh->dev->usb_dev,
 				   0,
@@ -512,7 +512,7 @@ uvc_error_t uvc_get_device_info(uvc_device_handle_t *devh,
     return UVC_ERROR_IO;
   }
 
-  printf("UVCLIB: uvc_get_device_info() 2\n");  
+  printf("!!!dgnet: UVCLIB: uvc_get_device_info() 2\n");  
 
   ret = uvc_scan_control(devh, internal_info);
   if (ret != UVC_SUCCESS) {
@@ -525,7 +525,7 @@ uvc_error_t uvc_get_device_info(uvc_device_handle_t *devh,
 
   UVC_EXIT(ret);
 
-  printf("UVCLIB: END uvc_get_device_info()\n");
+  printf("!!!dgnet: UVCLIB: END uvc_get_device_info()\n");
 
   return ret;
 }
@@ -666,7 +666,7 @@ uvc_error_t uvc_get_device_descriptor(
     uvc_device_t *dev,
     uvc_device_descriptor_t **desc) {
 
-  printf("UVCLIB: START uvc_get_device_descriptor() \n");
+  printf("!!!dgnet: UVCLIB: START uvc_get_device_descriptor() \n");
 
   uvc_device_descriptor_t *desc_internal;
   struct libusb_device_descriptor usb_desc;
@@ -675,9 +675,9 @@ uvc_error_t uvc_get_device_descriptor(
 
   UVC_ENTER();
 
-  printf("UVCLIB: START uvc_get_device_descriptor() 1\n");
+  printf("!!!dgnet: UVCLIB: START uvc_get_device_descriptor() 1\n");
   ret = libusb_get_device_descriptor(dev->usb_dev, &usb_desc);
-  printf("UVCLIB: START uvc_get_device_descriptor() 2\n");
+  printf("!!!dgnet: UVCLIB: START uvc_get_device_descriptor() 2\n");
 
   if (ret != UVC_SUCCESS) {
     UVC_EXIT(ret);
@@ -688,16 +688,16 @@ uvc_error_t uvc_get_device_descriptor(
   desc_internal->idVendor = usb_desc.idVendor;
   desc_internal->idProduct = usb_desc.idProduct;
 
-  printf("UVCLIB: START uvc_get_device_descriptor() 3\n");
+  printf("!!!dgnet: UVCLIB: START uvc_get_device_descriptor() 3\n");
   if (libusb_open(dev->usb_dev, &usb_devh) == 0) {
 
-    printf("UVCLIB: START uvc_get_device_descriptor() 4\n");
+    printf("!!!dgnet: UVCLIB: START uvc_get_device_descriptor() 4\n");
     unsigned char buf[64];
 
     int bytes = libusb_get_string_descriptor_ascii(
         usb_devh, usb_desc.iSerialNumber, buf, sizeof(buf));
 
-    printf("UVCLIB: START uvc_get_device_descriptor() 5\n");    
+    printf("!!!dgnet: UVCLIB: START uvc_get_device_descriptor() 5\n");    
 
     if (bytes > 0)
       desc_internal->serialNumber = strdup((const char*) buf);
@@ -705,7 +705,7 @@ uvc_error_t uvc_get_device_descriptor(
     bytes = libusb_get_string_descriptor_ascii(
         usb_devh, usb_desc.iManufacturer, buf, sizeof(buf));
 
-    printf("UVCLIB: START uvc_get_device_descriptor() 6\n");    
+    printf("!!!dgnet: UVCLIB: START uvc_get_device_descriptor() 6\n");    
 
     if (bytes > 0)
       desc_internal->manufacturer = strdup((const char*) buf);
@@ -714,14 +714,14 @@ uvc_error_t uvc_get_device_descriptor(
         usb_devh, usb_desc.iProduct, buf, sizeof(buf));
 
 
-    printf("UVCLIB: START uvc_get_device_descriptor() 7\n");    
+    printf("!!!dgnet: UVCLIB: START uvc_get_device_descriptor() 7\n");    
 
     if (bytes > 0)
       desc_internal->product = strdup((const char*) buf);
 
     libusb_close(usb_devh);
 
-    printf("UVCLIB: START uvc_get_device_descriptor() 8\n");
+    printf("!!!dgnet: UVCLIB: START uvc_get_device_descriptor() 8\n");
 
   } else {
     UVC_DEBUG("can't open device %04x:%04x, not fetching serial etc.",
@@ -732,7 +732,7 @@ uvc_error_t uvc_get_device_descriptor(
 
   UVC_EXIT(ret);
 
-  printf("UVCLIB: END uvc_get_device_descriptor() \n");
+  printf("!!!dgnet: UVCLIB: END uvc_get_device_descriptor() \n");
 
   return ret;
 }
@@ -775,7 +775,7 @@ uvc_error_t uvc_get_device_list(
     uvc_context_t *ctx,
     uvc_device_t ***list) {
 
-  printf("UVCLIB: START libusb_get_device_list()\n");
+  printf("!!!dgnet: UVCLIB: START libusb_get_device_list()\n");
 
   struct libusb_device **usb_dev_list;
   struct libusb_device *usb_dev;
@@ -882,7 +882,7 @@ uvc_error_t uvc_get_device_list(
 
   UVC_EXIT(UVC_SUCCESS);
 
-  printf("UVCLIB: END libusb_get_device_list() \n");
+  printf("!!!dgnet: UVCLIB: END libusb_get_device_list() \n");
 
 
   return UVC_SUCCESS;
@@ -1074,7 +1074,7 @@ void uvc_unref_device(uvc_device_t *dev) {
  */
 uvc_error_t uvc_claim_if(uvc_device_handle_t *devh, int idx) {
 
-  printf("UVCLIB: START uvc_claim_if(): \n");
+  printf("!!!dgnet: UVCLIB: START uvc_claim_if(): \n");
 
   int ret = UVC_SUCCESS;
 
@@ -1094,7 +1094,7 @@ uvc_error_t uvc_claim_if(uvc_device_handle_t *devh, int idx) {
   if (ret == UVC_SUCCESS || ret == LIBUSB_ERROR_NOT_FOUND || ret == LIBUSB_ERROR_NOT_SUPPORTED) {
     UVC_DEBUG("claiming interface %d", idx);
 
-    printf("UVCLIB: uvc_claim_if(): idx: %d\n", idx);
+    printf("!!!dgnet: UVCLIB: uvc_claim_if(): idx: %d\n", idx);
     if (!( ret = libusb_claim_interface(devh->usb_devh, idx))) {
       devh->claimed |= ( 1 << idx );
     }
@@ -1105,7 +1105,7 @@ uvc_error_t uvc_claim_if(uvc_device_handle_t *devh, int idx) {
 
   UVC_EXIT(ret);
 
-  printf("UVCLIB: END uvc_claim_if(): \n");
+  printf("!!!dgnet: UVCLIB: END uvc_claim_if(): \n");
 
   return ret;
 }
@@ -1119,7 +1119,7 @@ uvc_error_t uvc_claim_if(uvc_device_handle_t *devh, int idx) {
  */
 uvc_error_t uvc_release_if(uvc_device_handle_t *devh, int idx) {
 
-  printf("UVCLIB: START: uvc_release_if()\n");
+  printf("!!!dgnet: UVCLIB: START: uvc_release_if()\n");
 
   int ret = UVC_SUCCESS;
 
@@ -1131,28 +1131,28 @@ uvc_error_t uvc_release_if(uvc_device_handle_t *devh, int idx) {
     return ret;
   }
 
-  printf("UVCLIB: uvc_release_if() 1: libusb_set_interface_alt_setting()\n");
+  printf("!!!dgnet: UVCLIB: uvc_release_if() 1: libusb_set_interface_alt_setting()\n");
 
   /* libusb_release_interface *should* reset the alternate setting to the first available,
      but sometimes (e.g. on Darwin) it doesn't. Thus, we do it explicitly here.
      This is needed to de-initialize certain cameras. */
   libusb_set_interface_alt_setting(devh->usb_devh, idx, 0);
 
-  printf("UVCLIB: uvc_release_if() 2\n");
+  printf("!!!dgnet: UVCLIB: uvc_release_if() 2\n");
 
   ret = libusb_release_interface(devh->usb_devh, idx);
 
-  printf("UVCLIB: uvc_release_if() 3\n");
+  printf("!!!dgnet: UVCLIB: uvc_release_if() 3\n");
 
   if (UVC_SUCCESS == ret) {
 
-    printf("UVCLIB: uvc_release_if() 4: libusb_attach_kernel_driver(): idx: %d\n", idx);
+    printf("!!!dgnet: UVCLIB: uvc_release_if() 4: libusb_attach_kernel_driver(): idx: %d\n", idx);
 
     devh->claimed &= ~( 1 << idx );
     /* Reattach any kernel drivers that were disabled when we claimed this interface */
     ret = libusb_attach_kernel_driver(devh->usb_devh, idx);
 
-    printf("UVCLIB: uvc_release_if() 5\n");
+    printf("!!!dgnet: UVCLIB: uvc_release_if() 5\n");
 
     if (ret == UVC_SUCCESS) {
       UVC_DEBUG("reattached kernel driver to interface %d", idx);
@@ -1166,7 +1166,7 @@ uvc_error_t uvc_release_if(uvc_device_handle_t *devh, int idx) {
 
   UVC_EXIT(ret);
 
-  printf("UVCLIB: END: uvc_release_if() \n");
+  printf("!!!dgnet: UVCLIB: END: uvc_release_if() \n");
 
   return ret;
 }
@@ -1177,7 +1177,7 @@ uvc_error_t uvc_release_if(uvc_device_handle_t *devh, int idx) {
  */
 uvc_error_t uvc_scan_control(uvc_device_handle_t *devh, uvc_device_info_t *info) {
 
-  printf("UVCLIB: START uvc_scan_control()\n");
+  printf("!!!dgnet: UVCLIB: START uvc_scan_control()\n");
 
   const struct libusb_interface_descriptor *if_desc;
   uvc_error_t parse_ret, ret;
@@ -1193,7 +1193,7 @@ uvc_error_t uvc_scan_control(uvc_device_handle_t *devh, uvc_device_info_t *info)
   uvc_device_descriptor_t* dev_desc;
   int haveTISCamera = 0;
 
-  printf("UVCLIB: uvc_scan_control() 1: get_device_descriptor()\n");
+  printf("!!!dgnet: UVCLIB: uvc_scan_control() 1: get_device_descriptor()\n");
 
   get_device_descriptor ( devh, &dev_desc );
   if ( 0x199e == dev_desc->idVendor && ( 0x8101 == dev_desc->idProduct ||
@@ -1201,7 +1201,7 @@ uvc_error_t uvc_scan_control(uvc_device_handle_t *devh, uvc_device_info_t *info)
     haveTISCamera = 1;
   }
 
-  printf("UVCLIB: uvc_scan_control() 2\n");
+  printf("!!!dgnet: UVCLIB: uvc_scan_control() 2\n");
 
   uvc_free_device_descriptor ( dev_desc );
 
@@ -1230,7 +1230,7 @@ uvc_error_t uvc_scan_control(uvc_device_handle_t *devh, uvc_device_info_t *info)
   buffer = if_desc->extra;
   buffer_left = if_desc->extra_length;
 
-  printf("UVCLIB: uvc_scan_control() 3\n");
+  printf("!!!dgnet: UVCLIB: uvc_scan_control() 3\n");
 
   while (buffer_left >= 3) { // parseX needs to see buf[0,2] = length,type
     block_size = buffer[0];
@@ -1247,7 +1247,7 @@ uvc_error_t uvc_scan_control(uvc_device_handle_t *devh, uvc_device_info_t *info)
 
   UVC_EXIT(ret);
 
-  printf("UVCLIB: END uvc_scan_control()\n");
+  printf("!!!dgnet: UVCLIB: END uvc_scan_control()\n");
 
   return ret;
 }
@@ -1417,7 +1417,7 @@ uvc_error_t uvc_parse_vc(
     uvc_device_info_t *info,
     const unsigned char *block, size_t block_size) {
 
-  printf("UVCLIB: START uvc_parse_vc(): Process a single VideoControl descriptor block\n");
+  printf("!!!dgnet: UVCLIB: START uvc_parse_vc(): Process a single VideoControl descriptor block\n");
 
   int descriptor_subtype;
   uvc_error_t ret = UVC_SUCCESS;
@@ -1433,36 +1433,36 @@ uvc_error_t uvc_parse_vc(
 
   switch (descriptor_subtype) {
   case UVC_VC_HEADER:
-    printf("UVCLIB: uvc_parse_vc(): UVC_VC_HEADER: uvc_parse_vc_header()\n");
+    printf("!!!dgnet: UVCLIB: uvc_parse_vc(): UVC_VC_HEADER: uvc_parse_vc_header()\n");
     ret = uvc_parse_vc_header(dev, info, block, block_size);
     break;
   case UVC_VC_INPUT_TERMINAL:
-    printf("UVCLIB: uvc_parse_vc(): UVC_VC_INPUT_TERMINAL: uvc_parse_vc_input_terminal()\n");
+    printf("!!!dgnet: UVCLIB: uvc_parse_vc(): UVC_VC_INPUT_TERMINAL: uvc_parse_vc_input_terminal()\n");
     ret = uvc_parse_vc_input_terminal(dev, info, block, block_size);
     break;
   case UVC_VC_OUTPUT_TERMINAL:
-    printf("UVCLIB: uvc_parse_vc(): UVC_VC_OUTPUT_TERMINAL: Nothing To Do\n");
+    printf("!!!dgnet: UVCLIB: uvc_parse_vc(): UVC_VC_OUTPUT_TERMINAL: Nothing To Do\n");
     break;
   case UVC_VC_SELECTOR_UNIT:
-    printf("UVCLIB: uvc_parse_vc(): UVC_VC_SELECTOR_UNIT: uvc_parse_vc_selector_unit()\n");
+    printf("!!!dgnet: UVCLIB: uvc_parse_vc(): UVC_VC_SELECTOR_UNIT: uvc_parse_vc_selector_unit()\n");
     ret = uvc_parse_vc_selector_unit(dev, info, block, block_size);
     break;
   case UVC_VC_PROCESSING_UNIT:
-    printf("UVCLIB: uvc_parse_vc(): UVC_VC_PROCESSING_UNIT: uvc_parse_vc_processing_unit()\n");
+    printf("!!!dgnet: UVCLIB: uvc_parse_vc(): UVC_VC_PROCESSING_UNIT: uvc_parse_vc_processing_unit()\n");
     ret = uvc_parse_vc_processing_unit(dev, info, block, block_size);
     break;
   case UVC_VC_EXTENSION_UNIT:
-    printf("UVCLIB: uvc_parse_vc(): UVC_VC_EXTENSION_UNIT: uvc_parse_vc_extension_unit()\n");
+    printf("!!!dgnet: UVCLIB: uvc_parse_vc(): UVC_VC_EXTENSION_UNIT: uvc_parse_vc_extension_unit()\n");
     ret = uvc_parse_vc_extension_unit(dev, info, block, block_size);
     break;
   default:
-    printf("UVCLIB: uvc_parse_vc(): DEFAULT: ret = UVC_ERROR_INVALID_DEVICE\n");
+    printf("!!!dgnet: UVCLIB: uvc_parse_vc(): DEFAULT: ret = UVC_ERROR_INVALID_DEVICE\n");
     ret = UVC_ERROR_INVALID_DEVICE;
   }
 
   UVC_EXIT(ret);
 
-  printf("UVCLIB: END uvc_parse_vc()\n");
+  printf("!!!dgnet: UVCLIB: END uvc_parse_vc()\n");
 
   return ret;
 }
@@ -1876,16 +1876,16 @@ void uvc_free_devh(uvc_device_handle_t *devh) {
  */
 void uvc_close(uvc_device_handle_t *devh) {
 
-  printf("UVCLIB: START: uvc_close()\n");
+  printf("!!!dgnet: UVCLIB: START: uvc_close()\n");
 
   UVC_ENTER();
   uvc_context_t *ctx = devh->dev->ctx;
 
   if (devh->streams)
-    printf("UVCLIB: uvc_close() 1: uvc_stop_streaming(devh)\n");
+    printf("!!!dgnet: UVCLIB: uvc_close() 1: uvc_stop_streaming(devh)\n");
     uvc_stop_streaming(devh);
 
-  printf("UVCLIB: uvc_close() 2: uvc_release_if(devh, devh->info->ctrl_if.bInterfaceNumber)\n");
+  printf("!!!dgnet: UVCLIB: uvc_close() 2: uvc_release_if(devh, devh->info->ctrl_if.bInterfaceNumber)\n");
   uvc_release_if(devh, devh->info->ctrl_if.bInterfaceNumber);
 
   /* If we are managing the libusb context and this is the last open device,
@@ -1893,23 +1893,23 @@ void uvc_close(uvc_device_handle_t *devh) {
    * it'll cause a return from the thread's libusb_handle_events call, after
    * which the handler thread will check the flag we set and then exit. */
   if (ctx->own_usb_ctx && ctx->open_devices == devh && devh->next == NULL) {
-    printf("UVCLIB: uvc_close() 3: libusb_close(devh->usb_devh); pthread_join();\n");
+    printf("!!!dgnet: UVCLIB: uvc_close() 3: libusb_close(devh->usb_devh); pthread_join();\n");
     ctx->kill_handler_thread = 1;
     libusb_close(devh->usb_devh);
     pthread_join(ctx->handler_thread, NULL);
   } else {
-    printf("UVCLIB: uvc_close() 4: libusb_close(devh->usb_devh);\n");
+    printf("!!!dgnet: UVCLIB: uvc_close() 4: libusb_close(devh->usb_devh);\n");
     libusb_close(devh->usb_devh);
   }
 
   DL_DELETE(ctx->open_devices, devh);
 
-  printf("UVCLIB: uvc_close() 5: uvc_unref_device(devh->dev);\n");
+  printf("!!!dgnet: UVCLIB: uvc_close() 5: uvc_unref_device(devh->dev);\n");
   uvc_unref_device(devh->dev);
 
   uvc_free_devh(devh);
 
-  printf("UVCLIB: END: uvc_close()\n");
+  printf("!!!dgnet: UVCLIB: END: uvc_close()\n");
 
   UVC_EXIT_VOID();
 }
@@ -2047,7 +2047,7 @@ void uvc_process_streaming_status(uvc_device_handle_t *devh, unsigned char *data
 void uvc_process_status_xfer(uvc_device_handle_t *devh, struct libusb_transfer *transfer) {
   
   
-  printf("UVCLIB: START: uvc_process_status_xfer()\n");
+  printf("!!!dgnet: UVCLIB: START: uvc_process_status_xfer()\n");
   
   UVC_ENTER();
 
@@ -2056,17 +2056,17 @@ void uvc_process_status_xfer(uvc_device_handle_t *devh, struct libusb_transfer *
   if (transfer->actual_length > 0) {
     switch (transfer->buffer[0] & 0x0f) {
     case 1: /* VideoControl interface */
-      printf("UVCLIB: uvc_process_status_xfer(): uvc_process_control_status()\n");
+      printf("!!!dgnet: UVCLIB: uvc_process_status_xfer(): uvc_process_control_status()\n");
       uvc_process_control_status(devh, transfer->buffer, transfer->actual_length);
       break;
     case 2:  /* VideoStreaming interface */
-      printf("UVCLIB: uvc_process_status_xfer(): uvc_process_streaming_status()\n");
+      printf("!!!dgnet: UVCLIB: uvc_process_status_xfer(): uvc_process_streaming_status()\n");
       uvc_process_streaming_status(devh, transfer->buffer, transfer->actual_length);
       break;
     }
   }
 
-  printf("UVCLIB: END: uvc_process_status_xfer()\n");
+  printf("!!!dgnet: UVCLIB: END: uvc_process_status_xfer()\n");
 
   UVC_EXIT_VOID();
 }
@@ -2076,7 +2076,7 @@ void uvc_process_status_xfer(uvc_device_handle_t *devh, struct libusb_transfer *
  */
 void LIBUSB_CALL _uvc_status_callback(struct libusb_transfer *transfer) {
 
-  printf("UVCLIB: CALLBACK: _uvc_status_callback() START;\n");
+  printf("!!!dgnet: UVCLIB: CALLBACK: _uvc_status_callback() START;\n");
 
   UVC_ENTER();
 
@@ -2084,24 +2084,24 @@ void LIBUSB_CALL _uvc_status_callback(struct libusb_transfer *transfer) {
 
   switch (transfer->status) {
   case LIBUSB_TRANSFER_ERROR:
-    printf("UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_ERROR;\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_ERROR;\n");
   case LIBUSB_TRANSFER_CANCELLED:
-    printf("UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_CANCELLED;\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_CANCELLED;\n");
   case LIBUSB_TRANSFER_NO_DEVICE:
-    printf("UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_NO_DEVICE;\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_NO_DEVICE;\n");
     UVC_DEBUG("not processing/resubmitting, status = %d", transfer->status);
     UVC_EXIT_VOID();
     return;
   case LIBUSB_TRANSFER_COMPLETED:
-     printf("UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_COMPLETED; uvc_process_status_xfer()\n");
+     printf("!!!dgnet: UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_COMPLETED; uvc_process_status_xfer()\n");
     uvc_process_status_xfer(devh, transfer);
     break;
   case LIBUSB_TRANSFER_TIMED_OUT:
-    printf("UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_TIMED_OUT;\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_TIMED_OUT;\n");
   case LIBUSB_TRANSFER_STALL:
-    printf("UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_STALL;\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_STALL;\n");
   case LIBUSB_TRANSFER_OVERFLOW:
-    printf("UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_OVERFLOW;\n");
+    printf("!!!dgnet: UVCLIB: CALLBACK: _uvc_status_callback() LIBUSB_TRANSFER_OVERFLOW;\n");
     UVC_DEBUG("retrying transfer, status = %d", transfer->status);
     break;
   }
@@ -2109,7 +2109,7 @@ void LIBUSB_CALL _uvc_status_callback(struct libusb_transfer *transfer) {
 #ifdef UVC_DEBUGGING
   uvc_error_t ret =
 #endif
-      printf("UVCLIB: CALLBACK: _uvc_status_callback() libusb_submit_transfer();\n");
+      printf("!!!dgnet: UVCLIB: CALLBACK: _uvc_status_callback() libusb_submit_transfer();\n");
       libusb_submit_transfer(transfer);
   UVC_DEBUG("libusb_submit_transfer() = %d", ret);
 
