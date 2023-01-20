@@ -18,6 +18,7 @@ dmesg_file=${output_dir}/dmesg_host.txt
 vm_name="ubuntu20.04"
 #--------------------------------------------------
 
+mkdir -p ${output_dir}
 rm -f ${output_dir}/*
 sync
 
