@@ -70,6 +70,7 @@ echo "=============================" >> ${dmesg_file}
 sudo virsh attach-device ${vm_name} --file ./usb_device_rally_cam.xml
 sleep 5
 
+echo "kill tcp_dump_pid: $tcp_dump_pid"
 kill -9 $tcp_dump_pid
 sleep 1
 
@@ -96,6 +97,7 @@ echo "=============================" >> ${dmesg_file}
 
 read varname
 
+echo "kill tcp_dump_pid: $tcp_dump_pid"
 kill -9 $tcp_dump_pid
 sleep 1
 dmesg -c >> ${dmesg_file}
