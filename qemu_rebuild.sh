@@ -11,6 +11,8 @@ git pull https://github.com/andriykutsevol/DGnet_Dist_PID3-my.git usbspoof_impr_
 cd ${qemu_path}
 makepkg --skipinteg --skipchecksums --skippgpcheck -ef
 
+echo "----------------------------"
 echo "INTALL PACKAGE:"
+echo "----------------------------"
 sudo pacman -U ./qemu-headless-6.0.0-3-x86_64.pkg.tar.zst
 
