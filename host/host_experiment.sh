@@ -61,7 +61,7 @@ usb-devices > ${output_dir}/usb-devices_before_attach.txt
 
 
 sudo tcpdump -i usbmon2 -w ${output_dir}/tcpdump_attach.pcap &
-tcp_dump_pid=$_
+tcp_dump_pid=$!
 sleep 1
 echo "=============================" >> ${dmesg_file} 
 echo "attach-device ${vm_name}" >> ${dmesg_file} 
@@ -85,7 +85,7 @@ usb-devices > ${output_dir}/usb-devices_after_attach.txt
 
 
 sudo tcpdump -i usbmon2 -w ${output_dir}/tcpdump_experiment.pcap &
-tcp_dump_pid=$_
+tcp_dump_pid=$!
 sleep 1
 echo "NOW RUN YOUR GUEST EXPERIMENT."
 echo "When it will be completed - press Enter"
