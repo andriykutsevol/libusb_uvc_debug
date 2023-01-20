@@ -67,7 +67,7 @@ echo "=============================" >> ${dmesg_file}
 echo "attach-device ${vm_name}" >> ${dmesg_file} 
 echo "=============================" >> ${dmesg_file} 
 
-sudo virsh attach-device ${vm_name} --file ./usb_device_cam.xml
+sudo virsh attach-device ${vm_name} --file ./usb_device_rally_cam.xml
 sleep 5
 
 kill -9 $tcp_dump_pid
@@ -108,7 +108,7 @@ echo "=============================" >> ${dmesg_file}
 
 
 echo "Detach device (enter):"
-sudo virsh detach-device ${vm_name} --file ./usb_device_cam.xml
+sudo virsh detach-device ${vm_name} --file ./usb_device_rally_cam.xml
 sleep 3
 echo "after detach"
 virsh qemu-monitor-command ${vm_name} --hmp "info usb"
