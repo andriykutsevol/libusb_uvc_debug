@@ -7,9 +7,8 @@ clear
 
 #--------------------------------------------------
 
-guest_dir="/home/dgnet/qemu"
-output_dir=${guest_dir}"/results"
-framework_dir=${guest_dir}/libusb_uvc_debug
+framework_dir="/home/dgnet/qemu/guest/libusb_uvc_debug"
+output_dir=${framework_dir}/host/host_results
 dmesg_file=${output_dir}/dmesg_host.txt
 
 
@@ -22,7 +21,7 @@ sync
 #--------------------------------------------------
 
 
-echo "=============================" >> ${dmesg_file} 
+echo "=============================" >> ${dmesg_file}
 echo "sudo modprobe -r uvcvideo" >> ${dmesg_file} 
 echo "sudo modprobe uvcvideo" >> ${dmesg_file} 
 echo "=============================" >> ${dmesg_file} 
