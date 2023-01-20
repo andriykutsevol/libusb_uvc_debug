@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 auditctl -e 0
 modprobe usbmon
@@ -7,7 +8,9 @@ clear
 
 #--------------------------------------------------
 
+working_dir=`pwd`
 framework_dir="/home/dgnet/qemu/guest/libusb_uvc_debug"
+
 output_dir=${framework_dir}/host/host_results
 dmesg_file=${output_dir}/dmesg_host.txt
 
