@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# git reset --hard
+# git pull
+
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit
