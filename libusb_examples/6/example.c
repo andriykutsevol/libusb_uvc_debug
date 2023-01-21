@@ -1244,8 +1244,7 @@ int main(int argc, char **argv){
               probe ? (UVC_VS_PROBE_CONTROL << 8) : (UVC_VS_COMMIT_CONTROL << 8),
               strmh->cur_ctrl.bInterfaceNumber,
               stream_buf, len, 0
-          );          
-
+          );
           //================================================================
                       
           printf("UVCLIB: END: uvc_query_stream_ctrl()\n");    
