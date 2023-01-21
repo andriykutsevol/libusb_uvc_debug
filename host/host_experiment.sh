@@ -1,8 +1,19 @@
 #!/bin/bash
 set -e
 
-# git reset --hard
-# git pull
+#---------------------------------------------------------
+# NOTES:
+# 1) git reset --hard
+#    git pull
+
+# 2) trace_events.txt Be sure to leave a blank line at the end of the file.
+
+
+
+#---------------------------------------------------------
+
+# 
+# 
 
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
