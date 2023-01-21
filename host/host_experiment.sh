@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+
 auditctl -e 0
 modprobe usbmon
 sleep 1
