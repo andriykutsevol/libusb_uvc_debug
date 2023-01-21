@@ -1,6 +1,15 @@
 #!/bin/bash
 set -e
 
+
+#---------------------------------------------------------
+# NOTES:
+# 1) Sometime it cannot change format from the first attempt, and you need to run test twice to make it works.
+
+
+#---------------------------------------------------------
+
+
 clear
 echo "new new new new new new new new"
 echo "new new new new new new new new"

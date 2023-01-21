@@ -58,6 +58,7 @@ void cb(uvc_frame_t *frame, void *ptr) {
      * fp = fopen(filename, "w");
      * fwrite(frame->data, 1, frame->data_bytes, fp);
      * fclose(fp); */
+   write(fdnum_yuv, frame->data, frame->data_bytes);
     break;
   case UVC_COLOR_FORMAT_YUYV:
     printf("3\n");
