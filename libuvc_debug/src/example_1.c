@@ -187,12 +187,6 @@ int main(int argc, char **argv) {
         format_desc = format_desc->next;
       }
 
-      // while(fmt_index-- >0){
-      //   // Guvcview: "Camera Output: NV12, YUYV, RGB3, BGR3 ... etc"
-      //   printf("EXAMPLE: FMT_INDEX: %d\n", fmt_index);
-      //   format_desc = format_desc->next;
-      // }
-
       //-------------------------------
 
       const uvc_frame_desc_t *frame_desc = format_desc->frame_descs;
@@ -203,12 +197,6 @@ int main(int argc, char **argv) {
         printf("EXAMPLE: FRAME_INDEX: %d\n", i);
         frame_desc = frame_desc->next;
       }
-
-      // while(frame_index-- >0){
-      //   // Guvcview: "Rrsolution"
-      //   printf("EXAMPLE: FRAME_INDEX: %d\n", frame_index);
-      //   frame_desc = frame_desc->next;
-      // }
 
       //-------------------------------
 
@@ -237,6 +225,8 @@ int main(int argc, char **argv) {
 
       printf("\nEXAMPLE: Format: (%4s) %dx%d %dfps\n", format_desc->fourccFormat, width, height, fps);
 
+      printf("EXAMPLE: uvc_get_stream_ctrl_format_size(): frame_format: %d\n", frame_format);
+
       /* Try to negotiate first stream profile */
       res = uvc_get_stream_ctrl_format_size(
           devh, &ctrl, /* result stored in ctrl */
@@ -244,10 +234,14 @@ int main(int argc, char **argv) {
           width, height, fps /* width, height, fps */
       );
 
+
+      printf("\EXAMPLE: res %d\n", res);
+
       /* Print out the result */
       uvc_print_stream_ctrl(&ctrl, stderr);
 
       if (res < 0) {
+        printf("EXAMPLE: ERROR: uvc_get_stream_ctrl_format_size()");
         uvc_perror(res, "get_mode"); /* device doesn't provide a matching stream */
       } else {
         /* Start the video stream. The library will call user function cb:
