@@ -58,6 +58,7 @@ void cb(uvc_frame_t *frame, void *ptr) {
      * fp = fopen(filename, "w");
      * fwrite(frame->data, 1, frame->data_bytes, fp);
      * fclose(fp); */
+    // ffplay -f mjpeg -i ./out.mjpeg
    write(fdnum_yuv, frame->data, frame->data_bytes);
     break;
   case UVC_COLOR_FORMAT_YUYV:
