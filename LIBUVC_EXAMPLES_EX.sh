@@ -80,7 +80,6 @@ sleep 1
 
 cd ${binary_path}
 rm -f ./out
-#git pull
 make
 
 echo "================================="
