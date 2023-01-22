@@ -342,6 +342,7 @@ int main(int argc, char **argv){
 
                                 break;
                             default:
+                                printf("UVC_ERROR_INVALID_DEVICE\n");
                                 //ret = UVC_ERROR_INVALID_DEVICE;
                             }
 
