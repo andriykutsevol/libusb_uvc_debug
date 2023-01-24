@@ -36,6 +36,7 @@ dmesg_file=${output_dir}/dmesg_host.txt
 
 
 vm_name="ubuntu20.04"
+usb_device_xml="usb_device_c270_cam.xml"
 #--------------------------------------------------
 
 mkdir -p ${output_dir}
@@ -88,7 +89,7 @@ echo "=============================" >> ${dmesg_file}
 echo "attach-device ${vm_name}" >> ${dmesg_file} 
 echo "=============================" >> ${dmesg_file} 
 
-sudo virsh attach-device ${vm_name} --file ./usb_device_rally_cam.xml
+sudo virsh attach-device ${vm_name} --file ./${usb_device_xml}
 sleep 5
 
 echo "kill tcp_dump_pid: $tcp_dump_pid"
@@ -131,7 +132,7 @@ echo "=============================" >> ${dmesg_file}
 
 
 echo "Detach device (enter):"
-sudo virsh detach-device ${vm_name} --file ./usb_device_rally_cam.xml
+sudo virsh detach-device ${vm_name} --file ./${usb_device_xml}
 sleep 3
 echo "after detach"
 virsh qemu-monitor-command ${vm_name} --hmp "info usb"
