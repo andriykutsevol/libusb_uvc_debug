@@ -7,10 +7,8 @@ sync
 sync
 sync
 sleep 2
-#-----------------------------------------
 cd ./host_mnt/libusb_uvc_debug
-sudo ./v4l2_example5_c270.sh
-#-----------------------------------------
+sudo ./libuvc_example1_rally.sh 
 sync
 sync
 sync
@@ -29,3 +27,4 @@ sync
 sync
 sleep 2
 echo 'done'
+
