@@ -184,6 +184,8 @@ kill -9 $tcpdump3_pid
 dmesg >> ${output_dir}/dmesg.txt
 dmesg -c > /dev/null 2>&1
 clear
+sync
+sync
 sleep 1
 
 #======================================================
