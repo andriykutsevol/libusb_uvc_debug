@@ -36,7 +36,7 @@ dmesg_file=${output_dir}/dmesg_host.txt
 
 
 vm_name="ubuntu20.04"
-usb_device_xml="usb_device_rally_cam.xml"
+usb_device_xml="usb_device_c270_cam.xml"
 #--------------------------------------------------
 
 mkdir -p ${output_dir}
