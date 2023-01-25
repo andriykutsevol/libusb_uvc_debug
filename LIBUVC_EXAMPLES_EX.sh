@@ -31,8 +31,10 @@ fmt_index=${7}
 frame_index=${8}
 fps=${9}
 output_dir=${10}"/"$width"x"$height
+host_results=`pwd`/host/host_results
 binary_path=`pwd`"/libuvc_debug/build"
 root_dir=`pwd`
+
 
 
 
@@ -171,7 +173,6 @@ sleep 1
 ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v ${width}x${height} -r ${fps} -i ${binary_path}/out ${output_dir}/output.avi
 cp ${binary_path}/out ${output_dir}
 
-
 #======================================================
 #======================================================
 
@@ -184,6 +185,12 @@ dmesg >> ${output_dir}/dmesg.txt
 dmesg -c > /dev/null 2>&1
 clear
 sleep 1
+
+#======================================================
+
+mkdir -p ${output_dir}/host_results
+mv -R ${host_results}/* ${output_dir}/host_results
+
 
 # #======================================================
 
