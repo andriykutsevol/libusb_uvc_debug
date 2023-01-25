@@ -189,7 +189,7 @@ sleep 1
 #======================================================
 
 mkdir -p ${output_dir}/host_results
-mv -R ${host_results}/* ${output_dir}/host_results
+mv ${host_results}/* ${output_dir}/host_results
 
 
 # #======================================================
