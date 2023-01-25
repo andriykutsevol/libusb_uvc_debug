@@ -115,10 +115,6 @@ echo "=============================" >> ${dmesg_file}
 echo "EXPERIMENT" >> ${dmesg_file}
 echo "=============================" >> ${dmesg_file}
 
-echo "\n---------------------------\n" >> ${output_dir}/D_output.txt
-echo "----------START EXPERIMENT--------------" >> ${output_dir}/D_output.txt
-echo "\n---------------------------\n" >> ${output_dir}/D_output.txt
-
 read varname
 
 echo "kill tcp_dump_pid: $tcp_dump_pid"
