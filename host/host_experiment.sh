@@ -113,9 +113,11 @@ echo "NOW RUN YOUR GUEST EXPERIMENT."
 echo "When it will be completed - press Enter"
 echo "=============================" >> ${dmesg_file} 
 echo "EXPERIMENT" >> ${dmesg_file}
-echo "=============================" >> ${dmesg_file} 
+echo "=============================" >> ${dmesg_file}
 
-
+echo "\n---------------------------\n" >> ${output_dir}/D_output.txt
+echo "----------START EXPERIMENT--------------" >> ${output_dir}/D_output.txt
+echo "\n---------------------------\n" >> ${output_dir}/D_output.txt
 
 read varname
 
