@@ -143,3 +143,8 @@ echo "shutdown (enter):"
 #read varname
 virsh shutdown ${vm_name}
 sleep 5
+sync
+sync
+sleep 5
+sync
+sync
