@@ -52,8 +52,8 @@ echo "binary_path:          " ${binary_path}
 #binary_path:           /home/dgnet/experiment/3/libuvc_debug/build
 
 mkdir -p ${output_dir}
-rm -f ${output_dir}/*
-rm -f ${binary_path}/out
+rm -fR ${output_dir}/*
+rm -fR ${binary_path}/out
 
 
 #======================================================
@@ -81,7 +81,7 @@ sleep 1
 #======================================================
 
 cd ${binary_path}
-rm -f ./out
+rm -fR ./out
 make
 
 echo "================================="
@@ -189,7 +189,7 @@ sleep 1
 #======================================================
 
 mkdir -p ${output_dir}/host_results
-mv ${host_results}/* ${output_dir}/host_results
+mv ${host_results}/* ${output_dir}/host_results/
 
 
 # #======================================================
