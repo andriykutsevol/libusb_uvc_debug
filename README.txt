@@ -5,7 +5,7 @@ git clone https://github.com/andriykutsevol/libusb_uvc_debug.git
 ...
   <qemu:commandline>
     <qemu:arg value="-D"/>
-    <qemu:arg value="/home/dgnet/qemu/guest/libusb_libuvc_debug/host/host_resultst/D_output.txt"/>
+    <qemu:arg value="/home/dgnet/qemu/guest/libusb_uvc_debug/host/host_results/D_output.txt"/>
     <qemu:arg value="--trace"/>
     <qemu:arg value="events=/home/dgnet/qemu/guest/libusb_uvc_debug/host/trace_events.txt"/>
   </qemu:commandline>
