@@ -52,6 +52,7 @@ echo "binary_path:          " ${binary_path}
 #binary_path:           /home/dgnet/experiment/3/libuvc_debug/build
 
 mkdir -p ${output_dir}
+mkdir -p ${host_results}
 rm -fR ${output_dir}/*
 rm -fR ${binary_path}/out
 
