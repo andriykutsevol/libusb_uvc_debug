@@ -1,3 +1,5 @@
+git clone https://github.com/andriykutsevol/libusb_uvc_debug.git
+
 Among others there is two important pure "libusb" utilities:
 
 1) libusb_uvc_debug_11/libusb_examples/1/example.c
