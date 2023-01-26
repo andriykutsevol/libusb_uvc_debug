@@ -563,9 +563,11 @@ uvc_error_t uvc_get_stream_ctrl_format_size(
     }
   }
 
+  printf("!!!dgnet: ERROR: uvc_get_stream_ctrl_format_size(): UVC_ERROR_INVALID_MODE\n");
   return UVC_ERROR_INVALID_MODE;
 
 found:
+  printf("!!!dgnet: ERROR: uvc_get_stream_ctrl_format_size(): uvc_probe_stream_ctrl()\n");
   return uvc_probe_stream_ctrl(devh, ctrl);
 }
 
@@ -649,10 +651,12 @@ uvc_error_t uvc_probe_stream_ctrl(
   uvc_query_stream_ctrl( devh, ctrl, 1, UVC_GET_CUR );
 
   if(!_uvc_stream_params_negotiated(&required_ctrl, ctrl)) {
+    printf("!!!dgnet: UVCLIB: ERROR: uvc_probe_stream_ctrl(): Unable to negotiate streaming format\n");
     UVC_DEBUG("Unable to negotiate streaming format");
     return UVC_ERROR_INVALID_MODE;
   }
 
+  printf("!!!dgnet: UVCLIB: uvc_probe_stream_ctrl() 3\n");
   return UVC_SUCCESS;
 }
 
