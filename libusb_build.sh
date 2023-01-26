@@ -22,7 +22,7 @@ cd ${working_dir}
 #===================================
 
 
-rm -Rf ${build_dir}
+rm -Rf ${build_dir}/*
 autoreconf -fiv
 cd ${build_dir}
 
