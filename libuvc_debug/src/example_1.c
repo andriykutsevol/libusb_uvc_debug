@@ -182,21 +182,22 @@ int main(int argc, char **argv) {
       //-------------------------------
 
       const uvc_format_desc_t *format_desc = uvc_get_format_descs(devh);
+      printf("EXAMPLE: FRAME_INDEX: %d\n", 0);
 
       for (int i=0; i<fmt_index; i++ ){
         // Guvcview: "Camera Output: NV12, YUYV, RGB3, BGR3 ... etc"
-        printf("EXAMPLE: FMT_INDEX: %d\n", i);
         format_desc = format_desc->next;
+        printf("EXAMPLE: FRAME_INDEX: %d\n", i+1);
       }
 
       //-------------------------------
 
       const uvc_frame_desc_t *frame_desc = format_desc->frame_descs;
-
+      printf("EXAMPLE: FRAME_INDEX: %d\n", 0);
 
       for (int i=0; i<frame_index; i++){
         // Guvcview: "Resolution"
-        printf("EXAMPLE: FRAME_INDEX: %d\n", i);
+        printf("EXAMPLE: FRAME_INDEX: %d\n", i+1);
         frame_desc = frame_desc->next;
       }
 
@@ -210,11 +211,14 @@ int main(int argc, char **argv) {
       switch (format_desc->bDescriptorSubtype) {
       case UVC_VS_FORMAT_MJPEG:
         frame_format = UVC_COLOR_FORMAT_MJPEG;
+        printf("EXAMPLE: UVC_VS_FORMAT_MJPEG\n");
         break;
       case UVC_VS_FORMAT_FRAME_BASED:
+        printf("EXAMPLE: UVC_VS_FORMAT_FRAME_BASED\n");
         frame_format = UVC_FRAME_FORMAT_H264;
         break;
       default:
+        printf("EXAMPLE: UVC_FRAME_FORMAT_YUYV\n");
         frame_format = UVC_FRAME_FORMAT_YUYV;
         break;
       }
