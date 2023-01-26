@@ -195,7 +195,7 @@ int main(int argc, char **argv) {
 
 
       for (int i=0; i<frame_index; i++){
-        // Guvcview: "Rrsolution"
+        // Guvcview: "Resolution"
         printf("EXAMPLE: FRAME_INDEX: %d\n", i);
         frame_desc = frame_desc->next;
       }

@@ -15,6 +15,7 @@ clear
 current_dir=`pwd`
 working_dir=${current_dir}"/libusb"
 build_dir=${working_dir}/build
+mkdir -p ${build_dir}
 cd ${working_dir}
 
 
@@ -23,7 +24,6 @@ cd ${working_dir}
 
 rm -Rf ${build_dir}
 autoreconf -fiv
-mkdir ${build_dir}
 cd ${build_dir}
 
 

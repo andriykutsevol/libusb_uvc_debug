@@ -17,12 +17,12 @@ set -e
 current_dir=`pwd`
 working_dir=${current_dir}"/libuvc_debug"
 build_dir=${working_dir}/build
+mkdir -p ${build_dir}
 cd ${working_dir}
 
 #===================================
 
 rm -Rf ${build_dir}
-mkdir -p ${build_dir}
 cd ${build_dir}
 #===================================
 
