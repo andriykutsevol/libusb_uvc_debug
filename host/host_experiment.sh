@@ -3,11 +3,11 @@ set -e
 
 #---------------------------------------------------------
 # NOTES:
-# 1) git reset --hard
+# 1) GIT error: Your local changes to the following files would be overwritten by merge...
+#    git reset --hard
 #    git pull
 
 # 2) trace_events.txt Be sure to leave a blank line at the end of the file.
-
 
 
 #---------------------------------------------------------
