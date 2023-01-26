@@ -191,10 +191,11 @@ cp ${binary_path}/out ${output_dir}
 #======================================================
 #======================================================
 
-sleep 1
-echo "kill tcpdump3: $tcpdump3_pid"
-kill -9 $tcpdump3_pid
-
+#-------------------------------
+# tcpdump
+# echo "kill tcpdump3: $tcpdump3_pid"
+# kill -9 $tcpdump3_pid
+#-------------------------------
 
 dmesg >> ${output_dir}/dmesg.txt
 dmesg -c > /dev/null 2>&1
