@@ -241,7 +241,7 @@ int main(int argc, char **argv) {
       );
 
 
-      printf("\EXAMPLE: res %d\n", res);
+      printf("EXAMPLE: res %d\n", res);
 
       /* Print out the result */
       uvc_print_stream_ctrl(&ctrl, stderr);
