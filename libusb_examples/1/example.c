@@ -1,6 +1,7 @@
 
 // sudo ./example 1133 2085
         // rally: 1133 2177
+        // plankton: 6353 20510
 
 #include <libusb-1.0/libusb.h>
 #include <stdio.h>

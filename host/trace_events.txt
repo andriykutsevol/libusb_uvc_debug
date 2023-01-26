@@ -1,1 +1,4 @@
 hw_usb*
+usb_host_parse_endpoint
+usb_host_parse_interface
+usb_host_parse_config
