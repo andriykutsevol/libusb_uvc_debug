@@ -95,9 +95,13 @@ sleep 5
 
 cd ${root_dir}
 
-modprobe usbmon
-tcpdump -i usbmon0 -w ${output_dir}/tcpdump1.pcap &
-tcpdump1_pid=$!
+
+#-------------------------------
+# tcpdump
+# modprobe usbmon
+# tcpdump -i usbmon0 -w ${output_dir}/tcpdump1.pcap &
+# tcpdump1_pid=$!
+#-------------------------------
 
 
 echo "modprobe -r uvcvideo" >  ${output_dir}/dmesg.txt
@@ -111,8 +115,11 @@ clear
 echo "" >>  ${output_dir}/dmesg.txt
 echo "" >>  ${output_dir}/dmesg.txt
 
-echo "kill tcpdump1: $tcpdump1_pid"
-kill -9 $tcpdump1_pid
+#-------------------------------
+# tcpdump
+# echo "kill tcpdump1: $tcpdump1_pid"
+# kill -9 $tcpdump1_pid
+#-------------------------------
 
 dmesg -c > /dev/null 2>&1
 clear
@@ -120,21 +127,25 @@ sleep 3
 
 #======================================================
 
-modprobe usbmon
-tcpdump -i usbmon0 -w ${output_dir}/tcpdump2.pcap &
-tcpdump2_pid=$!
+#-------------------------------
+# tcpdump
+# modprobe usbmon
+# tcpdump -i usbmon0 -w ${output_dir}/tcpdump2.pcap &
+# tcpdump2_pid=$!
+#-------------------------------
 
 
 echo "sudo modprobe uvcvideo" >>  ${output_dir}/dmesg.txt
 echo "" >>  ${output_dir}/dmesg.txt
 sudo modprobe uvcvideo
 dmesg >> ${output_dir}/dmesg.txt
-
-
 sleep 3
 
-echo "kill tcpdump2: $tcpdump2_pid"
-kill -9 $tcpdump2_pid
+#-------------------------------
+# tcpdump
+# echo "kill tcpdump2: $tcpdump2_pid"
+# kill -9 $tcpdump2_pid
+#-------------------------------
 
 dmesg -c > /dev/null 2>&1
 clear
@@ -149,9 +160,12 @@ echo "libuvc_"${example_number} >> ${output_dir}/dmesg.txt
 echo "" >>  ${output_dir}/dmesg.txt
 
 
-modprobe usbmon
-tcpdump -i usbmon0 -w ${output_dir}/tcpdump3.pcap &
-tcpdump3_pid=$!
+#-------------------------------
+# tcpdump
+# modprobe usbmon
+# tcpdump -i usbmon0 -w ${output_dir}/tcpdump3.pcap &
+# tcpdump3_pid=$!
+#-------------------------------
 
 
 #======================================================

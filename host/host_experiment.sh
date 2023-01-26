@@ -22,7 +22,6 @@ fi
 
 
 auditctl -e 0
-modprobe usbmon
 sleep 1
 clear
 
@@ -84,10 +83,13 @@ usb-devices > ${output_dir}/usb-devices_before_attach.txt
 #--------------------------------------------------
 
 
+#-------------------------------
+# tcpdump
+# modprobe usbmon
+# sudo tcpdump -i usbmon2 -w ${output_dir}/tcpdump_attach.pcap &
+# tcp_dump_pid=$!
+# sleep 1
 
-sudo tcpdump -i usbmon2 -w ${output_dir}/tcpdump_attach.pcap &
-tcp_dump_pid=$!
-sleep 1
 echo "=============================" >> ${dmesg_file} 
 echo "attach-device ${vm_name}" >> ${dmesg_file} 
 echo "=============================" >> ${dmesg_file} 
@@ -95,9 +97,12 @@ echo "=============================" >> ${dmesg_file}
 sudo virsh attach-device ${vm_name} --file ./${usb_device_xml}
 sleep 5
 
-echo "kill tcp_dump_pid: $tcp_dump_pid"
-kill -9 $tcp_dump_pid
-sleep 1
+#-------------------------------
+# tcpdump
+# echo "kill tcp_dump_pid: $tcp_dump_pid"
+# kill -9 $tcp_dump_pid
+# sleep 1
+#-------------------------------
 
 dmesg -c >> ${dmesg_file}
 
@@ -109,9 +114,13 @@ virsh qemu-monitor-command ${vm_name} --hmp "info usb"
 usb-devices > ${output_dir}/usb-devices_after_attach.txt
 
 
-sudo tcpdump -i usbmon2 -w ${output_dir}/tcpdump_experiment.pcap &
-tcp_dump_pid=$!
-sleep 1
+#-------------------------------
+# tcpdump
+# modprobe usbmon
+# sudo tcpdump -i usbmon2 -w ${output_dir}/tcpdump_experiment.pcap &
+# tcp_dump_pid=$!
+# sleep 1
+
 echo "NOW RUN YOUR GUEST EXPERIMENT."
 echo "When it will be completed - press Enter"
 echo "=============================" >> ${dmesg_file} 
@@ -120,9 +129,13 @@ echo "=============================" >> ${dmesg_file}
 
 read varname
 
-echo "kill tcp_dump_pid: $tcp_dump_pid"
-kill -9 $tcp_dump_pid
-sleep 1
+#-------------------------------
+# tcpdump
+# echo "kill tcp_dump_pid: $tcp_dump_pid"
+# kill -9 $
+# sleep 1
+#-------------------------------
+
 dmesg -c >> ${dmesg_file}
 
 sudo chmod -R a+rwx ${output_dir}
