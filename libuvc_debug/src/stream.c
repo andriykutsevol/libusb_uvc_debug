@@ -629,6 +629,11 @@ uvc_error_t uvc_get_still_ctrl_format_size(
 static int _uvc_stream_params_negotiated(
   uvc_stream_ctrl_t *required,
   uvc_stream_ctrl_t *actual) {
+
+    printf("!!!dgnet: UVCLIB: uvc_probe_stream_ctrl(): required->bFormatIndex: %d, actual->bFormatIndex: %d \n", required->bFormatIndex, actual->bFormatIndex);
+    printf("!!!dgnet: UVCLIB: uvc_probe_stream_ctrl(): required->bFrameIndex: %d, actual->bFrameIndex: %d \n", required->bFrameIndex, actual->bFrameIndex);
+    printf("!!!dgnet: UVCLIB: uvc_probe_stream_ctrl(): required->dwMaxPayloadTransferSize: %d, actual->dwMaxPayloadTransferSize: %d \n", required->dwMaxPayloadTransferSize, actual->dwMaxPayloadTransferSize);
+
     return required->bFormatIndex == actual->bFormatIndex &&
     required->bFrameIndex == actual->bFrameIndex &&
     required->dwMaxPayloadTransferSize == actual->dwMaxPayloadTransferSize;
