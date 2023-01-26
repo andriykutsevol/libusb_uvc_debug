@@ -43,7 +43,7 @@ make
 echo "=============================="
 echo "make install (to local dir): ${build_dir}/lib"
 echo "=============================="
-sudo make install
+make install
 
 echo "=============================="
 echo "install (cp, ln -s)"
