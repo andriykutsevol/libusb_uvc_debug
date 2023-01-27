@@ -211,8 +211,11 @@ cp ${host_results}/* ${output_dir}/host_results/
 
 sudo chmod -R a+rwx ${host_results}
 
-cat /dev/null > ${host_results}/D_output.txt
-cat /dev/null > ${host_results}/dmesg_host.txt
+sudo cat /dev/null > ${host_results}/D_output.txt
+sudo cat /dev/null > ${host_results}/dmesg_host.txt
+sync
+sync
+
 
 # #======================================================
 
