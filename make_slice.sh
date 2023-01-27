@@ -1,5 +1,7 @@
 #!/bin/bash
-#set -e
+set -e
+
+# ./make_slice.sh /home/dgnet/qemu/guest/libusb_uvc_debug/rally/libuvc 1
 
 if [ -z "$1" ]
   then
