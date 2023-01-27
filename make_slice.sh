@@ -19,13 +19,15 @@ fi
 working_dir=${1}
 target_dir=${2}
 
+rm -rf ${working_dir}/${target_dir}_slice
+
 cd ${working_dir}
 cp -r ./${target_dir} ./${target_dir}_slice
 
 cd ./${target_dir}_slice
 
 find . -type f -name 'out' -exec rm {} +
-find . -type f -name 'outz' -exec rm {} +
+find . -type f -name 'output.avi' -exec rm {} +
 
 
 
