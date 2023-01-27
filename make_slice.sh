@@ -20,6 +20,7 @@ working_dir=${1}
 target_dir=${2}
 
 rm -rf ${working_dir}/${target_dir}_slice
+rm -rf ${working_dir}/${target_dir}_slice.zip
 
 cd ${working_dir}
 cp -r ./${target_dir} ./${target_dir}_slice
