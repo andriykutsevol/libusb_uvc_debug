@@ -30,6 +30,10 @@ cd ./${target_dir}_slice
 find . -type f -name 'out' -exec rm {} +
 find . -type f -name 'output.avi' -exec rm {} +
 
+cd ../
+
+tar -czf ./${target_dir}_slice.tar.gz ./${target_dir}_slice
+
 
 
 
