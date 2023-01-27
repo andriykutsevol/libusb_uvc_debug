@@ -208,7 +208,7 @@ sleep 1
 
 mkdir -p ${output_dir}/host_results
 cp ${host_results}/* ${output_dir}/host_results/
-rm -Rf ${host_results}/*
+rm -f ${host_results}/*
 mkdir -p ${host_results}
 
 
