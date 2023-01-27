@@ -2,3 +2,5 @@ hw_usb*
 usb_host_parse_endpoint
 usb_host_parse_interface
 usb_host_parse_config
+usb_host_set_interface
+usb_host_req_control
