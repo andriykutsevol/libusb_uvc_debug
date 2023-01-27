@@ -215,6 +215,8 @@ sudo cat /dev/null > ${host_results}/D_output.txt
 sudo cat /dev/null > ${host_results}/dmesg_host.txt
 sync
 sync
+sync
+sleep 1
 
 
 # #======================================================
