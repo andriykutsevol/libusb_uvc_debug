@@ -208,9 +208,11 @@ sleep 1
 
 mkdir -p ${output_dir}/host_results
 cp ${host_results}/* ${output_dir}/host_results/
-rm -f ${host_results}/*
-mkdir -p ${host_results}
 
+sudo chmod -R a+rwx ${host_results}
+
+cat /dev/null > ${host_results}/D_output.txt
+cat /dev/null > ${host_results}/dmesg_host.txt
 
 # #======================================================
 
