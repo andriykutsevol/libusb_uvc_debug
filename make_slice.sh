@@ -2,6 +2,7 @@
 set -e
 
 # ./make_slice.sh /home/dgnet/qemu/guest/libusb_uvc_debug/rally/libuvc 1
+# ./make_slice.sh /home/dgnet/kernel/libusb_uvc_debug/google/libuvc 1  
 
 if [ -z "$1" ]
   then
