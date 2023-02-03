@@ -238,7 +238,7 @@ sudo chmod -R a+rwx ${output_dir}
 
 
 #======================================================
-
+    # If we run this on host - it will be empty files.
 # sudo cat /dev/null > ${host_results}/D_output.txt
 # sudo cat /dev/null > ${host_results}/dmesg_host.txt
 sudo echo "" > ${host_results}/D_output.txt
