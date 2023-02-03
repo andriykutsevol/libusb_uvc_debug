@@ -28,6 +28,7 @@ cp -r ./${target_dir} ./${target_dir}_slice
 cd ./${target_dir}_slice
 
 find . -type f -name 'out' -exec rm {} +
+#find . -type f -name 'ex_out.txt' -exec rm {} +
 #find . -type f -name 'output.avi' -exec rm {} +
 find . -type f -name 'tcpdump1.pcap' -exec rm {} +
 find . -type f -name 'tcpdump2.pcap' -exec rm {} +
