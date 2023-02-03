@@ -9,6 +9,12 @@ set -e
 #---------------------------------------------------------
 
 
+istcpdump=0
+
+
+
+
+
 clear
 echo "new new new new new new new new"
 echo "new new new new new new new new"
@@ -98,10 +104,15 @@ cd ${root_dir}
 
 #-------------------------------
 # tcpdump
-# modprobe usbmon
-# tcpdump -i usbmon0 -w ${output_dir}/tcpdump1.pcap &
-# tcpdump1_pid=$!
+if [ ${istcpdump} -ne "0" ]; then
+    modprobe usbmon
+    tcpdump -i usbmon0 -w ${output_dir}/tcpdump1.pcap &
+    tcpdump1_pid=$!
+fi 
 #-------------------------------
+
+
+
 
 
 echo "modprobe -r uvcvideo" >  ${output_dir}/dmesg.txt
@@ -117,8 +128,11 @@ echo "" >>  ${output_dir}/dmesg.txt
 
 #-------------------------------
 # tcpdump
-# echo "kill tcpdump1: $tcpdump1_pid"
-# kill -9 $tcpdump1_pid
+if [ ${istcpdump} -ne "0" ]; then
+    echo "kill tcpdump1: $tcpdump1_pid"
+    kill -9 $tcpdump1_pid
+
+fi 
 #-------------------------------
 
 dmesg -c > /dev/null 2>&1
@@ -129,9 +143,11 @@ sleep 3
 
 #-------------------------------
 # tcpdump
-# modprobe usbmon
-# tcpdump -i usbmon0 -w ${output_dir}/tcpdump2.pcap &
-# tcpdump2_pid=$!
+if [ ${istcpdump} -ne "0" ]; then
+    modprobe usbmon
+    tcpdump -i usbmon0 -w ${output_dir}/tcpdump2.pcap &
+    tcpdump2_pid=$!
+fi 
 #-------------------------------
 
 
@@ -143,8 +159,10 @@ sleep 3
 
 #-------------------------------
 # tcpdump
-# echo "kill tcpdump2: $tcpdump2_pid"
-# kill -9 $tcpdump2_pid
+if [ ${istcpdump} -ne "0" ]; then
+    echo "kill tcpdump2: $tcpdump2_pid"
+    kill -9 $tcpdump2_pid
+fi 
 #-------------------------------
 
 dmesg -c > /dev/null 2>&1
@@ -162,9 +180,11 @@ echo "" >>  ${output_dir}/dmesg.txt
 
 #-------------------------------
 # tcpdump
-# modprobe usbmon
-# tcpdump -i usbmon0 -w ${output_dir}/tcpdump3.pcap &
-# tcpdump3_pid=$!
+if [ ${istcpdump} -ne "0" ]; then
+    modprobe usbmon
+    tcpdump -i usbmon0 -w ${output_dir}/tcpdump3.pcap &
+    tcpdump3_pid=$!
+fi 
 #-------------------------------
 
 
@@ -193,8 +213,10 @@ cp ${binary_path}/out ${output_dir}
 
 #-------------------------------
 # tcpdump
-# echo "kill tcpdump3: $tcpdump3_pid"
-# kill -9 $tcpdump3_pid
+if [ ${istcpdump} -ne "0" ]; then
+    echo "kill tcpdump3: $tcpdump3_pid"
+    kill -9 $tcpdump3_pid
+fi 
 #-------------------------------
 
 dmesg >> ${output_dir}/dmesg.txt

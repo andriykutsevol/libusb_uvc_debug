@@ -5,9 +5,11 @@ set -e
 ex_num=1
 output_dir=`pwd`"/google/libuvc/${ex_num}"
 working_dir=`pwd`
-dev_file="video0"
+
 
 # v4l2-ctl --all --device /dev/${device_file}
+dev_file="video0"
+
 
 # v4l2-ctl --device /dev/${dev_file} --list-formats-ext
 
