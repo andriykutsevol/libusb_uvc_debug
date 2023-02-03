@@ -7,6 +7,9 @@ output_dir=`pwd`"/google/libuvc/${ex_num}"
 working_dir=`pwd`
 
 
+# sudo modprobe -r xhci_pci
+# sudo modprobe xhci_pci
+
 # v4l2-ctl --all --device /dev/${device_file}
 dev_file="video0"
 
