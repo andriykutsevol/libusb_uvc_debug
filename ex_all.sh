@@ -15,20 +15,19 @@ fi
 
 
 working_dir=`pwd`
-device_dir=${working_dir}/google
 slices_dir=${working_dir}/slices
+sudo rm -rf ${slices_dir}/*
 mkdir -p ${slices_dir}
 
-#===================================================================
-# cleanup
-#===================================================================
 
-sudo rm -rf ${device_dir}/*
-sudo rm -rf ${slices_dir}/*
 
 #===================================================================
 # libuvc_example1_google.sh
 #===================================================================
+
+device_dir=${working_dir}/google
+sudo rm -rf ${device_dir}/*
+
 
 ex_num=1
 output_dir=${device_dir}/libuvc/${ex_num}
@@ -60,8 +59,22 @@ cd ${working_dir}
 
 
 #===================================================================
-# libuvc_example7_google.sh
+# libuvc_example1_rally.sh
 #===================================================================
+device_dir=${working_dir}/rally
+sudo rm -rf ${device_dir}/*
+
+
+ex_num=1
+output_dir=`pwd`"/rally/libuvc/${ex_num}"
+
+./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 640 480 0 0 30 ${output_dir}
+
+./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1024 576 0 12 30 ${output_dir}
+
+./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1280 720 0 13 30 ${output_dir}
+
+
 
 
 
@@ -74,14 +87,19 @@ cd ${working_dir}
 #-----------------------
 #google
 #-----------------------
+dev_name="google"
 
-./make_slice.sh ${working_dir} "google"
-
-cp ./google_slice.tar.gz ${slices_dir}/
-
-rm -rf ./google_slice.tar.gz
-rm -rf ./google_slice
+./make_slice.sh ${working_dir} ${dev_name}
+cp ./${dev_name}_slice.tar.gz ${slices_dir}/
+rm -rf ./${dev_name}_slice.tar.gz
+rm -rf ./${dev_name}_slice
 
 #-----------------------
 #rally
 #-----------------------
+dev_name="rally"
+
+./make_slice.sh ${working_dir} ${dev_name}
+cp ./${dev_name}_slice.tar.gz ${slices_dir}/
+rm -rf ./${dev_name}_slice.tar.gz
+rm -rf ./${dev_name}_slice
