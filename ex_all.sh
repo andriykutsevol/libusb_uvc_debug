@@ -1,10 +1,14 @@
 #!/bin/bash
 set -e
+# sudo modprobe -r xhci_pci
+# sudo modprobe xhci_pci
+
 
 
 working_dir=`pwd`
 device_dir=${working_dir}/google
 slices_dir=${working_dir}/slices
+mkdir -p ${slices_dir}
 
 #===================================================================
 # cleanup
