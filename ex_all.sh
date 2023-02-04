@@ -77,7 +77,7 @@ cd ${working_dir}
 
 ./make_slice.sh ${working_dir} "google"
 
-cp ./google_slice.tar.gz ./slices_dir/
+cp ./google_slice.tar.gz ${slices_dir}/
 
 rm -rf ./google_slice.tar.gz
 rm -rf ./google_slice
