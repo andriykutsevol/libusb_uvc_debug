@@ -2,43 +2,46 @@
 set -e
 # ./libuvc_example1_rally.sh
 
+
+# ffplay -f mjpeg -i ./out.mjpeg
+
 ex_num=1
 
 output_dir=`pwd`"/rally/libuvc/${ex_num}"
 
-# ffplay -f mjpeg -i ./out.mjpeg
+
 
 ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 640 480 0 0 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 160 120 0 1 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 160 120 0 1 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 176 144 0 2 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 176 144 0 2 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 320 180 0 3 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 320 180 0 3 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 320 240 0 4 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 320 240 0 4 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 352 288 0 5 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 352 288 0 5 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 480 270 0 6 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 480 270 0 6 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 640 360 0 7 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 640 360 0 7 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 800 448 0 8 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 800 448 0 8 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 800 600 0 9 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 800 600 0 9 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 848 480 0 10 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 848 480 0 10 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 960 540 0 11 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 960 540 0 11 30 ${output_dir}
 
 ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1024 576 0 12 30 ${output_dir}
 
 ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1280 720 0 13 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1600 896 0 14 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1600 896 0 14 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1920 1080 0 15 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1920 1080 0 15 30 ${output_dir}
 
 
 
