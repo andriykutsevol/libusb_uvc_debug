@@ -96,6 +96,8 @@ cp ./${dev_name}_slice.tar.gz ${slices_dir}/
 rm -rf ./${dev_name}_slice.tar.gz
 rm -rf ./${dev_name}_slice
 
+
+
 #-----------------------
 #rally
 #-----------------------
