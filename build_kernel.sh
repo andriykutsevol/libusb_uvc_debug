@@ -2,10 +2,11 @@
 set -e
 
 
-path_to_kernel="/home/dgnet/kernel"
+path_to_kernel="/home/dgnet/kernel/v5.19.13-zen1_qemu_libusb_ex"
 
 cd ${path_to_kernel}/src/zen-kernel
-git pull https://github.com/andriykutsevol/v6.0.7-zen1.git hdmi
+# This taken from PKGBUILD
+git pull https://github.com/andriykutsevol/zen-kernel.git v5.19.13-zen1_qemu_libusb_ex
 
 echo "================================="
 echo "================================="
@@ -21,4 +22,4 @@ echo "================================="
 echo "================================="
 
 
-sudo pacman -U linux-zen-6.0.7.zen1-1-x86_64.pkg.tar.zst
+sudo pacman -U linux-zen-5.19.13.zen1-1-x86_64.pkg.tar.zst
