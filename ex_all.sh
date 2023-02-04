@@ -3,6 +3,15 @@ set -e
 # sudo modprobe -r xhci_pci
 # sudo modprobe xhci_pci
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+#===================================================================
+#===================================================================
+
+
 
 
 working_dir=`pwd`
