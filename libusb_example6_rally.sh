@@ -227,6 +227,7 @@ fi
 
 # 2)
 # uint16_t bcdUVC = 0x100;
+      # lsuvc: bcdUVC = SW_TO_SHORT(&buffer_ci[3]): 100
 # uint8_t probe = 0;
 # enum uvc_req_code req = UVC_SET_CUR;
 
@@ -244,6 +245,23 @@ fi
 # strmh->cur_ctrl.wDelay = 0;
 # strmh->cur_ctrl.dwMaxVideoFrameSize = 614400;                         // Эту величину, мы видим где найти, она есть выше.
 # strmh->cur_ctrl.dwMaxPayloadTransferSize = 3060;                      // А эту где взять - ее нужно посчитать:
+
+
+    # !!!dgnet: THE RESULT of libusb_control_transfer (now decode following a GET transfer)
+    # !!!dgnet: UVCLIB: probe: 1
+    # !!!dgnet: UVCLIB: ctrl->bmHint: 1
+    # !!!dgnet: UVCLIB: ctrl->bFormatIndex: 1
+    # !!!dgnet: UVCLIB: ctrl->bFrameIndex: 1
+    # !!!dgnet: UVCLIB: ctrl->dwFrameInterval: 333333
+    # !!!dgnet: UVCLIB: ctrl->wKeyFrameRate: 0
+    # !!!dgnet: UVCLIB: ctrl->wPFrameRate: 0
+    # !!!dgnet: UVCLIB: ctrl->wCompQuality: 2000
+    # !!!dgnet: UVCLIB: ctrl->wCompWindowSize: 0
+    # !!!dgnet: UVCLIB: ctrl->wDelay: 0
+    # !!!dgnet: UVCLIB: ctrl->dwMaxVideoFrameSize: 614400
+    # !!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize: 3060
+    # !!!dgnet: UVCLIB: ctrl->bInterfaceNumber: 1
+
 
 
 # 4)
@@ -265,13 +283,15 @@ fi
 # 5)
 
         # uint8_t bAlternateSetting = 11;
-              # !!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bAlternateSetting 6
+              # !!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bAlternateSetting 11
               # ret = libusb_set_interface_alt_setting(strmh->devh->usb_devh,
               #                                       altsetting->bInterfaceNumber,
               #                                       altsetting->bAlternateSetting); 
-                     
+
         # uint8_t bEndpointAddres = 129;
         # size_t total_transfer_size = 97920;
+              # !!!dgnet: UVCLIB: total_transfer_size: 97920
+                  # total_transfer_size = packets_per_transfer * endpoint_bytes_per_packet;
 
 
 
