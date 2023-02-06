@@ -324,10 +324,7 @@ uvc_error_t uvc_query_stream_ctrl(
 
     }
 
-
-
-
-    else
+  }else{
 
       printf("!!!dgnet: IT WAS A SET (UVC_SET_CUR): req != UVC_SET_CUR:  libusb_control_transfer\n");
 
