@@ -1337,6 +1337,9 @@ int main(int argc, char **argv){
     strmh->transfers[transfer_id] = transfer;
     strmh->transfer_bufs[transfer_id] = malloc(total_transfer_size);
 
+    // Helper function to populate the required libusb_transfer fields for an isochronous transfer.
+    // _uvc_stream_callback: callback function to be invoked on transfer completion
+    // 500: timeout for the transfer in milliseconds
     libusb_fill_iso_transfer(
       transfer, usb_devh, bEndpointAddres,
       strmh->transfer_bufs[transfer_id],

@@ -1,6 +1,5 @@
 git clone https://github.com/andriykutsevol/libusb_uvc_debug.git
 
-
 <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
 ...
   <qemu:commandline>
