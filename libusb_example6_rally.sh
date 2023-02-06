@@ -8,9 +8,93 @@ fi
 
 
 
+# example1.c:
+
+# uvc_stream_ctrl_t ctrl;
+
+# /* Try to negotiate first stream profile */
+# res = uvc_get_stream_ctrl_format_size(
+#     devh, &ctrl, /* result stored in ctrl */
+#     frame_format,
+#     width, height, fps /* width, height, fps */
+# );
+
+#         uvc_query_stream_ctrl( devh, ctrl, 1, UVC_GET_MAX);
+        
+
+
+# res = uvc_start_streaming(devh, &ctrl, cb, (void *) 12345, 0);
+
+#     ret = uvc_stream_open_ctrl(devh, &strmh, ctrl);
+
+#         uvc_stream_ctrl()
+
+#             uvc_query_stream_ctrl()
+
+#                 !!!! ТУТ происходит выборка значений
+    #                 !!!dgnet: UVCLIB: ctrl->dwMaxVideoFrameSize: 614400
+    #                 !!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize: 3072
+#                 Это происходит через:  !!! libusb_control_transfer !!!
+#                 Именно он возвращает значения:
+#                     ctrl->dwMaxVideoFrameSize
+#                     ctrl->dwMaxPayloadTransferSize
+
+#                 Поэтому для запуска этого шестого примера, нужно значале запустить
+#                 пример 1 и там найти эти значения
+
+
+                              # EXAMPLE: Format: (YUY2) 640x480 30fps
+                              # !!!dgnet: THE RESULT of libusb_control_transfer (now decode following a GET transfer)
+                              # !!!dgnet: UVCLIB: probe: 1
+                              # !!!dgnet: UVCLIB: ctrl->bmHint: 1
+                              # !!!dgnet: UVCLIB: ctrl->bFormatIndex: 1
+                              # !!!dgnet: UVCLIB: ctrl->bFrameIndex: 1
+                              # !!!dgnet: UVCLIB: ctrl->dwFrameInterval: 333333
+                              # !!!dgnet: UVCLIB: ctrl->wKeyFrameRate: 0
+                              # !!!dgnet: UVCLIB: ctrl->wPFrameRate: 0
+                              # !!!dgnet: UVCLIB: ctrl->wCompQuality: 2000
+                              # !!!dgnet: UVCLIB: ctrl->wCompWindowSize: 0
+                              # !!!dgnet: UVCLIB: ctrl->wDelay: 0
+                              # !!!dgnet: UVCLIB: ctrl->dwMaxVideoFrameSize: 614400
+                              # !!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize: 3060
+                              # !!!dgnet: UVCLIB: ctrl->bInterfaceNumber: 1
+
+
+#     ret = uvc_stream_start(strmh, cb, user_ptr, flags);
+
+#         /* Go through the altsettings and find one whose packets are at least
+#         * as big as our format's maximum per-packet usage. Assume that the
+#         * packet sizes are increasing. */
+
+#             if (endpoint->bEndpointAddress == format_desc->parent->bEndpointAddress) {
+#               endpoint_bytes_per_packet = endpoint->wMaxPacketSize;
+#             // wMaxPacketSize: [unused:2 (multiplier-1):3 size:11]
+#             endpoint_bytes_per_packet = (endpoint_bytes_per_packet & 0x07ff) *
+#               (((endpoint_bytes_per_packet >> 11) & 3) + 1);
+#             break;
+
+#         packets_per_transfer = (ctrl->dwMaxVideoFrameSize +
+#                                 endpoint_bytes_per_packet - 1) / endpoint_bytes_per_packet;
+
+
+#         total_transfer_size = packets_per_transfer * endpoint_bytes_per_packet;
+
+#         libusb_fill_iso_transfer(
+#             transfer, strmh->devh->usb_devh, format_desc->parent->bEndpointAddress,
+#             strmh->transfer_bufs[transfer_id],
+#             total_transfer_size, packets_per_transfer, _uvc_stream_callback, (void*) strmh, 5000); 
+
+
+
+
+#====================================================
+#====================================================
 #====================================================
 #c270
 #====================================================
+#====================================================
+#====================================================
+
 
 # lsuvc
 # Guvcview tool has YUYV:
@@ -117,18 +201,37 @@ fi
 
 #====================================================
 
+# Руками устанавливаем:
+
+# 0)
+      # uint8_t contol_bInterfaceNumber = 0;
+
+# 1)
+      # uint8_t bEndpointAddress = 135;
+
+      # Это берется из lsuvc:
+
+            # ======================================
+            # END VIDEO CONTROL PARSING.
+            # ======================================
+            # ------------------------
+            # ENDPOINT: endpoint_idx 0, ALTSETTING(if_desc): 0, INTERFACE: 0
+            # ep_desc->bLength: 7
+            # ep_desc->bDescriptorType: 5
+            # ep_desc->bEndpointAddress: 135
+
+        # Это эндпоинт нулевого интерфейса.           
 
 
 
 
-# uint8_t bEndpointAddress = 135;
-
+# 2)
 # uint16_t bcdUVC = 0x100;
 # uint8_t probe = 0;
 # enum uvc_req_code req = UVC_SET_CUR;
 
 
-
+# 3)
 # strmh->cur_ctrl.bInterfaceNumber = 1;
 # strmh->cur_ctrl.bmHint = 1;
 # strmh->cur_ctrl.bFormatIndex = 1;
@@ -143,7 +246,7 @@ fi
 # strmh->cur_ctrl.dwMaxPayloadTransferSize = 3060;                      // А эту где взять - ее нужно посчитать:
 
 
-
+# 4)
 #           size_t len;
 #           if (bcdUVC >= 0x0110)
 #             len = 34;
@@ -152,8 +255,27 @@ fi
 
 
 
+# 5)
+        # /* Number of packets per transfer */
+        # size_t packets_per_transfer = 32;
+        # /* Size of packet transferable from the chosen endpoint */
+        # size_t endpoint_bytes_per_packet = 3060;
 
 
+# 5)
+
+        # uint8_t bAlternateSetting = 11;
+              # !!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bAlternateSetting 6
+              # ret = libusb_set_interface_alt_setting(strmh->devh->usb_devh,
+              #                                       altsetting->bInterfaceNumber,
+              #                                       altsetting->bAlternateSetting); 
+                     
+        # uint8_t bEndpointAddres = 129;
+        # size_t total_transfer_size = 97920;
+
+
+
+# !!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bInterfaceNumber 1
 
 
 
