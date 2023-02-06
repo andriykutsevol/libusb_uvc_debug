@@ -24,7 +24,7 @@ vm_name="ubuntu20.04"
 
 echo "============================="
 echo "attach-device ${vm_name}"
-echo "=============================" >>
+echo "============================="
 
 
 sudo virsh attach-device ${vm_name} --file ./${usb_device_xml_path}
