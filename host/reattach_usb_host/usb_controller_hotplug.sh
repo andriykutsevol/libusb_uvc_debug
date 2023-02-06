@@ -28,7 +28,7 @@ echo "============================="
 
 
 sudo virsh attach-device ${vm_name} --file ./${usb_device_xml_path}
-sleep 15
+sleep 10
 
 
 echo "============================="
@@ -51,7 +51,7 @@ echo "============================="
 echo "Detach device: "
 sudo virsh detach-device ${vm_name} --file ./${usb_device_xml_path}
 
-sleep 15
+sleep 10
 
 echo "After detach"
 virsh qemu-monitor-command ${vm_name} --hmp "info usb"
