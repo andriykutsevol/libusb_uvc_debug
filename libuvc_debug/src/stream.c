@@ -259,7 +259,7 @@ uvc_error_t uvc_query_stream_ctrl(
   }
 
 
-  printf("START libusb_control_transfer\n");
+  printf("!!!dgnet: START libusb_control_transfer\n");
 
   /* do the transfer */
   err = libusb_control_transfer(
@@ -297,7 +297,40 @@ uvc_error_t uvc_query_stream_ctrl(
       ctrl->bMaxVersion = buf[33];
       /** @todo support UVC 1.1 */
     }
+
+
+    printf("!!!dgnet: THE RESULT of libusb_control_transfer (now decode following a GET transfer)\n");
+    printf("!!!dgnet: UVCLIB: probe: %d\n", probe);
+    printf("!!!dgnet: UVCLIB: ctrl->bmHint: %d\n", ctrl->bmHint);
+    printf("!!!dgnet: UVCLIB: ctrl->bFormatIndex: %d\n", ctrl->bFormatIndex);
+    printf("!!!dgnet: UVCLIB: ctrl->bFrameIndex: %d\n", ctrl->bFrameIndex);
+    printf("!!!dgnet: UVCLIB: ctrl->dwFrameInterval: %d\n", ctrl->dwFrameInterval);
+    printf("!!!dgnet: UVCLIB: ctrl->wKeyFrameRate: %d\n", ctrl->wKeyFrameRate);
+    printf("!!!dgnet: UVCLIB: ctrl->wPFrameRate: %d\n", ctrl->wPFrameRate);
+    printf("!!!dgnet: UVCLIB: ctrl->wCompQuality: %d\n", ctrl->wCompQuality);
+    printf("!!!dgnet: UVCLIB: ctrl->wCompWindowSize: %d\n", ctrl->wCompWindowSize);
+    printf("!!!dgnet: UVCLIB: ctrl->wDelay: %d\n", ctrl->wDelay);
+    printf("!!!dgnet: UVCLIB: ctrl->dwMaxVideoFrameSize: %d\n", ctrl->dwMaxVideoFrameSize);
+    printf("!!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize: %d\n", ctrl->dwMaxPayloadTransferSize);
+    printf("!!!dgnet: UVCLIB: ctrl->bInterfaceNumber: %d\n", ctrl->bInterfaceNumber);
+
+    if (len == 34) {
+
+      printf("!!!dgnet: UVCLIB: ctrl->dwClockFrequency: %d\n", ctrl->dwClockFrequency);
+      printf("!!!dgnet: UVCLIB: ctrl->bmFramingInfo: %d\n", ctrl->bmFramingInfo);
+      printf("!!!dgnet: UVCLIB: ctrl->bPreferredVersion: %d\n", ctrl->bPreferredVersion);
+      printf("!!!dgnet: UVCLIB: ctrl->bMinVersion: %d\n", ctrl->bMinVersion);
+      printf("!!!dgnet: UVCLIB: ctrl->bMaxVersion: %d\n", ctrl->bMaxVersion);
+
+    }
+
+
+
+
     else
+
+      printf("!!!dgnet: IT WAS A SET (UVC_SET_CUR): req != UVC_SET_CUR:  libusb_control_transfer\n");
+
       ctrl->dwClockFrequency = devh->info->ctrl_if.dwClockFrequency;
 
     /* fix up block for cameras that fail to set dwMax* */
