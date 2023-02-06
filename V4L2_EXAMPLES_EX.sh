@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+
 clear
 echo "new new new new new new new new"
 echo "new new new new new new new new"

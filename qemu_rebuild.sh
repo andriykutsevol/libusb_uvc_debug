@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$EUID" -eq 0 ]
+  then echo "Do not run as root"
+  exit
+fi
+
+
 
 qemu_path=/home/dgnet/qemu/DGnet_ALP_PID3
 qemu_src_path=${qemu_path}/src/qemu-6.0.0/

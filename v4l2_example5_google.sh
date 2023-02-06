@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+
 output_dir=`pwd`"/google/v4l2-examples/5"
 working_dir=`pwd`
 

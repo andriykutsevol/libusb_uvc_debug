@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 
 output_dir=`pwd`"/aver/libuvc/1"
 working_dir=`pwd`
