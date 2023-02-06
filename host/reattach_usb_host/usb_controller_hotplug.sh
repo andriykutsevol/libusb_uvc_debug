@@ -23,7 +23,7 @@ vm_name="ubuntu20.04"
 
 
 echo "============================="
-echo "attach-device ${vm_name}"
+echo "Attach-device ${vm_name}"
 echo "============================="
 
 
