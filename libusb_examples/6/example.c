@@ -937,8 +937,8 @@ int main(int argc, char **argv){
   bEndpointAddress_mysetting = strtol(argv[4],&tmpptr,10);
   bcdUVC_mysetting = strtol(argv[5],&tmpptr,10);
   bInterfaceNumber_mysetting = strtol(argv[6],&tmpptr,10);
-  // bmHint_mysetting = strtol(argv[7],&tmpptr,10);
-  // bFormatIndex_mysetting = strtol(argv[8],&tmpptr,10);
+  bmHint_mysetting = strtol(argv[7],&tmpptr,10);
+  bFormatIndex_mysetting = strtol(argv[8],&tmpptr,10);
   // bFrameIndex_mysetting = strtol(argv[9],&tmpptr,10);
   // dwFrameInterval_mysetting = strtol(argv[10],&tmpptr,10);
   // wKeyFrameRate_mysetting = strtol(argv[11],&tmpptr,10);
