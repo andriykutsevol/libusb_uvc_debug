@@ -88,16 +88,16 @@ ${bFormatIndex_mysetting} \
 ${bFrameIndex_mysetting} \
 ${dwFrameInterval_mysetting} \
 ${wKeyFrameRate_mysetting} \
-${wPFrameRate_mysetting} \
-${wCompQuality_mysetting} \
-${wCompWindowSize_mysetting} \
-${wDelay_mysetting} \
-${dwMaxVideoFrameSize_mysetting} \
-${dwMaxPayloadTransferSize_mysetting} \
-${endpoint_bytes_per_packet_mysetting} \
-${bAlternateSetting_mysetting} \
-${bEndpointAddres_mysetting} \
-${total_transfer_size_mysetting}
+${wPFrameRate_mysetting}
+# ${wCompQuality_mysetting} \
+# ${wCompWindowSize_mysetting} \
+# ${wDelay_mysetting} \
+# ${dwMaxVideoFrameSize_mysetting} \
+# ${dwMaxPayloadTransferSize_mysetting} \
+# ${endpoint_bytes_per_packet_mysetting} \
+# ${bAlternateSetting_mysetting} \
+# ${bEndpointAddres_mysetting} \
+# ${total_transfer_size_mysetting}
 
 cd ${root_dir}
 

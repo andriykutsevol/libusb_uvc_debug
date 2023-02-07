@@ -934,15 +934,15 @@ int main(int argc, char **argv){
   pidi = strtol(argv[2],&tmpptr,10);
 
   contol_bInterfaceNumber_mysetting = strtol(argv[3],&tmpptr,10);
-  // bEndpointAddress_mysetting = strtol(argv[4],&tmpptr,10);
-  // bcdUVC_mysetting = strtol(argv[5],&tmpptr,10);
-  // bInterfaceNumber_mysetting = strtol(argv[6],&tmpptr,10);
-  // bmHint_mysetting = strtol(argv[7],&tmpptr,10);
-  // bFormatIndex_mysetting = strtol(argv[8],&tmpptr,10);
-  // bFrameIndex_mysetting = strtol(argv[9],&tmpptr,10);
-  // dwFrameInterval_mysetting = strtol(argv[10],&tmpptr,10);
-  // wKeyFrameRate_mysetting = strtol(argv[11],&tmpptr,10);
-  // wPFrameRate_mysetting = strtol(argv[12],&tmpptr,10);
+  bEndpointAddress_mysetting = strtol(argv[4],&tmpptr,10);
+  bcdUVC_mysetting = strtol(argv[5],&tmpptr,10);
+  bInterfaceNumber_mysetting = strtol(argv[6],&tmpptr,10);
+  bmHint_mysetting = strtol(argv[7],&tmpptr,10);
+  bFormatIndex_mysetting = strtol(argv[8],&tmpptr,10);
+  bFrameIndex_mysetting = strtol(argv[9],&tmpptr,10);
+  dwFrameInterval_mysetting = strtol(argv[10],&tmpptr,10);
+  wKeyFrameRate_mysetting = strtol(argv[11],&tmpptr,10);
+  wPFrameRate_mysetting = strtol(argv[12],&tmpptr,10);
   // wCompQuality_mysetting = strtol(argv[13],&tmpptr,10);
   // wCompWindowSize_mysetting = strtol(argv[14],&tmpptr,10);
   // wDelay_mysetting = strtol(argv[15],&tmpptr,10);
