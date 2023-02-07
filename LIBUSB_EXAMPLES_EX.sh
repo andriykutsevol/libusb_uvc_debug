@@ -91,6 +91,9 @@ mkdir -p ${output_dir}
 mkdir -p ${host_results}
 rm -fR ${output_dir}/*
 rm -fR ${binary_path}/out
+rm -fR ${binary_path}/out.yuv
+rm -fR ${binary_path}/out.mjpg
+rm -fR ${binary_path}/output.avi
 
 
 
@@ -120,7 +123,6 @@ sleep 1
 #======================================================
 
 cd ${binary_path}
-rm -fR ./out
 make
 
 echo "================================="
@@ -237,6 +239,7 @@ echo "========================" >> ${output_dir}/ex_out.txt 2>&1
 cd ${binary_path}
 rm -fR ./out
 rm -fR ./out.yuv
+rm -fR ./out.mjpg
 rm -fR ./output.avi
 
 ./example 1133 2085 \
