@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
-# sudo modprobe -r xhci_pci
-# sudo modprobe xhci_pci
+
 
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
@@ -10,8 +9,6 @@ fi
 
 #===================================================================
 #===================================================================
-
-
 
 
 working_dir=`pwd`
@@ -36,7 +33,6 @@ output_dir=${device_dir}/libuvc/${ex_num}
 
 # sudo modprobe -r xhci_pci
 # sudo modprobe xhci_pci
-
 # v4l2-ctl --all --device /dev/${device_file}
 dev_file="video0"
 
@@ -76,7 +72,7 @@ device_dir=${working_dir}/rally
 sudo rm -rf ${device_dir}/*
 
 
-dev_file="video2"
+dev_file="video6"
 
 ex_num=1
 output_dir=`pwd`"/rally/libuvc/${ex_num}"
