@@ -369,6 +369,8 @@ bEndpointAddres_mysetting=129;
 total_transfer_size_mysetting=97920;
 
 #------------------------------------------------------
+fps=15
+#------------------------------------------------------
 
 ex_num=6
 output_dir=`pwd`"/c270/libusb/${ex_num}"
@@ -393,7 +395,9 @@ ${endpoint_bytes_per_packet_mysetting} \
 ${bAlternateSetting_mysetting} \
 ${bEndpointAddres_mysetting} \
 ${total_transfer_size_mysetting} \
+${fps} \
 ${output_dir}
+
 
 
 

@@ -64,9 +64,9 @@ endpoint_bytes_per_packet_mysetting=${22};
 bAlternateSetting_mysetting=${23};
 bEndpointAddres_mysetting=${24};
 total_transfer_size_mysetting=${25};
+fps=${26}
 
-
-output_dir=${26}"/"${width}"x"${height}
+output_dir=${27}"/"${width}"x"${height}
 host_results=`pwd`/host/host_results
 binary_path=`pwd`"/libusb_examples/${example_number}/build"
 root_dir=`pwd`
@@ -275,6 +275,16 @@ sleep 1
 # sleep 2
 # sudo modprobe uvcvideo
 # sleep 2
+
+# ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 640x480 -r  -i /home/dgnet/kernel/libusb_uvc_debug/libusb_examples/6/build/out.yuv /home/dgnet/kernel/libusb_uvc_debug/c270/libusb/6/640x480/output.avi
+
+# ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 640x480 -r  -i ./out.yuv /home/dgnet/kernel/libusb_uvc_debug/c270/libusb/6/640x480/output.avi
+
+# ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 640x480 -r  -i /home/dgnet/kernel/libusb_uvc_debug/libusb_examples/6/build/out.yuv ./output.avi
+
+# ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 640x480 -r  -i ./out.yuv ./output.avi
+
+
 
 
 echo "==========================="
