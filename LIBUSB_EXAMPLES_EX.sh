@@ -258,6 +258,8 @@ sync
 sync
 
 sleep 1
+# ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 640x480 -r 15 -i ./out.yuv ./output.avi
+
 ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v ${width}x${height} -r ${fps} -i ${binary_path}/out.yuv ${output_dir}/output.avi
 cp ${binary_path}/out ${output_dir}
 
