@@ -935,8 +935,8 @@ int main(int argc, char **argv){
 
   contol_bInterfaceNumber_mysetting = strtol(argv[3],&tmpptr,10);
   bEndpointAddress_mysetting = strtol(argv[4],&tmpptr,10);
-  // bcdUVC_mysetting = strtol(argv[5],&tmpptr,10);
-  // bInterfaceNumber_mysetting = strtol(argv[6],&tmpptr,10);
+  bcdUVC_mysetting = strtol(argv[5],&tmpptr,10);
+  bInterfaceNumber_mysetting = strtol(argv[6],&tmpptr,10);
   // bmHint_mysetting = strtol(argv[7],&tmpptr,10);
   // bFormatIndex_mysetting = strtol(argv[8],&tmpptr,10);
   // bFrameIndex_mysetting = strtol(argv[9],&tmpptr,10);
