@@ -19,3 +19,13 @@ device_vidpid=${2}":"${3}
 device_vid=${2}
 device_pid=${3}
 device_file=${4}
+videon=${device_file}
+resolution=${5}":"${6}
+width=${5}
+height=${6}
+
+
+echo "example number:       " ${example_number}
+echo "device_vidpid:        " ${device_vidpid}
+echo "device file:          " ${device_file}
+echo "resolution:           " ${resolution}
