@@ -31,6 +31,9 @@ sudo modprobe uvcvideo
 sleep 2
 
 
+#---------------------------------------------------------
+
+
 example_number=${1}
 device_vidpid=${2}":"${3}
 device_vid=${2}
