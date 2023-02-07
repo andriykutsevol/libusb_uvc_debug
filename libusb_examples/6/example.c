@@ -21,30 +21,30 @@
 
 uint8_t contol_bInterfaceNumber_mysetting;
 
-uint8_t bEndpointAddress_mysetting = 135;
+uint8_t bEndpointAddress_mysetting;
 
-uint16_t bcdUVC_mysetting = 0x100;
+uint16_t bcdUVC_mysetting;
 
-uint8_t bInterfaceNumber_mysetting = 1;
-uint16_t bmHint_mysetting = 1;
-uint8_t bFormatIndex_mysetting = 1;
-uint8_t bFrameIndex_mysetting = 1;
-uint32_t dwFrameInterval_mysetting = 333333;
-uint16_t wKeyFrameRate_mysetting = 0;
-uint16_t wPFrameRate_mysetting = 0;
-uint16_t wCompQuality_mysetting = 200;
-uint16_t wCompWindowSize_mysetting = 0;
-uint16_t wDelay_mysetting = 0;
-uint32_t dwMaxVideoFrameSize_mysetting = 614400;
-uint32_t dwMaxPayloadTransferSize_mysetting = 3060;
+uint8_t bInterfaceNumber_mysetting;
+uint16_t bmHint_mysetting;
+uint8_t bFormatIndex_mysetting;
+uint8_t bFrameIndex_mysetting;
+uint32_t dwFrameInterval_mysetting;
+uint16_t wKeyFrameRate_mysetting;
+uint16_t wPFrameRate_mysetting;
+uint16_t wCompQuality_mysetting;
+uint16_t wCompWindowSize_mysetting;
+uint16_t wDelay_mysetting;
+uint32_t dwMaxVideoFrameSize_mysetting;
+uint32_t dwMaxPayloadTransferSize_mysetting;
 
-size_t endpoint_bytes_per_packet_mysetting = 3060;
+size_t endpoint_bytes_per_packet_mysetting;
 
-uint8_t bAlternateSetting_mysetting = 11;
+uint8_t bAlternateSetting_mysetting;
 
-uint8_t bEndpointAddres_mysetting = 129;
+uint8_t bEndpointAddres_mysetting;
 
-size_t total_transfer_size_mysetting = 97920;
+size_t total_transfer_size_mysetting;
 
 
 //================================================================
@@ -934,8 +934,24 @@ int main(int argc, char **argv){
   pidi = strtol(argv[2],&tmpptr,10);
 
   contol_bInterfaceNumber_mysetting = strtol(argv[3],&tmpptr,10);
-
-
+  bEndpointAddress_mysetting = strtol(argv[4],&tmpptr,10);
+  bcdUVC_mysetting = strtol(argv[5],&tmpptr,10);
+  bInterfaceNumber_mysetting = strtol(argv[6],&tmpptr,10);
+  bmHint_mysetting = strtol(argv[7],&tmpptr,10);
+  bFormatIndex_mysetting = strtol(argv[8],&tmpptr,10);
+  bFrameIndex_mysetting = strtol(argv[9],&tmpptr,10);
+  dwFrameInterval_mysetting = strtol(argv[10],&tmpptr,10);
+  wKeyFrameRate_mysetting = strtol(argv[11],&tmpptr,10);
+  wPFrameRate_mysetting = strtol(argv[12],&tmpptr,10);
+  wCompQuality_mysetting = strtol(argv[13],&tmpptr,10);
+  wCompWindowSize_mysetting = strtol(argv[14],&tmpptr,10);
+  wDelay_mysetting = strtol(argv[15],&tmpptr,10);
+  dwMaxVideoFrameSize_mysetting = strtol(argv[16],&tmpptr,10);
+  dwMaxPayloadTransferSize_mysetting = strtol(argv[17],&tmpptr,10);
+  endpoint_bytes_per_packet_mysetting = strtol(argv[18],&tmpptr,10);
+  bAlternateSetting_mysetting = strtol(argv[19],&tmpptr,10);
+  bEndpointAddres_mysetting = strtol(argv[20],&tmpptr,10);
+  total_transfer_size_mysetting = strtol(argv[22],&tmpptr,10);
 
 
   //fmt_index = strtol(argv[3],tmpptr,10);
