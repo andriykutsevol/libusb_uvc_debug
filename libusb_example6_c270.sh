@@ -402,3 +402,21 @@ ${output_dir}
 
 
 #------------------------------------------------------
+
+#-----------------------
+#Make Slice
+#-----------------------
+working_dir=`pwd`
+cd ${working_dir}
+
+dev_name="c270"
+slices_dir=${working_dir}/slices
+#sudo rm -rf ${slices_dir}/*
+sudo rm -rf {dev_name}_slice.tar.gz
+mkdir -p ${slices_dir}
+
+
+./make_slice.sh ${working_dir} ${dev_name}
+cp ./${dev_name}_slice.tar.gz ${slices_dir}/
+rm -rf ./${dev_name}_slice.tar.gz
+rm -rf ./${dev_name}_slice
