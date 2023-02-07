@@ -944,7 +944,7 @@ int main(int argc, char **argv){
   wKeyFrameRate_mysetting = strtol(argv[11],&tmpptr,10);
   wPFrameRate_mysetting = strtol(argv[12],&tmpptr,10);
   
-  printf("bzbzbzbzb: wCompQuality_mysetting: %s", argv[13]);
+  printf("example.c: wCompQuality_mysetting: %s\n", argv[13]);
   //wCompQuality_mysetting = strtol(argv[13],&tmpptr,10);
 
 

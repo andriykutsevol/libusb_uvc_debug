@@ -86,7 +86,7 @@ ${bFormatIndex_mysetting} \
 ${bFrameIndex_mysetting} \
 ${dwFrameInterval_mysetting} \
 ${wKeyFrameRate_mysetting} \
-${wPFrameRate_mysetting}
+${wPFrameRate_mysetting} \
 ${wCompQuality_mysetting} \
 ${wCompWindowSize_mysetting} \
 ${wDelay_mysetting} \
