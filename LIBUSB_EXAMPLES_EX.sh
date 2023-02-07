@@ -42,6 +42,9 @@ dwFrameInterval_mysetting=${14};
 wKeyFrameRate_mysetting=${15};
 wPFrameRate_mysetting=${16};
 wCompQuality_mysetting=${17};
+
+echo "'wCompQuality_mysetting: ' ${wCompQuality_mysetting}"
+
 wCompWindowSize_mysetting=${18};
 wDelay_mysetting=${19};
 dwMaxVideoFrameSize_mysetting=${20};
