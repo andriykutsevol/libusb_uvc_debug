@@ -238,6 +238,7 @@ sleep 1
 mkdir -p ${output_dir}/host_results
 
 if [ "$(ls -A ${output_dir}/host_results)" ]; then
+    echo "Copy host_resluts to output_dir"
     cp ${host_results}/* ${output_dir}/host_results/
 fi
 
