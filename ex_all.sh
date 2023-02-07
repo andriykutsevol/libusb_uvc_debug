@@ -20,6 +20,10 @@ mkdir -p ${slices_dir}
 
 # #===================================================================
 # # libuvc_example1_google.sh
+# # https://www.mimomonitors.com/collections/1280x800/products/mimo-vue-capture
+# # 18d1:501e Google Inc. Plankton Captured HDMI Video 
+# # https://www.mimomonitors.com/search?q=hdmi+capture
+# # https://www.mimomonitors.com/products/mimo-vue-capture?_pos=1&_sid=05aacaf5e&_ss=r
 # #===================================================================
 
 # device_dir=${working_dir}/google
