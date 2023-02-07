@@ -371,7 +371,7 @@ total_transfer_size_mysetting=97920;
 #------------------------------------------------------
 
 ex_num=6
-output_dir=`pwd`"/rally/libusb/${ex_num}"
+output_dir=`pwd`"/c270/libusb/${ex_num}"
 
 ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 640 480 \
 ${contol_bInterfaceNumber_mysetting} \

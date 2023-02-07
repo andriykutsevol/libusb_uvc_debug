@@ -254,6 +254,8 @@ ${total_transfer_size_mysetting} \
 
 
 cd ${output_dir}
+sync
+sync
 
 sleep 1
 ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v ${width}x${height} -r ${fps} -i ${binary_path}/out.yuv ${output_dir}/output.avi
