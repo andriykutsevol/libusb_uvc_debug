@@ -398,27 +398,3 @@ ${output_dir}
 
 
 #------------------------------------------------------
-
-./example 1133 2085 \
-${contol_bInterfaceNumber_mysetting} \
-${bEndpointAddress_mysetting} \
-${bcdUVC_mysetting} \
-${bInterfaceNumber_mysetting} \
-${bmHint_mysetting} \
-${bFormatIndex_mysetting} \
-${bFrameIndex_mysetting} \
-${dwFrameInterval_mysetting} \
-${wKeyFrameRate_mysetting} \
-${wPFrameRate_mysetting} \
-${wCompQuality_mysetting} \
-${wCompWindowSize_mysetting} \
-${wDelay_mysetting} \
-${dwMaxVideoFrameSize_mysetting} \
-${dwMaxPayloadTransferSize_mysetting} \
-${endpoint_bytes_per_packet_mysetting} \
-${bAlternateSetting_mysetting} \
-${bEndpointAddres_mysetting} \
-${total_transfer_size_mysetting}
-
-
-#------------------------------------------------------
