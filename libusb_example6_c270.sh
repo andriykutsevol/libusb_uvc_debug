@@ -346,7 +346,7 @@ fi
 
 contol_bInterfaceNumber_mysetting=0;
 bEndpointAddress_mysetting=135;
-bcdUVC_mysetting=256  // 0x100;
+bcdUVC_mysetting=256  # 0x100;
 
 
 bInterfaceNumber_mysetting=1;
