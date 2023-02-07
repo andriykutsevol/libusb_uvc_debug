@@ -15,9 +15,9 @@ clear
 
 #---------------------------------------------------------
 
-usb_device_xml_path="./device.xml"
+usb_device_xml_path="dell_4350_usb_controller.xml"
 
-vm_name="ubuntu20.04"
+vm_name="win10-zoom"
 
 #---------------------------------------------------------
 
