@@ -943,19 +943,15 @@ int main(int argc, char **argv){
   dwFrameInterval_mysetting = strtol(argv[10],&tmpptr,10);
   wKeyFrameRate_mysetting = strtol(argv[11],&tmpptr,10);
   wPFrameRate_mysetting = strtol(argv[12],&tmpptr,10);
-  
-  printf("example.c: wCompQuality_mysetting: %s\n", argv[13]);
-  //wCompQuality_mysetting = strtol(argv[13],&tmpptr,10);
-
-
-  // wCompWindowSize_mysetting = strtol(argv[14],&tmpptr,10);
-  // wDelay_mysetting = strtol(argv[15],&tmpptr,10);
-  // dwMaxVideoFrameSize_mysetting = strtol(argv[16],&tmpptr,10);
-  // dwMaxPayloadTransferSize_mysetting = strtol(argv[17],&tmpptr,10);
-  // endpoint_bytes_per_packet_mysetting = strtol(argv[18],&tmpptr,10);
-  // bAlternateSetting_mysetting = strtol(argv[19],&tmpptr,10);
-  // bEndpointAddres_mysetting = strtol(argv[20],&tmpptr,10);
-  // total_transfer_size_mysetting = strtol(argv[21],&tmpptr,10);
+  wCompQuality_mysetting = strtol(argv[13],&tmpptr,10);
+  wCompWindowSize_mysetting = strtol(argv[14],&tmpptr,10);
+  wDelay_mysetting = strtol(argv[15],&tmpptr,10);
+  dwMaxVideoFrameSize_mysetting = strtol(argv[16],&tmpptr,10);
+  dwMaxPayloadTransferSize_mysetting = strtol(argv[17],&tmpptr,10);
+  endpoint_bytes_per_packet_mysetting = strtol(argv[18],&tmpptr,10);
+  bAlternateSetting_mysetting = strtol(argv[19],&tmpptr,10);
+  bEndpointAddres_mysetting = strtol(argv[20],&tmpptr,10);
+  total_transfer_size_mysetting = strtol(argv[21],&tmpptr,10);
 
 
   // //fmt_index = strtol(argv[3],tmpptr,10);
