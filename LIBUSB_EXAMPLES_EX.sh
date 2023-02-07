@@ -59,7 +59,7 @@ output_dir=${26}"/"${width}"x"${height}
 
 
 host_results=`pwd`/host/host_results
-binary_path=`pwd`"/libuvc_debug/build"
+binary_path=`pwd`"libusb_examples/${example_number}/build"
 root_dir=`pwd`
 
 
@@ -73,7 +73,7 @@ rm -fR ${binary_path}/out
 
 
 #======================================================
-
+cd ${binary_path}
 ./example 1133 2085 \
 ${contol_bInterfaceNumber_mysetting} \
 ${bEndpointAddress_mysetting} \
@@ -94,6 +94,8 @@ ${endpoint_bytes_per_packet_mysetting} \
 ${bAlternateSetting_mysetting} \
 ${bEndpointAddres_mysetting} \
 ${total_transfer_size_mysetting}
+
+cd ${root_dir}
 
 
 
