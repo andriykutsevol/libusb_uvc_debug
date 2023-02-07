@@ -419,7 +419,7 @@ static uvc_error_t uvc_open_internal(
       goto fail;
     }
 
-    printf("!!!dgnet: UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer() \n");
+    printf("!!!dgnet: UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer():  bEndpointAddress: %d\n", internal_devh->info->ctrl_if.bEndpointAddress);
 
     libusb_fill_interrupt_transfer(internal_devh->status_xfer,
                                    usb_devh,

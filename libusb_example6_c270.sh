@@ -200,27 +200,32 @@ fi
 
 
 #====================================================
+# 640x480
+#====================================================
 
 # Руками устанавливаем:
 
 # 0)
-      # uint8_t contol_bInterfaceNumber = 0;
+      # uint8_t contol_bInterfaceNumber = 0;          # Нулевой интерфейс всегда контрольный.
 
 # 1)
       # uint8_t bEndpointAddress = 135;
 
-      # Это берется из lsuvc:
+            # Это берется из lsuvc:
 
-            # ======================================
-            # END VIDEO CONTROL PARSING.
-            # ======================================
-            # ------------------------
-            # ENDPOINT: endpoint_idx 0, ALTSETTING(if_desc): 0, INTERFACE: 0
-            # ep_desc->bLength: 7
-            # ep_desc->bDescriptorType: 5
-            # ep_desc->bEndpointAddress: 135
+                  # ======================================
+                  # END VIDEO CONTROL PARSING.
+                  # ======================================
+                  # ------------------------
+                  # ENDPOINT: endpoint_idx 0, ALTSETTING(if_desc): 0, INTERFACE: 0
+                  # ep_desc->bLength: 7
+                  # ep_desc->bDescriptorType: 5
+                  # ep_desc->bEndpointAddress: 135
 
-        # Это эндпоинт нулевого интерфейса.           
+            # Это эндпоинт нулевого интерфейса.
+
+            # А так же это можно взять из:
+            #       !!!dgnet: UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer():  bEndpointAddress           
 
 
 
@@ -246,7 +251,7 @@ fi
 # strmh->cur_ctrl.dwMaxVideoFrameSize = 614400;                         // Эту величину, мы видим где найти, она есть выше.
 # strmh->cur_ctrl.dwMaxPayloadTransferSize = 3060;                      // А эту где взять - ее нужно посчитать:
 
-
+    # Последний
     # !!!dgnet: THE RESULT of libusb_control_transfer (now decode following a GET transfer)
     # !!!dgnet: UVCLIB: probe: 1
     # !!!dgnet: UVCLIB: ctrl->bmHint: 1
@@ -283,6 +288,8 @@ fi
 # 5)
 
         # uint8_t bAlternateSetting = 11;
+              # !!!dgnet: UVCLIB: -----START ISOCHRONOUS TRANSFER-----
+              # ...
               # !!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bAlternateSetting 11
               # ret = libusb_set_interface_alt_setting(strmh->devh->usb_devh,
               #                                       altsetting->bInterfaceNumber,

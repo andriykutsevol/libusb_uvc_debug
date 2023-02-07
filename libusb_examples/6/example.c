@@ -13,6 +13,36 @@
 #include <pthread.h>
 #include <signal.h>
 
+//================================================================
+//================================================================
+
+uint8_t contol_bInterfaceNumber_mysetting = 0;
+
+uint8_t bEndpointAddress_mysetting = 135;
+
+uint16_t bcdUVC_mysetting = 0x100;
+
+uint8_t bInterfaceNumber_mysetting = 1;
+uint16_t bmHint_mysetting = 1;
+uint8_t bFormatIndex_mysetting = 1;
+uint8_t bFrameIndex_mysetting = 1;
+uint32_t dwFrameInterval_mysetting = 333333;
+uint16_t wKeyFrameRate_mysetting = 0;
+uint16_t wPFrameRate_mysetting = 0;
+uint16_t wCompQuality_mysetting = 200;
+uint16_t wCompWindowSize_mysetting = 0;
+uint16_t wDelay_mysetting = 0;
+uint32_t dwMaxVideoFrameSize_mysetting = 614400;
+uint32_t dwMaxPayloadTransferSize_mysetting = 3060;
+
+size_t endpoint_bytes_per_packet_mysetting = 3060;
+
+uint8_t bAlternateSetting_mysetting = 11;
+
+uint8_t bEndpointAddres_mysetting = 129;
+
+size_t total_transfer_size_mysetting = 97920;
+
 
 //================================================================
 //================================================================
@@ -1012,7 +1042,7 @@ int main(int argc, char **argv){
 
   printf("UVCLIB: START uvc_claim_if(): \n");
 
-      uint8_t contol_bInterfaceNumber = 0;
+      uint8_t contol_bInterfaceNumber = contol_bInterfaceNumber_mysetting;
 
       ret = libusb_detach_kernel_driver(usb_devh, contol_bInterfaceNumber);
 
@@ -1050,7 +1080,7 @@ int main(int argc, char **argv){
 
   struct libusb_transfer *status_xfer = NULL;
   uint8_t status_buf[32];
-  uint8_t bEndpointAddress = 135;
+  uint8_t bEndpointAddress = bEndpointAddress_mysetting;
 
   status_xfer = libusb_alloc_transfer(0);
 
@@ -1120,37 +1150,23 @@ int main(int argc, char **argv){
   printf("==============================================\n");
 
 
-  uint16_t bcdUVC = 0x100;
+  uint16_t bcdUVC = bcdUVC_mysetting;
   uint8_t probe = 0;
   enum uvc_req_code req = UVC_SET_CUR;
 
 
-  //uint8_t ctrl_bInterfaceNumber = 1;
-  //uint16_t ctrl_bmHint = 1;
-  //uint8_t ctrl_bFormatIndex = 1;
-  //uint8_t ctrl_bFrameIndex = 1;
-  //uint32_t ctrl_dwFrameInterval = 333333;
-  //uint16_t ctrl_wKeyFrameRate = 0;
-  //uint16_t ctrl_wPFrameRate = 0;
-  //uint16_t ctrl_wCompQuality = 200;
-  //uint16_t ctrl_wCompWindowSize = 0;
-  //uint16_t ctrl_wDelay = 0;
-  //uint32_t ctrl_dwMaxVideoFrameSize = 614400;
-  //uint32_t ctrl_dwMaxPayloadTransferSize = 3060;
-
-
-  strmh->cur_ctrl.bInterfaceNumber = 1;
-  strmh->cur_ctrl.bmHint = 1;
-  strmh->cur_ctrl.bFormatIndex = 1;
-  strmh->cur_ctrl.bFrameIndex = 1;
-  strmh->cur_ctrl.dwFrameInterval = 333333;
-  strmh->cur_ctrl.wKeyFrameRate = 0;
-  strmh->cur_ctrl.wPFrameRate = 0;
-  strmh->cur_ctrl.wCompQuality = 200;
-  strmh->cur_ctrl.wCompWindowSize = 0;
-  strmh->cur_ctrl.wDelay = 0;
-  strmh->cur_ctrl.dwMaxVideoFrameSize = 614400;
-  strmh->cur_ctrl.dwMaxPayloadTransferSize = 3060;
+  strmh->cur_ctrl.bInterfaceNumber = bInterfaceNumber_mysetting;
+  strmh->cur_ctrl.bmHint = bmHint_mysetting;
+  strmh->cur_ctrl.bFormatIndex = bFormatIndex_mysetting;
+  strmh->cur_ctrl.bFrameIndex = bFrameIndex_mysetting;
+  strmh->cur_ctrl.dwFrameInterval = dwFrameInterval_mysetting;
+  strmh->cur_ctrl.wKeyFrameRate = wKeyFrameRate_mysetting;
+  strmh->cur_ctrl.wPFrameRate = wPFrameRate_mysetting;
+  strmh->cur_ctrl.wCompQuality = wCompQuality_mysetting;
+  strmh->cur_ctrl.wCompWindowSize = wCompWindowSize_mysetting;
+  strmh->cur_ctrl.wDelay = wDelay_mysetting;
+  strmh->cur_ctrl.dwMaxVideoFrameSize = dwMaxVideoFrameSize_mysetting;
+  strmh->cur_ctrl.dwMaxPayloadTransferSize = dwMaxPayloadTransferSize_mysetting;
 
 
   if (bcdUVC >= 0x0110){
@@ -1295,13 +1311,13 @@ int main(int argc, char **argv){
   /* Number of packets per transfer */
   size_t packets_per_transfer = 32;
   /* Size of packet transferable from the chosen endpoint */
-  size_t endpoint_bytes_per_packet = 3060;
+  size_t endpoint_bytes_per_packet = endpoint_bytes_per_packet_mysetting;
 
 
 
-  uint8_t bAlternateSetting = 11;
-  uint8_t bEndpointAddres = 129;
-  size_t total_transfer_size = 97920;
+  uint8_t bAlternateSetting = bAlternateSetting_mysetting;
+  uint8_t bEndpointAddres = bEndpointAddres_mysetting;
+  size_t total_transfer_size = total_transfer_size_mysetting;
   
 
   struct libusb_transfer *transfer;
