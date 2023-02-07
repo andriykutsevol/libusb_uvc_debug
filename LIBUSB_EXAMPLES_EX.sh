@@ -272,22 +272,6 @@ sync
 sleep 1
 
 # TODO: BUG in the example.c code. It does not release the device properly.
-# Therefore it does not flush all otput untill this script killed.
-
-# sudo modprobe -r uvcvideo
-# sleep 2
-# sudo modprobe uvcvideo
-# sleep 2
-
-# ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 640x480 -r  -i /home/dgnet/kernel/libusb_uvc_debug/libusb_examples/6/build/out.yuv /home/dgnet/kernel/libusb_uvc_debug/c270/libusb/6/640x480/output.avi
-
-# ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 640x480 -r  -i ./out.yuv /home/dgnet/kernel/libusb_uvc_debug/c270/libusb/6/640x480/output.avi
-
-# ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 640x480 -r  -i /home/dgnet/kernel/libusb_uvc_debug/libusb_examples/6/build/out.yuv ./output.avi
-
-# ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 640x480 -r  -i ./out.yuv ./output.avi
-
-
 
 
 echo "==========================="
