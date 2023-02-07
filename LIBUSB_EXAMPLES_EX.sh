@@ -271,10 +271,15 @@ sleep 1
 # TODO: BUG in the example.c code. It does not release the device properly.
 # Therefore it does not flush all otput untill this script killed.
 
-sudo modprobe -r uvcvideo
-sleep 2
-sudo modprobe uvcvideo
-sleep 2
+# sudo modprobe -r uvcvideo
+# sleep 2
+# sudo modprobe uvcvideo
+# sleep 2
+
+
+echo "==========================="
+echo "ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v ${width}x${height} -r ${fps} -i ${binary_path}/out.yuv ${output_dir}/output.avi"
+echo "==========================="
 
 ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v ${width}x${height} -r ${fps} -i ${binary_path}/out.yuv ${output_dir}/output.avi
 cp ${binary_path}/out ${output_dir}
