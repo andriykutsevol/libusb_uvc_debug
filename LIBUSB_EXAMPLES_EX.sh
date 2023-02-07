@@ -59,7 +59,7 @@ output_dir=${26}"/"${width}"x"${height}
 
 
 host_results=`pwd`/host/host_results
-binary_path=`pwd`"libusb_examples/${example_number}/build"
+binary_path=`pwd`"/libusb_examples/${example_number}/build"
 root_dir=`pwd`
 
 
