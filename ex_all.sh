@@ -56,6 +56,17 @@ cd ${working_dir}
 #v4l2-ctl --device /dev/${dev_file} --set-fmt-video=width=640,height=480,pixelformat=YUYV
 ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_file} 640 480 0 0 30 ${output_dir}
 
+#-----------------------
+#Make Slice
+#-----------------------
+cd ${working_dir}
+dev_name="google"
+
+./make_slice.sh ${working_dir} ${dev_name}
+cp ./${dev_name}_slice.tar.gz ${slices_dir}/
+rm -rf ./${dev_name}_slice.tar.gz
+rm -rf ./${dev_name}_slice
+
 
 
 #===================================================================
@@ -76,31 +87,10 @@ output_dir=`pwd`"/rally/libuvc/${ex_num}"
 
 ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_file} 640 480 0 0 30 ${output_dir}
 
-
-
-
-
-
-#===================================================================
-# Make Slice
-#===================================================================
+#-----------------------
+#Make Slice
+#-----------------------
 cd ${working_dir}
-
-#-----------------------
-#google
-#-----------------------
-dev_name="google"
-
-./make_slice.sh ${working_dir} ${dev_name}
-cp ./${dev_name}_slice.tar.gz ${slices_dir}/
-rm -rf ./${dev_name}_slice.tar.gz
-rm -rf ./${dev_name}_slice
-
-
-
-#-----------------------
-#rally
-#-----------------------
 dev_name="rally"
 
 ./make_slice.sh ${working_dir} ${dev_name}
