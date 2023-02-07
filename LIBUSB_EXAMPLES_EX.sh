@@ -74,6 +74,10 @@ rm -fR ${binary_path}/out
 
 #======================================================
 cd ${binary_path}
+rm -fR ./out
+rm -fR ./out.yuv
+rm -fR ./output.avi
+
 ./example 1133 2085 \
 ${contol_bInterfaceNumber_mysetting} \
 ${bEndpointAddress_mysetting} \
