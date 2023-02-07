@@ -943,7 +943,7 @@ int main(int argc, char **argv){
   dwFrameInterval_mysetting = strtol(argv[10],&tmpptr,10);
   wKeyFrameRate_mysetting = strtol(argv[11],&tmpptr,10);
   wPFrameRate_mysetting = strtol(argv[12],&tmpptr,10);
-  wCompQuality_mysetting = strtol(argv[13],&tmpptr,10);
+  // wCompQuality_mysetting = strtol(argv[13],&tmpptr,10);
   // wCompWindowSize_mysetting = strtol(argv[14],&tmpptr,10);
   // wDelay_mysetting = strtol(argv[15],&tmpptr,10);
   // dwMaxVideoFrameSize_mysetting = strtol(argv[16],&tmpptr,10);
