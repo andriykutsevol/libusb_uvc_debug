@@ -19,21 +19,17 @@ fi
 
 #---------------------------------------------------------
 
-
 istcpdump=1
 
+#---------------------------------------------------------
 
 
-
-
-clear
-echo "new new new new new new new new"
-echo "new new new new new new new new"
 
 sudo modprobe -r uvcvideo
 sleep 2
 sudo modprobe uvcvideo
 sleep 2
+
 
 example_number=${1}
 device_vidpid=${2}":"${3}
@@ -52,6 +48,15 @@ host_results=`pwd`/host/host_results
 binary_path=`pwd`"/libuvc_debug/build"
 root_dir=`pwd`
 
+
+
+#---------------------------------------------------------
+
+clear
+echo "new new new new new new new new"
+echo "new new new new new new new new"
+
+#---------------------------------------------------------
 
 
 
