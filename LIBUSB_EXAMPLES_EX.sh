@@ -34,8 +34,6 @@ echo "resolution:           " ${resolution}
 contol_bInterfaceNumber_mysetting=${7};
 bEndpointAddress_mysetting=${8};
 bcdUVC_mysetting=${9}  # 0x100;
-
-
 bInterfaceNumber_mysetting=${10};
 bmHint_mysetting=${11};
 bFormatIndex_mysetting=${12};
@@ -48,16 +46,13 @@ wCompWindowSize_mysetting=${18};
 wDelay_mysetting=${19};
 dwMaxVideoFrameSize_mysetting=${20};
 dwMaxPayloadTransferSize_mysetting=${21};
-
-
 endpoint_bytes_per_packet_mysetting=${22};
 bAlternateSetting_mysetting=${23};
 bEndpointAddres_mysetting=${24};
 total_transfer_size_mysetting=${25};
 
+
 output_dir=${26}"/"${width}"x"${height}
-
-
 host_results=`pwd`/host/host_results
 binary_path=`pwd`"/libusb_examples/${example_number}/build"
 root_dir=`pwd`
