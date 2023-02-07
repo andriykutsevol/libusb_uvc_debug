@@ -954,647 +954,647 @@ int main(int argc, char **argv){
   total_transfer_size_mysetting = strtol(argv[22],&tmpptr,10);
 
 
-  //fmt_index = strtol(argv[3],tmpptr,10);
-  //frame_index = strtol(argv[4],tmpptr,10);
+  // //fmt_index = strtol(argv[3],tmpptr,10);
+  // //frame_index = strtol(argv[4],tmpptr,10);
 
-  int ret;
+  // int ret;
 
-  //================================================================
-  //================================================================
+  // //================================================================
+  // //================================================================
 
-  FILE* h_yuv = fopen("./out.yuv", "a+");
-  fdnum_yuv = fileno(h_yuv);
+  // FILE* h_yuv = fopen("./out.yuv", "a+");
+  // fdnum_yuv = fileno(h_yuv);
 
-  //================================================================
+  // //================================================================
 
 
 
-  uvc_stream_handle_t *strmh = NULL;
-  strmh = calloc(1, sizeof(*strmh));
+  // uvc_stream_handle_t *strmh = NULL;
+  // strmh = calloc(1, sizeof(*strmh));
 
-  //================================================================
-  //================================================================
+  // //================================================================
+  // //================================================================
 
-  struct libusb_context *ctx;
+  // struct libusb_context *ctx;
 
-  ret = libusb_init(&ctx);
+  // ret = libusb_init(&ctx);
 
 
-  if (ret != UVC_SUCCESS) {
-    printf("EXAMPLE: ERROR: libusb_init() \n");
-    return -1;
-  }
+  // if (ret != UVC_SUCCESS) {
+  //   printf("EXAMPLE: ERROR: libusb_init() \n");
+  //   return -1;
+  // }
 
 
-  //================================================================
-  //================================================================
-  // https://github.com/nasa/astrobee/blob/30b91e3f821b02f5d850dbb962f4b4a8237b3913/hardware/vive/src/vive_driver/vive_usb.c
+  // //================================================================
+  // //================================================================
+  // // https://github.com/nasa/astrobee/blob/30b91e3f821b02f5d850dbb962f4b4a8237b3913/hardware/vive/src/vive_driver/vive_usb.c
 
-  // Get a list of devices
-  libusb_device** devs;
-  struct libusb_device_handle *devh = NULL;
-  struct libusb_device_descriptor desc;
-  struct libusb_device *dev;  
+  // // Get a list of devices
+  // libusb_device** devs;
+  // struct libusb_device_handle *devh = NULL;
+  // struct libusb_device_descriptor desc;
+  // struct libusb_device *dev;  
 
 
-  ssize_t cnt = libusb_get_device_list(ctx, &devs);
-  if (cnt < 0)
-  {
-    printf("UVCLIB: ERROR: the libusb_get_device_list function returned %d which is not zero \n", ret);
-    return 0;
-  }
+  // ssize_t cnt = libusb_get_device_list(ctx, &devs);
+  // if (cnt < 0)
+  // {
+  //   printf("UVCLIB: ERROR: the libusb_get_device_list function returned %d which is not zero \n", ret);
+  //   return 0;
+  // }
 
 
-  printf("UVCLIB: Devices cnt: %d \n", cnt);
+  // printf("UVCLIB: Devices cnt: %d \n", cnt);
 
-  // Iterate over the devices looking for vive products
-  int dev_found = 0;
-	for (size_t idx = 0; idx < cnt; ++idx)
-	{
+  // // Iterate over the devices looking for vive products
+  // int dev_found = 0;
+	// for (size_t idx = 0; idx < cnt; ++idx)
+	// {
 
-    dev = devs[idx];
+  //   dev = devs[idx];
 
-    libusb_get_device_descriptor(dev, &desc);
+  //   libusb_get_device_descriptor(dev, &desc);
 
-    //printf("desc.idVendor: 0x%x\n", desc.idVendor);
-    //printf("desc.idProduct: 0x%x\n", desc.idProduct);
+  //   //printf("desc.idVendor: 0x%x\n", desc.idVendor);
+  //   //printf("desc.idProduct: 0x%x\n", desc.idProduct);
 
-    if (desc.idVendor == vidi && desc.idProduct == pidi) {
-      dev_found = 1;
-      break;
-    }
-  }
+  //   if (desc.idVendor == vidi && desc.idProduct == pidi) {
+  //     dev_found = 1;
+  //     break;
+  //   }
+  // }
 
-  if (!dev_found){
-    printf("UVCLIB: ERROR: Device NOT Found\n");
-    return -1;
-  } else {
-    printf("Device found\n");
-  }
+  // if (!dev_found){
+  //   printf("UVCLIB: ERROR: Device NOT Found\n");
+  //   return -1;
+  // } else {
+  //   printf("Device found\n");
+  // }
 
 
-  printf("==============================================\n");
-  printf("==============================================\n");
-  printf("AFTER DEVICE FOUND (NOTHING IMPORTANT HAPPENED SO FAR)\n");
-  printf("==============================================\n");
-  printf("==============================================\n");
+  // printf("==============================================\n");
+  // printf("==============================================\n");
+  // printf("AFTER DEVICE FOUND (NOTHING IMPORTANT HAPPENED SO FAR)\n");
+  // printf("==============================================\n");
+  // printf("==============================================\n");
 
 
-  //================================================================
-  //================================================================
+  // //================================================================
+  // //================================================================
 
 
-  printf("UVCLIB: START uvc_open()\n");
-  struct libusb_device_handle *usb_devh;
+  // printf("UVCLIB: START uvc_open()\n");
+  // struct libusb_device_handle *usb_devh;
 
-  printf("UVCLIB: BEFORE libusb_open()\n");
+  // printf("UVCLIB: BEFORE libusb_open()\n");
 
-  ret = libusb_open(dev, &usb_devh);
+  // ret = libusb_open(dev, &usb_devh);
 
-  printf("UVCLIB: AFTER libusb_open()\n");
+  // printf("UVCLIB: AFTER libusb_open()\n");
 
-  if (ret != UVC_SUCCESS) {
-    printf("EXAMPLE: ERROR: libusb_open \n");
-  }else{
-    printf("EXAMPLE: SUCCESS: libusb_open \n");
-  }   
+  // if (ret != UVC_SUCCESS) {
+  //   printf("EXAMPLE: ERROR: libusb_open \n");
+  // }else{
+  //   printf("EXAMPLE: SUCCESS: libusb_open \n");
+  // }   
 
-  //================================================================
-  //================================================================
+  // //================================================================
+  // //================================================================
 
-  printf("UVCLIB: START uvc_open_internal()\n");
+  // printf("UVCLIB: START uvc_open_internal()\n");
 
-  printf("UVCLIB: START uvc_claim_if(): \n");
+  // printf("UVCLIB: START uvc_claim_if(): \n");
 
-      uint8_t contol_bInterfaceNumber = contol_bInterfaceNumber_mysetting;
+  //     uint8_t contol_bInterfaceNumber = contol_bInterfaceNumber_mysetting;
 
-      ret = libusb_detach_kernel_driver(usb_devh, contol_bInterfaceNumber);
+  //     ret = libusb_detach_kernel_driver(usb_devh, contol_bInterfaceNumber);
 
-      if (ret == UVC_SUCCESS || ret == LIBUSB_ERROR_NOT_FOUND || ret == LIBUSB_ERROR_NOT_SUPPORTED) {
-        printf("UVCLIB: claiming contol interface: %d\n", contol_bInterfaceNumber);
+  //     if (ret == UVC_SUCCESS || ret == LIBUSB_ERROR_NOT_FOUND || ret == LIBUSB_ERROR_NOT_SUPPORTED) {
+  //       printf("UVCLIB: claiming contol interface: %d\n", contol_bInterfaceNumber);
 
-        ret = libusb_claim_interface(usb_devh, contol_bInterfaceNumber);
+  //       ret = libusb_claim_interface(usb_devh, contol_bInterfaceNumber);
 
-        if (ret < 0) {
-            printf("Error claiming Control interface: %s\n", libusb_error_name(ret));
-            //goto out;
-        }else{
-            printf("Control Interface Claimed\n");
-        }
-      }
+  //       if (ret < 0) {
+  //           printf("Error claiming Control interface: %s\n", libusb_error_name(ret));
+  //           //goto out;
+  //       }else{
+  //           printf("Control Interface Claimed\n");
+  //       }
+  //     }
 
-  printf("UVCLIB: END uvc_claim_if(): \n");    
+  // printf("UVCLIB: END uvc_claim_if(): \n");    
 
-  printf("UVCLIB: uvc_open_internal() 4 \n");
+  // printf("UVCLIB: uvc_open_internal() 4 \n");
 
-  //================================================================
-  //================================================================ 
+  // //================================================================
+  // //================================================================ 
 
 
-  libusb_get_device_descriptor(dev, &desc);
+  // libusb_get_device_descriptor(dev, &desc);
 
-  printf("UVCLIB: desc.idVendor: 0x%x\n", desc.idVendor);
-  printf("UVCLIB: desc.idProduct: 0x%x\n", desc.idProduct);
+  // printf("UVCLIB: desc.idVendor: 0x%x\n", desc.idVendor);
+  // printf("UVCLIB: desc.idProduct: 0x%x\n", desc.idProduct);
 
 
-  //================================================================
-  //================================================================  
+  // //================================================================
+  // //================================================================  
 
-  printf("UVCLIB: uvc_open_internal() 5: libusb_alloc_transfer() \n");
+  // printf("UVCLIB: uvc_open_internal() 5: libusb_alloc_transfer() \n");
 
-  struct libusb_transfer *status_xfer = NULL;
-  uint8_t status_buf[32];
-  uint8_t bEndpointAddress = bEndpointAddress_mysetting;
+  // struct libusb_transfer *status_xfer = NULL;
+  // uint8_t status_buf[32];
+  // uint8_t bEndpointAddress = bEndpointAddress_mysetting;
 
-  status_xfer = libusb_alloc_transfer(0);
+  // status_xfer = libusb_alloc_transfer(0);
 
-  if (!status_xfer){
-    printf("UVCLIB: ERROR: libusb_alloc_transfer(0)\n");
-    return -1;
-  }
+  // if (!status_xfer){
+  //   printf("UVCLIB: ERROR: libusb_alloc_transfer(0)\n");
+  //   return -1;
+  // }
 
-  printf("UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer() \n");
+  // printf("UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer() \n");
 
 
-  libusb_fill_interrupt_transfer(status_xfer,
-                                usb_devh,
-                                bEndpointAddress,
-                                status_buf,
-                                sizeof(status_buf),
-                                _uvc_status_callback_my,
-                                devh,
-                                0);
+  // libusb_fill_interrupt_transfer(status_xfer,
+  //                               usb_devh,
+  //                               bEndpointAddress,
+  //                               status_buf,
+  //                               sizeof(status_buf),
+  //                               _uvc_status_callback_my,
+  //                               devh,
+  //                               0);
 
-  printf("UVCLIB: uvc_open_internal() 7: libusb_submit_transfer() \n");
+  // printf("UVCLIB: uvc_open_internal() 7: libusb_submit_transfer() \n");
 
-  ret = libusb_submit_transfer(status_xfer);
+  // ret = libusb_submit_transfer(status_xfer);
 
-  printf("UVCLIB: uvc_open_internal() 8 \n");
+  // printf("UVCLIB: uvc_open_internal() 8 \n");
 
-  if (ret) {
-    printf("UVCLIB: ERROR: uvc: device has a status interrupt endpoint, but unable to read from it\n");
-    return -1;
-  }
+  // if (ret) {
+  //   printf("UVCLIB: ERROR: uvc: device has a status interrupt endpoint, but unable to read from it\n");
+  //   return -1;
+  // }
 
-  //================================================================
-  //================================================================  
+  // //================================================================
+  // //================================================================  
 
-  printf("UVCLIB: START uvc_start_handler_thread()\n");
+  // printf("UVCLIB: START uvc_start_handler_thread()\n");
 
-  pthread_create(&handler_thread, NULL, _uvc_handle_events_my, (void*) ctx);
+  // pthread_create(&handler_thread, NULL, _uvc_handle_events_my, (void*) ctx);
 
-  printf("UVCLIB: END uvc_start_handler_thread()\n"); 
+  // printf("UVCLIB: END uvc_start_handler_thread()\n"); 
 
-  //================================================================
-  //================================================================  
+  // //================================================================
+  // //================================================================  
 
-  printf("UVCLIB: uvc_open_internal() 9 \n");
-  printf("Device opened\n");
+  // printf("UVCLIB: uvc_open_internal() 9 \n");
+  // printf("Device opened\n");
 
 
-  printf("==============================================\n");
-  printf("==============================================\n");
-  printf("AFTER DEVICE OPENED \n");
-  printf("==============================================\n");
-  printf("==============================================\n");
+  // printf("==============================================\n");
+  // printf("==============================================\n");
+  // printf("AFTER DEVICE OPENED \n");
+  // printf("==============================================\n");
+  // printf("==============================================\n");
 
 
-  printf("UVCLIB: SLEEP(2) BEFORE START STREAMING SETTING UP\n");
-  sleep(2);
+  // printf("UVCLIB: SLEEP(2) BEFORE START STREAMING SETTING UP\n");
+  // sleep(2);
 
 
-  //================================================================
-  //================================================================  
+  // //================================================================
+  // //================================================================  
 
 
-  printf("==============================================\n");
-  printf("==============================================\n");
-  printf("GET STREAM CTRL FORMAT SIZE \n");
-  printf("==============================================\n");
-  printf("==============================================\n");
+  // printf("==============================================\n");
+  // printf("==============================================\n");
+  // printf("GET STREAM CTRL FORMAT SIZE \n");
+  // printf("==============================================\n");
+  // printf("==============================================\n");
 
 
-  uint16_t bcdUVC = bcdUVC_mysetting;
-  uint8_t probe = 0;
-  enum uvc_req_code req = UVC_SET_CUR;
+  // uint16_t bcdUVC = bcdUVC_mysetting;
+  // uint8_t probe = 0;
+  // enum uvc_req_code req = UVC_SET_CUR;
 
 
-  strmh->cur_ctrl.bInterfaceNumber = bInterfaceNumber_mysetting;
-  strmh->cur_ctrl.bmHint = bmHint_mysetting;
-  strmh->cur_ctrl.bFormatIndex = bFormatIndex_mysetting;
-  strmh->cur_ctrl.bFrameIndex = bFrameIndex_mysetting;
-  strmh->cur_ctrl.dwFrameInterval = dwFrameInterval_mysetting;
-  strmh->cur_ctrl.wKeyFrameRate = wKeyFrameRate_mysetting;
-  strmh->cur_ctrl.wPFrameRate = wPFrameRate_mysetting;
-  strmh->cur_ctrl.wCompQuality = wCompQuality_mysetting;
-  strmh->cur_ctrl.wCompWindowSize = wCompWindowSize_mysetting;
-  strmh->cur_ctrl.wDelay = wDelay_mysetting;
-  strmh->cur_ctrl.dwMaxVideoFrameSize = dwMaxVideoFrameSize_mysetting;
-  strmh->cur_ctrl.dwMaxPayloadTransferSize = dwMaxPayloadTransferSize_mysetting;
+  // strmh->cur_ctrl.bInterfaceNumber = bInterfaceNumber_mysetting;
+  // strmh->cur_ctrl.bmHint = bmHint_mysetting;
+  // strmh->cur_ctrl.bFormatIndex = bFormatIndex_mysetting;
+  // strmh->cur_ctrl.bFrameIndex = bFrameIndex_mysetting;
+  // strmh->cur_ctrl.dwFrameInterval = dwFrameInterval_mysetting;
+  // strmh->cur_ctrl.wKeyFrameRate = wKeyFrameRate_mysetting;
+  // strmh->cur_ctrl.wPFrameRate = wPFrameRate_mysetting;
+  // strmh->cur_ctrl.wCompQuality = wCompQuality_mysetting;
+  // strmh->cur_ctrl.wCompWindowSize = wCompWindowSize_mysetting;
+  // strmh->cur_ctrl.wDelay = wDelay_mysetting;
+  // strmh->cur_ctrl.dwMaxVideoFrameSize = dwMaxVideoFrameSize_mysetting;
+  // strmh->cur_ctrl.dwMaxPayloadTransferSize = dwMaxPayloadTransferSize_mysetting;
 
 
-  if (bcdUVC >= 0x0110){
-    // len = 34;
-    // strmh->cur_ctrl.dwClockFrequency;
-    // strmh->cur_ctrl.bmFramingInfo;
-    // strmh->cur_ctrl.bPreferredVersion;
-    // strmh->cur_ctrl.bMinVersion;
-    // strmh->cur_ctrl.bMaxVersion;
-  } else {
-    //len = 26;
-  }
+  // if (bcdUVC >= 0x0110){
+  //   // len = 34;
+  //   // strmh->cur_ctrl.dwClockFrequency;
+  //   // strmh->cur_ctrl.bmFramingInfo;
+  //   // strmh->cur_ctrl.bPreferredVersion;
+  //   // strmh->cur_ctrl.bMinVersion;
+  //   // strmh->cur_ctrl.bMaxVersion;
+  // } else {
+  //   //len = 26;
+  // }
 
 
-  //================================================================
-  //================================================================  
+  // //================================================================
+  // //================================================================  
 
-  printf("==============================================\n");
-  printf("==============================================\n");
-  printf("UVCLIB: START: uvc_stream_open_ctrl()\n");
-  printf("==============================================\n");
-  printf("==============================================\n");  
+  // printf("==============================================\n");
+  // printf("==============================================\n");
+  // printf("UVCLIB: START: uvc_stream_open_ctrl()\n");
+  // printf("==============================================\n");
+  // printf("==============================================\n");  
 
-      printf("UVCLIB: START uvc_claim_if(): \n");
+  //     printf("UVCLIB: START uvc_claim_if(): \n");
 
-          ret = libusb_detach_kernel_driver(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
+  //         ret = libusb_detach_kernel_driver(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
 
-          if (ret == UVC_SUCCESS || ret == LIBUSB_ERROR_NOT_FOUND || ret == LIBUSB_ERROR_NOT_SUPPORTED) {
-            printf("UVCLIB: claiming streaming interface: %d\n", strmh->cur_ctrl.bInterfaceNumber);
+  //         if (ret == UVC_SUCCESS || ret == LIBUSB_ERROR_NOT_FOUND || ret == LIBUSB_ERROR_NOT_SUPPORTED) {
+  //           printf("UVCLIB: claiming streaming interface: %d\n", strmh->cur_ctrl.bInterfaceNumber);
 
-            ret = libusb_claim_interface(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
+  //           ret = libusb_claim_interface(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
 
-            if (ret < 0) {
-                printf("Error claiming Control interface: %s\n", libusb_error_name(ret));
-                //goto out;
-            }else{
-                printf("Control Interface Claimed\n");
-            }    
+  //           if (ret < 0) {
+  //               printf("Error claiming Control interface: %s\n", libusb_error_name(ret));
+  //               //goto out;
+  //           }else{
+  //               printf("Control Interface Claimed\n");
+  //           }    
 
-          }
+  //         }
 
-      printf("UVCLIB: END uvc_claim_if(): \n");
+  //     printf("UVCLIB: END uvc_claim_if(): \n");
 
 
-      printf("UVCLIB: START uvc_stream_ctrl()\n");
-          printf("UVCLIB: START: uvc_query_stream_ctrl()\n");    
+  //     printf("UVCLIB: START uvc_stream_ctrl()\n");
+  //         printf("UVCLIB: START: uvc_query_stream_ctrl()\n");    
 
-          uint8_t stream_buf[34];
-          memset(stream_buf, 0, sizeof(stream_buf));
+  //         uint8_t stream_buf[34];
+  //         memset(stream_buf, 0, sizeof(stream_buf));
 
-          size_t len;
-          if (bcdUVC >= 0x0110)
-            len = 34;
-          else
-            len = 26; 
+  //         size_t len;
+  //         if (bcdUVC >= 0x0110)
+  //           len = 34;
+  //         else
+  //           len = 26; 
 
 
-          //================================================================
-          /* prepare for a SET transfer */
+  //         //================================================================
+  //         /* prepare for a SET transfer */
 
-          SHORT_TO_SW(strmh->cur_ctrl.bmHint, stream_buf);
-          stream_buf[2] = strmh->cur_ctrl.bFormatIndex;
-          stream_buf[3] = strmh->cur_ctrl.bFrameIndex; 
-          INT_TO_DW(strmh->cur_ctrl.dwFrameInterval, stream_buf + 4);
-          SHORT_TO_SW(strmh->cur_ctrl.wKeyFrameRate, stream_buf + 8);
-          SHORT_TO_SW(strmh->cur_ctrl.wPFrameRate, stream_buf + 10);
-          SHORT_TO_SW(strmh->cur_ctrl.wCompQuality, stream_buf + 12);
-          SHORT_TO_SW(strmh->cur_ctrl.wCompWindowSize, stream_buf + 14);
-          SHORT_TO_SW(strmh->cur_ctrl.wDelay, stream_buf + 16);
-          INT_TO_DW(strmh->cur_ctrl.dwMaxVideoFrameSize, stream_buf + 18);
-          INT_TO_DW(strmh->cur_ctrl.dwMaxPayloadTransferSize, stream_buf + 22);
+  //         SHORT_TO_SW(strmh->cur_ctrl.bmHint, stream_buf);
+  //         stream_buf[2] = strmh->cur_ctrl.bFormatIndex;
+  //         stream_buf[3] = strmh->cur_ctrl.bFrameIndex; 
+  //         INT_TO_DW(strmh->cur_ctrl.dwFrameInterval, stream_buf + 4);
+  //         SHORT_TO_SW(strmh->cur_ctrl.wKeyFrameRate, stream_buf + 8);
+  //         SHORT_TO_SW(strmh->cur_ctrl.wPFrameRate, stream_buf + 10);
+  //         SHORT_TO_SW(strmh->cur_ctrl.wCompQuality, stream_buf + 12);
+  //         SHORT_TO_SW(strmh->cur_ctrl.wCompWindowSize, stream_buf + 14);
+  //         SHORT_TO_SW(strmh->cur_ctrl.wDelay, stream_buf + 16);
+  //         INT_TO_DW(strmh->cur_ctrl.dwMaxVideoFrameSize, stream_buf + 18);
+  //         INT_TO_DW(strmh->cur_ctrl.dwMaxPayloadTransferSize, stream_buf + 22);
 
 
 
-          if (len == 34) {
-            // INT_TO_DW ( strmh->cur_ctrl.dwClockFrequency, stream_buf + 26 );
-            // stream_buf[30] = strmh->cur_ctrl.bmFramingInfo;
-            // stream_buf[31] = strmh->cur_ctrl.bPreferredVersion;
-            // stream_buf[32] = strmh->cur_ctrl.bMinVersion;
-            // stream_buf[33] = strmh->cur_ctrl.bMaxVersion;
-            // /** @todo support UVC 1.1 */                             // !!!!!!!!!!!!!!1
-          }else{
-          }
+  //         if (len == 34) {
+  //           // INT_TO_DW ( strmh->cur_ctrl.dwClockFrequency, stream_buf + 26 );
+  //           // stream_buf[30] = strmh->cur_ctrl.bmFramingInfo;
+  //           // stream_buf[31] = strmh->cur_ctrl.bPreferredVersion;
+  //           // stream_buf[32] = strmh->cur_ctrl.bMinVersion;
+  //           // stream_buf[33] = strmh->cur_ctrl.bMaxVersion;
+  //           // /** @todo support UVC 1.1 */                             // !!!!!!!!!!!!!!1
+  //         }else{
+  //         }
 
 
-          /* do the transfer */
-          ret = libusb_control_transfer(
-              usb_devh,
-              req == UVC_SET_CUR ? 0x21 : 0xA1,
-              req,
-              probe ? (UVC_VS_PROBE_CONTROL << 8) : (UVC_VS_COMMIT_CONTROL << 8),
-              strmh->cur_ctrl.bInterfaceNumber,
-              stream_buf, len, 0
-          );
-          //================================================================
+  //         /* do the transfer */
+  //         ret = libusb_control_transfer(
+  //             usb_devh,
+  //             req == UVC_SET_CUR ? 0x21 : 0xA1,
+  //             req,
+  //             probe ? (UVC_VS_PROBE_CONTROL << 8) : (UVC_VS_COMMIT_CONTROL << 8),
+  //             strmh->cur_ctrl.bInterfaceNumber,
+  //             stream_buf, len, 0
+  //         );
+  //         //================================================================
                       
-          printf("UVCLIB: END: uvc_query_stream_ctrl()\n");    
-      printf("UVCLIB: END uvc_stream_ctrl()\n");
+  //         printf("UVCLIB: END: uvc_query_stream_ctrl()\n");    
+  //     printf("UVCLIB: END uvc_stream_ctrl()\n");
 
-      strmh->running = 0;
+  //     strmh->running = 0;
 
-      strmh->outbuf = malloc( strmh->cur_ctrl.dwMaxVideoFrameSize );
-      strmh->holdbuf = malloc( strmh->cur_ctrl.dwMaxVideoFrameSize );
+  //     strmh->outbuf = malloc( strmh->cur_ctrl.dwMaxVideoFrameSize );
+  //     strmh->holdbuf = malloc( strmh->cur_ctrl.dwMaxVideoFrameSize );
 
-      strmh->meta_outbuf = malloc( LIBUVC_XFER_META_BUF_SIZE );
-      strmh->meta_holdbuf = malloc( LIBUVC_XFER_META_BUF_SIZE );
+  //     strmh->meta_outbuf = malloc( LIBUVC_XFER_META_BUF_SIZE );
+  //     strmh->meta_holdbuf = malloc( LIBUVC_XFER_META_BUF_SIZE );
 
-  //================================================================
-  //================================================================  
-
-
-  printf("==============================================\n");
-  printf("==============================================\n");
-  printf("UVCLIB: uvc_stream_start()\n");
-  printf("==============================================\n");
-  printf("==============================================\n");  
+  // //================================================================
+  // //================================================================  
 
 
-  printf("UVCLIB: START: uvc_stream_start()\n");
+  // printf("==============================================\n");
+  // printf("==============================================\n");
+  // printf("UVCLIB: uvc_stream_start()\n");
+  // printf("==============================================\n");
+  // printf("==============================================\n");  
 
 
-  const struct libusb_interface *interface;
-  int interface_id;
-
-  strmh->running = 1;
-  strmh->seq = 1;
-  strmh->fid = 0;
-  strmh->pts = 0;
-  strmh->last_scr = 0;
-
-  /* A VS interface uses isochronous transfers iff it has multiple altsettings.
-   * (UVC 1.5: 2.4.3. VideoStreaming Interface) */
-  char isochronous = 1;
+  // printf("UVCLIB: START: uvc_stream_start()\n");
 
 
+  // const struct libusb_interface *interface;
+  // int interface_id;
 
-  /* For isochronous streaming, we choose an appropriate altsetting for the endpoint
-    * and set up several transfers */
-  const struct libusb_interface_descriptor *altsetting = 0;
-  const struct libusb_endpoint_descriptor *endpoint = 0; 
+  // strmh->running = 1;
+  // strmh->seq = 1;
+  // strmh->fid = 0;
+  // strmh->pts = 0;
+  // strmh->last_scr = 0;
 
-  /* Number of packets per transfer */
-  size_t packets_per_transfer = 32;
-  /* Size of packet transferable from the chosen endpoint */
-  size_t endpoint_bytes_per_packet = endpoint_bytes_per_packet_mysetting;
+  // /* A VS interface uses isochronous transfers iff it has multiple altsettings.
+  //  * (UVC 1.5: 2.4.3. VideoStreaming Interface) */
+  // char isochronous = 1;
 
 
 
-  uint8_t bAlternateSetting = bAlternateSetting_mysetting;
-  uint8_t bEndpointAddres = bEndpointAddres_mysetting;
-  size_t total_transfer_size = total_transfer_size_mysetting;
+  // /* For isochronous streaming, we choose an appropriate altsetting for the endpoint
+  //   * and set up several transfers */
+  // const struct libusb_interface_descriptor *altsetting = 0;
+  // const struct libusb_endpoint_descriptor *endpoint = 0; 
+
+  // /* Number of packets per transfer */
+  // size_t packets_per_transfer = 32;
+  // /* Size of packet transferable from the chosen endpoint */
+  // size_t endpoint_bytes_per_packet = endpoint_bytes_per_packet_mysetting;
+
+
+
+  // uint8_t bAlternateSetting = bAlternateSetting_mysetting;
+  // uint8_t bEndpointAddres = bEndpointAddres_mysetting;
+  // size_t total_transfer_size = total_transfer_size_mysetting;
   
 
-  struct libusb_transfer *transfer;
+  // struct libusb_transfer *transfer;
 
 
 
-  ret = libusb_set_interface_alt_setting(usb_devh, strmh->cur_ctrl.bInterfaceNumber, bAlternateSetting);
+  // ret = libusb_set_interface_alt_setting(usb_devh, strmh->cur_ctrl.bInterfaceNumber, bAlternateSetting);
 
-  if (ret != UVC_SUCCESS) {
-    printf("libusb_set_interface_alt_setting failed\n");
-    strmh->running = 0;
-    return -1;
-  }
+  // if (ret != UVC_SUCCESS) {
+  //   printf("libusb_set_interface_alt_setting failed\n");
+  //   strmh->running = 0;
+  //   return -1;
+  // }
 
-  printf("=============================================\n");
-  printf("=============================================\n");
-  printf("UVCLIB: END: uvc_stream_start()\n");
-  printf("SLEEP 1(10) Before 'libusb_alloc_transfer', 'libusb_fill_iso_transfer' \n");
-  sleep(10);
-  printf("=============================================\n");
-  printf("=============================================\n");
+  // printf("=============================================\n");
+  // printf("=============================================\n");
+  // printf("UVCLIB: END: uvc_stream_start()\n");
+  // printf("SLEEP 1(10) Before 'libusb_alloc_transfer', 'libusb_fill_iso_transfer' \n");
+  // sleep(10);
+  // printf("=============================================\n");
+  // printf("=============================================\n");
 
 
   
 
 
 
-  for (int transfer_id = 0; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; ++transfer_id) {
+  // for (int transfer_id = 0; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; ++transfer_id) {
 
-    printf("libusb_alloc_transfer(): %d: packets_per_transfer %d\n", transfer_id, packets_per_transfer);
-    transfer = libusb_alloc_transfer(packets_per_transfer);
+  //   printf("libusb_alloc_transfer(): %d: packets_per_transfer %d\n", transfer_id, packets_per_transfer);
+  //   transfer = libusb_alloc_transfer(packets_per_transfer);
 
-    strmh->transfers[transfer_id] = transfer;
-    strmh->transfer_bufs[transfer_id] = malloc(total_transfer_size);
+  //   strmh->transfers[transfer_id] = transfer;
+  //   strmh->transfer_bufs[transfer_id] = malloc(total_transfer_size);
 
-    // Helper function to populate the required libusb_transfer fields for an isochronous transfer.
-    // _uvc_stream_callback: callback function to be invoked on transfer completion
-    // 500: timeout for the transfer in milliseconds
-    libusb_fill_iso_transfer(
-      transfer, usb_devh, bEndpointAddres,
-      strmh->transfer_bufs[transfer_id],
-      total_transfer_size, packets_per_transfer, _uvc_stream_callback, (void*) strmh, 5000);
+  //   // Helper function to populate the required libusb_transfer fields for an isochronous transfer.
+  //   // _uvc_stream_callback: callback function to be invoked on transfer completion
+  //   // 500: timeout for the transfer in milliseconds
+  //   libusb_fill_iso_transfer(
+  //     transfer, usb_devh, bEndpointAddres,
+  //     strmh->transfer_bufs[transfer_id],
+  //     total_transfer_size, packets_per_transfer, _uvc_stream_callback, (void*) strmh, 5000);
 
-    libusb_set_iso_packet_lengths(transfer, endpoint_bytes_per_packet);  
+  //   libusb_set_iso_packet_lengths(transfer, endpoint_bytes_per_packet);  
 
-  }
-
-
-  printf("=============================================\n");
-  printf("=============================================\n");
-  printf("AFTER 'libusb_alloc_transfer', 'libusb_fill_iso_transfer' \n");
-  printf("SLEEP 2(10) Before 'libusb_submit_transfer'\n");
-  sleep(10);
-  printf("=============================================\n");
-  printf("=============================================\n");  
+  // }
 
 
-  pthread_t cb_thread;
-  pthread_create(&cb_thread, NULL, _uvc_user_caller, (void*) strmh);  
+  // printf("=============================================\n");
+  // printf("=============================================\n");
+  // printf("AFTER 'libusb_alloc_transfer', 'libusb_fill_iso_transfer' \n");
+  // printf("SLEEP 2(10) Before 'libusb_submit_transfer'\n");
+  // sleep(10);
+  // printf("=============================================\n");
+  // printf("=============================================\n");  
+
+
+  // pthread_t cb_thread;
+  // pthread_create(&cb_thread, NULL, _uvc_user_caller, (void*) strmh);  
 
 
 
-  int transfer_id;
-  for (transfer_id = 0; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; transfer_id++) {
-    printf("libusb_submit_transfer(): %d\n", transfer_id);
-    ret = libusb_submit_transfer(strmh->transfers[transfer_id]);
-    if (ret != UVC_SUCCESS) {
-      printf("libusb_submit_transfer failed: %d",ret);
-      break;
-    }
-  }
-
-
-  printf("=============================================\n");
-  printf("=============================================\n");
-  printf("AFTER 'libusb_submit_transfer'\n");
-  printf("SLEEP 3 (5) STREAMING...\n");
-  sleep(5);   
-  printf("=============================================\n");
-  printf("=============================================\n");
-
-
-  // if ( ret != UVC_SUCCESS && transfer_id >= 0 ) {
-  //   for ( ; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; transfer_id++) {
-  //     free (transfers[transfer_id]->buffer );
-  //     libusb_free_transfer (transfers[transfer_id]);
-  //     transfers[transfer_id] = 0;
+  // int transfer_id;
+  // for (transfer_id = 0; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; transfer_id++) {
+  //   printf("libusb_submit_transfer(): %d\n", transfer_id);
+  //   ret = libusb_submit_transfer(strmh->transfers[transfer_id]);
+  //   if (ret != UVC_SUCCESS) {
+  //     printf("libusb_submit_transfer failed: %d",ret);
+  //     break;
   //   }
   // }
 
 
-
-  //================================================================
-  //================================================================ 
-  //================================================================
-  //================================================================    
-
-
-
-  printf("UVCLIB: START uvc_stop_streaming()\n");
-
-  //uvc_stop_streaming(devh);`
-      // DL_FOREACH_SAFE(devh->streams, strmh, strmh_tmp) {
-      //   uvc_stream_close(strmh);
-
-              if (strmh->running){
-                printf("UVCLIB: uvc_stop_streaming() 1\n");
-                //uvc_stream_stop(strmh);
-                      strmh->running = 0;
-                      pthread_mutex_lock(&strmh->cb_mutex);
-                      int i;
-                      for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
-                        if(strmh->transfers[i] != NULL)
-                          printf("UVCLIB: uvc_stop_streaming() 2\n");
-                          libusb_cancel_transfer(strmh->transfers[i]);
-                      }
-                      printf("======================================\n");
-                      printf("======================================\n");     
-                      printf("UVCLIB: SLEEP(3) BEFORE LOOP\n");            
-                      printf("======================================\n");
-                      printf("======================================\n");
-
-                      sleep(3);
-
-                      /* Wait for transfers to complete/cancel */
-                      do {
-                        printf("UVCLIB: uvc_stop_streaming() 3\n");
-                        for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
-                          printf("UVCLIB: uvc_stop_streaming() 4\n");
-                          if(strmh->transfers[i] != NULL){
-                            printf("UVCLIB: uvc_stop_streaming() 5\n");
-                            break;
-                          }
-                        }
-                        if(i == LIBUVC_NUM_TRANSFER_BUFS )
-                          break;
-
-                        printf("UVCLIB: uvc_stop_streaming() 6\n"); 
-
-                        // !!! This will not work without logic in the "if ( resubmit )"
-                        pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
-                      } while(1);
+  // printf("=============================================\n");
+  // printf("=============================================\n");
+  // printf("AFTER 'libusb_submit_transfer'\n");
+  // printf("SLEEP 3 (5) STREAMING...\n");
+  // sleep(5);   
+  // printf("=============================================\n");
+  // printf("=============================================\n");
 
 
-                      printf("UVCLIB: uvc_stop_streaming() 7\n");
-
-                      /** @todo stop the actual stream, camera side? */
-
-                      // if (strmh->user_cb) {
-                      //   /* wait for the thread to stop (triggered by
-                      //   * LIBUSB_TRANSFER_CANCELLED transfer) */
-                      pthread_join(cb_thread, NULL);
-                      // }
-              }
-
-                      // return UVC_SUCCESS;
+  // // if ( ret != UVC_SUCCESS && transfer_id >= 0 ) {
+  // //   for ( ; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; transfer_id++) {
+  // //     free (transfers[transfer_id]->buffer );
+  // //     libusb_free_transfer (transfers[transfer_id]);
+  // //     transfers[transfer_id] = 0;
+  // //   }
+  // // }
 
 
 
-              // uvc_release_if(strmh->devh, strmh->stream_if->bInterfaceNumber);
-
-                    printf("UVCLIB: START: uvc_release_if()\n");
-                      printf("UVCLIB: uvc_release_if() 1: libusb_set_interface_alt_setting()\n");
-                      // libusb_set_interface_alt_setting(devh->usb_devh, idx, 0);
-                      libusb_set_interface_alt_setting(usb_devh, strmh->cur_ctrl.bInterfaceNumber, 0);
-                      printf("UVCLIB: uvc_release_if() 2\n");
-                      // ret = libusb_release_interface(devh->usb_devh, idx);
-                      ret = libusb_release_interface(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
-                      // ret = libusb_attach_kernel_driver(devh->usb_devh, idx);
-                      ret = libusb_attach_kernel_driver(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
-                    printf("UVCLIB: END: uvc_release_if() \n");
-
-              // pthread_cond_destroy(&strmh->cb_cond);
-              // pthread_mutex_destroy(&strmh->cb_mutex);
-
-
-              // DL_DELETE(strmh->devh->streams, strmh);
-              // free(strmh);
-
-
-  //---------------------------------------------------
-  printf("UVCLIB: END uvc_stop_streaming()\n");
-  //---------------------------------------------------
+  // //================================================================
+  // //================================================================ 
+  // //================================================================
+  // //================================================================    
 
 
 
-  //---------------------------------------------------
-  printf("UVCLIB: START uvc_close()\n");
-  //---------------------------------------------------
+  // printf("UVCLIB: START uvc_stop_streaming()\n");
 
-  // void uvc_close(uvc_device_handle_t *devh) {
-      // if (devh->streams)
-            // uvc_stop_streaming(devh);
+  // //uvc_stop_streaming(devh);`
+  //     // DL_FOREACH_SAFE(devh->streams, strmh, strmh_tmp) {
+  //     //   uvc_stream_close(strmh);
 
-      // uvc_release_if(devh, devh->info->ctrl_if.bInterfaceNumber);      
+  //             if (strmh->running){
+  //               printf("UVCLIB: uvc_stop_streaming() 1\n");
+  //               //uvc_stream_stop(strmh);
+  //                     strmh->running = 0;
+  //                     pthread_mutex_lock(&strmh->cb_mutex);
+  //                     int i;
+  //                     for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
+  //                       if(strmh->transfers[i] != NULL)
+  //                         printf("UVCLIB: uvc_stop_streaming() 2\n");
+  //                         libusb_cancel_transfer(strmh->transfers[i]);
+  //                     }
+  //                     printf("======================================\n");
+  //                     printf("======================================\n");     
+  //                     printf("UVCLIB: SLEEP(3) BEFORE LOOP\n");            
+  //                     printf("======================================\n");
+  //                     printf("======================================\n");
 
-          printf("UVCLIB: START: uvc_release_if()\n");
-            printf("UVCLIB: uvc_release_if() 1: libusb_set_interface_alt_setting()\n");
-            // libusb_set_interface_alt_setting(devh->usb_devh, idx, 0);
-            libusb_set_interface_alt_setting(usb_devh, contol_bInterfaceNumber, 0);
-            printf("UVCLIB: uvc_release_if() 2\n");
-            // ret = libusb_release_interface(devh->usb_devh, idx);
-            ret = libusb_release_interface(usb_devh, contol_bInterfaceNumber);
-            // ret = libusb_attach_kernel_driver(devh->usb_devh, idx);
-            ret = libusb_attach_kernel_driver(usb_devh, contol_bInterfaceNumber);
-          printf("UVCLIB: END: uvc_release_if() \n");
+  //                     sleep(3);
 
+  //                     /* Wait for transfers to complete/cancel */
+  //                     do {
+  //                       printf("UVCLIB: uvc_stop_streaming() 3\n");
+  //                       for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
+  //                         printf("UVCLIB: uvc_stop_streaming() 4\n");
+  //                         if(strmh->transfers[i] != NULL){
+  //                           printf("UVCLIB: uvc_stop_streaming() 5\n");
+  //                           break;
+  //                         }
+  //                       }
+  //                       if(i == LIBUVC_NUM_TRANSFER_BUFS )
+  //                         break;
 
-  printf("UVCLIB: uvc_close() 3: libusb_close(devh->usb_devh); pthread_join();\n");
-  //if (ctx->own_usb_ctx && ctx->open_devices == devh && devh->next == NULL) {
-      kill_handler_thread = 1;
-      libusb_close(usb_devh);
-      pthread_join(handler_thread, NULL);
+  //                       printf("UVCLIB: uvc_stop_streaming() 6\n"); 
 
-      // uvc_unref_device(devh->dev);
-      // uvc_free_devh(devh);
-
-    // DL_DELETE(ctx->open_devices, devh);
-    // uvc_unref_device(devh->dev);
-    // uvc_free_devh(devh);
-
-
-  //---------------------------------------------------
-  printf("UVCLIB: END uvc_close()\n");
-  //---------------------------------------------------
-
-
-  // uvc_unref_device(dev);
-
-
-  //---------------------------------------------------
-  printf("UVCLIB: START uvc_exit()\n");
-  //---------------------------------------------------
-
-  // void uvc_exit(uvc_context_t *ctx) {
-
-      // DL_FOREACH(ctx->open_devices, devh) {
-      //   uvc_close(devh);
-      // }    
-
-      // if (ctx->own_usb_ctx)
-      //   printf("UVCLIB: uvc_exit() 2 libusb_exit()\n");
-           libusb_exit(ctx);
-           //free(ctx);
+  //                       // !!! This will not work without logic in the "if ( resubmit )"
+  //                       pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
+  //                     } while(1);
 
 
+  //                     printf("UVCLIB: uvc_stop_streaming() 7\n");
 
-  //---------------------------------------------------
-  printf("UVCLIB: STOP uvc_exit()\n");
-  //---------------------------------------------------
+  //                     /** @todo stop the actual stream, camera side? */
 
-  //================================================================
-  //================================================================   
+  //                     // if (strmh->user_cb) {
+  //                     //   /* wait for the thread to stop (triggered by
+  //                     //   * LIBUSB_TRANSFER_CANCELLED transfer) */
+  //                     pthread_join(cb_thread, NULL);
+  //                     // }
+  //             }
+
+  //                     // return UVC_SUCCESS;
+
+
+
+  //             // uvc_release_if(strmh->devh, strmh->stream_if->bInterfaceNumber);
+
+  //                   printf("UVCLIB: START: uvc_release_if()\n");
+  //                     printf("UVCLIB: uvc_release_if() 1: libusb_set_interface_alt_setting()\n");
+  //                     // libusb_set_interface_alt_setting(devh->usb_devh, idx, 0);
+  //                     libusb_set_interface_alt_setting(usb_devh, strmh->cur_ctrl.bInterfaceNumber, 0);
+  //                     printf("UVCLIB: uvc_release_if() 2\n");
+  //                     // ret = libusb_release_interface(devh->usb_devh, idx);
+  //                     ret = libusb_release_interface(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
+  //                     // ret = libusb_attach_kernel_driver(devh->usb_devh, idx);
+  //                     ret = libusb_attach_kernel_driver(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
+  //                   printf("UVCLIB: END: uvc_release_if() \n");
+
+  //             // pthread_cond_destroy(&strmh->cb_cond);
+  //             // pthread_mutex_destroy(&strmh->cb_mutex);
+
+
+  //             // DL_DELETE(strmh->devh->streams, strmh);
+  //             // free(strmh);
+
+
+  // //---------------------------------------------------
+  // printf("UVCLIB: END uvc_stop_streaming()\n");
+  // //---------------------------------------------------
+
+
+
+  // //---------------------------------------------------
+  // printf("UVCLIB: START uvc_close()\n");
+  // //---------------------------------------------------
+
+  // // void uvc_close(uvc_device_handle_t *devh) {
+  //     // if (devh->streams)
+  //           // uvc_stop_streaming(devh);
+
+  //     // uvc_release_if(devh, devh->info->ctrl_if.bInterfaceNumber);      
+
+  //         printf("UVCLIB: START: uvc_release_if()\n");
+  //           printf("UVCLIB: uvc_release_if() 1: libusb_set_interface_alt_setting()\n");
+  //           // libusb_set_interface_alt_setting(devh->usb_devh, idx, 0);
+  //           libusb_set_interface_alt_setting(usb_devh, contol_bInterfaceNumber, 0);
+  //           printf("UVCLIB: uvc_release_if() 2\n");
+  //           // ret = libusb_release_interface(devh->usb_devh, idx);
+  //           ret = libusb_release_interface(usb_devh, contol_bInterfaceNumber);
+  //           // ret = libusb_attach_kernel_driver(devh->usb_devh, idx);
+  //           ret = libusb_attach_kernel_driver(usb_devh, contol_bInterfaceNumber);
+  //         printf("UVCLIB: END: uvc_release_if() \n");
+
+
+  // printf("UVCLIB: uvc_close() 3: libusb_close(devh->usb_devh); pthread_join();\n");
+  // //if (ctx->own_usb_ctx && ctx->open_devices == devh && devh->next == NULL) {
+  //     kill_handler_thread = 1;
+  //     libusb_close(usb_devh);
+  //     pthread_join(handler_thread, NULL);
+
+  //     // uvc_unref_device(devh->dev);
+  //     // uvc_free_devh(devh);
+
+  //   // DL_DELETE(ctx->open_devices, devh);
+  //   // uvc_unref_device(devh->dev);
+  //   // uvc_free_devh(devh);
+
+
+  // //---------------------------------------------------
+  // printf("UVCLIB: END uvc_close()\n");
+  // //---------------------------------------------------
+
+
+  // // uvc_unref_device(dev);
+
+
+  // //---------------------------------------------------
+  // printf("UVCLIB: START uvc_exit()\n");
+  // //---------------------------------------------------
+
+  // // void uvc_exit(uvc_context_t *ctx) {
+
+  //     // DL_FOREACH(ctx->open_devices, devh) {
+  //     //   uvc_close(devh);
+  //     // }    
+
+  //     // if (ctx->own_usb_ctx)
+  //     //   printf("UVCLIB: uvc_exit() 2 libusb_exit()\n");
+  //          libusb_exit(ctx);
+  //          //free(ctx);
+
+
+
+  // //---------------------------------------------------
+  // printf("UVCLIB: STOP uvc_exit()\n");
+  // //---------------------------------------------------
+
+  // //================================================================
+  // //================================================================   
 
 
   return 0;
