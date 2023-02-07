@@ -2,6 +2,9 @@
 // sudo ./example 1133 2085     // c270
 // sudo ./example 10549 6        // megawell
 
+// ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v ${width}x${height} -r ${fps} -i ${binary_path}/out ${output_dir}/output.avi
+// ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 640x480 -r 15 -i ./out.yuv ./output.avi
+
 #include <libusb-1.0/libusb.h>
 #include <stdio.h>
 #include <string.h>
@@ -16,7 +19,7 @@
 //================================================================
 //================================================================
 
-uint8_t contol_bInterfaceNumber_mysetting = 0;
+uint8_t contol_bInterfaceNumber_mysetting;
 
 uint8_t bEndpointAddress_mysetting = 135;
 
@@ -929,6 +932,11 @@ int main(int argc, char **argv){
 
   vidi = strtol(argv[1],&tmpptr,10);
   pidi = strtol(argv[2],&tmpptr,10);
+
+  contol_bInterfaceNumber_mysetting = strtol(argv[3],&tmpptr,10);
+
+
+
 
   //fmt_index = strtol(argv[3],tmpptr,10);
   //frame_index = strtol(argv[4],tmpptr,10);

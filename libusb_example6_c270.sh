@@ -311,6 +311,31 @@ fi
 
 
 
+# uint8_t contol_bInterfaceNumber_mysetting = 0;
 
+# uint8_t bEndpointAddress_mysetting = 135;
+
+# uint16_t bcdUVC_mysetting = 0x100;
+
+# uint8_t bInterfaceNumber_mysetting = 1;
+# uint16_t bmHint_mysetting = 1;
+# uint8_t bFormatIndex_mysetting = 1;
+# uint8_t bFrameIndex_mysetting = 1;
+# uint32_t dwFrameInterval_mysetting = 333333;
+# uint16_t wKeyFrameRate_mysetting = 0;
+# uint16_t wPFrameRate_mysetting = 0;
+# uint16_t wCompQuality_mysetting = 200;
+# uint16_t wCompWindowSize_mysetting = 0;
+# uint16_t wDelay_mysetting = 0;
+# uint32_t dwMaxVideoFrameSize_mysetting = 614400;
+# uint32_t dwMaxPayloadTransferSize_mysetting = 3060;
+
+# size_t endpoint_bytes_per_packet_mysetting = 3060;
+
+# uint8_t bAlternateSetting_mysetting = 11;
+
+# uint8_t bEndpointAddres_mysetting = 129;
+
+# size_t total_transfer_size_mysetting = 97920;
 
 
