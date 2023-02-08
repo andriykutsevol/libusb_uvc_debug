@@ -42,9 +42,9 @@ output_dir=`pwd`"/rally/libuvc/${ex_num}"
 
 # ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 960 540 0 11 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1024 576 0 12 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1024 576 0 12 30 ${output_dir}
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1280 720 0 13 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1280 720 0 13 30 ${output_dir}
 
 # ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1600 896 0 14 30 ${output_dir}
 
