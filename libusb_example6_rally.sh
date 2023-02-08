@@ -32,13 +32,13 @@ wCompQuality_mysetting=0;
 wCompWindowSize_mysetting=0;
 wDelay_mysetting=0;
 dwMaxVideoFrameSize_mysetting=614400;
-dwMaxPayloadTransferSize_mysetting=3060;
+dwMaxPayloadTransferSize_mysetting=3072;
 
 
-endpoint_bytes_per_packet_mysetting=3060;
+endpoint_bytes_per_packet_mysetting=3072;
 bAlternateSetting_mysetting=6;
 bEndpointAddres_mysetting=129;
-total_transfer_size_mysetting=97920;
+total_transfer_size_mysetting=98304;
 
 #------------------------------------------------------
 
