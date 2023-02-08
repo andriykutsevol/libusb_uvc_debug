@@ -76,59 +76,62 @@ ${output_dir}
 # #====================================================
 # # 1280x720
 # #====================================================
-# fps=5
+fps=30
 
-# contol_bInterfaceNumber_mysetting=0;
-# bEndpointAddress_mysetting=135;
-# bcdUVC_mysetting=256  # 0x100;
+dev_fname=video6
 
-
-# bInterfaceNumber_mysetting=1;
-# bmHint_mysetting=1;
-# bFormatIndex_mysetting=1;
-# bFrameIndex_mysetting=18;
-# dwFrameInterval_mysetting=2000000;
-# wKeyFrameRate_mysetting=0;
-# wPFrameRate_mysetting=0;
-# wCompQuality_mysetting=2000;
-# wCompWindowSize_mysetting=0;
-# wDelay_mysetting=0;
-# dwMaxVideoFrameSize_mysetting=1843200;
-# dwMaxPayloadTransferSize_mysetting=3060;
+contol_bInterfaceNumber_mysetting=0;
+bEndpointAddress_mysetting=133;
+bcdUVC_mysetting=256  # 0x100;
 
 
-# endpoint_bytes_per_packet_mysetting=3060;
-# bAlternateSetting_mysetting=11;
-# bEndpointAddres_mysetting=129;
-# total_transfer_size_mysetting=97920;
+bInterfaceNumber_mysetting=1;
+bmHint_mysetting=1;
+bFormatIndex_mysetting=1;
+bFrameIndex_mysetting=1;
+dwFrameInterval_mysetting=333333;
+wKeyFrameRate_mysetting=0;
+wPFrameRate_mysetting=0;
+wCompQuality_mysetting=0;
+wCompWindowSize_mysetting=0;
+wDelay_mysetting=0;
+dwMaxVideoFrameSize_mysetting=1843200;
+dwMaxPayloadTransferSize_mysetting=9216;
 
-# #------------------------------------------------------
 
-# ex_num=6
-# output_dir=`pwd`"/rally/libusb/${ex_num}"
+endpoint_bytes_per_packet_mysetting=9216;
+bAlternateSetting_mysetting=8;
+bEndpointAddres_mysetting=129;
+total_transfer_size_mysetting=294912;
 
-# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1280 720 \
-# ${contol_bInterfaceNumber_mysetting} \
-# ${bEndpointAddress_mysetting} \
-# ${bcdUVC_mysetting} \
-# ${bInterfaceNumber_mysetting} \
-# ${bmHint_mysetting} \
-# ${bFormatIndex_mysetting} \
-# ${bFrameIndex_mysetting} \
-# ${dwFrameInterval_mysetting} \
-# ${wKeyFrameRate_mysetting} \
-# ${wPFrameRate_mysetting} \
-# ${wCompQuality_mysetting} \
-# ${wCompWindowSize_mysetting} \
-# ${wDelay_mysetting} \
-# ${dwMaxVideoFrameSize_mysetting} \
-# ${dwMaxPayloadTransferSize_mysetting} \
-# ${endpoint_bytes_per_packet_mysetting} \
-# ${bAlternateSetting_mysetting} \
-# ${bEndpointAddres_mysetting} \
-# ${total_transfer_size_mysetting} \
-# ${fps} \
-# ${output_dir}
+#------------------------------------------------------
+
+ex_num=6
+output_dir=`pwd`"/rally/libusb/${ex_num}"
+
+./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1280 720 \
+${contol_bInterfaceNumber_mysetting} \
+${bEndpointAddress_mysetting} \
+${bcdUVC_mysetting} \
+${bInterfaceNumber_mysetting} \
+${bmHint_mysetting} \
+${bFormatIndex_mysetting} \
+${bFrameIndex_mysetting} \
+${dwFrameInterval_mysetting} \
+${wKeyFrameRate_mysetting} \
+${wPFrameRate_mysetting} \
+${wCompQuality_mysetting} \
+${wCompWindowSize_mysetting} \
+${wDelay_mysetting} \
+${dwMaxVideoFrameSize_mysetting} \
+${dwMaxPayloadTransferSize_mysetting} \
+${endpoint_bytes_per_packet_mysetting} \
+${bAlternateSetting_mysetting} \
+${bEndpointAddres_mysetting} \
+${total_transfer_size_mysetting} \
+${fps} \
+${output_dir}
+
 
 
 
