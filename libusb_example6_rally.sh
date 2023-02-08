@@ -150,6 +150,8 @@ fi
 #====================================================
 fps=30
 
+dev_fname=video6
+
 contol_bInterfaceNumber_mysetting=0;
 bEndpointAddress_mysetting=135;
 bcdUVC_mysetting=256  # 0x100;
