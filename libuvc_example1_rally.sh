@@ -18,7 +18,7 @@ output_dir=`pwd`"/rally/libuvc/${ex_num}"
 
 
 
-# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 640 480 0 0 30 ${output_dir}
+./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 640 480 0 0 30 ${output_dir}
 
 # ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 160 120 0 1 30 ${output_dir}
 
@@ -95,3 +95,29 @@ output_dir=`pwd`"/rally/libuvc/${ex_num}"
 # Input #0, mjpeg, from './out':
 #   Duration: N/A, bitrate: N/A
 #   Stream #0:0: Video: mjpeg (Baseline), yuvj422p(pc, bt470bg/unknown/unknown), 3840x2160, 25 tbr, 1200k tbn, 25 tbc
+
+
+
+
+
+
+
+
+
+#-----------------------
+#Make Slice
+#-----------------------
+working_dir=`pwd`
+cd ${working_dir}
+
+dev_name="rally"
+slices_dir=${working_dir}/slices
+#sudo rm -rf ${slices_dir}/*
+sudo rm -rf {dev_name}_slice.tar.gz
+mkdir -p ${slices_dir}
+
+
+./make_slice.sh ${working_dir} ${dev_name}
+cp ./${dev_name}_slice.tar.gz ${slices_dir}/
+rm -rf ./${dev_name}_slice.tar.gz
+rm -rf ./${dev_name}_slice
