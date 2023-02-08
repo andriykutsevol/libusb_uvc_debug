@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+
 
 
 find ./aver -type f -exec rm -ivf {} \;
