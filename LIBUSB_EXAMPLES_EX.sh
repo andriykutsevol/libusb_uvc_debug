@@ -242,7 +242,7 @@ rm -fR ./out.yuv
 rm -fR ./out.mjpg
 rm -fR ./output.avi
 
-./example 1133 2085 \
+./example ${device_vid} ${device_pid} \
 ${contol_bInterfaceNumber_mysetting} \
 ${bEndpointAddress_mysetting} \
 ${bcdUVC_mysetting} \
