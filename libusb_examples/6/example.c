@@ -936,7 +936,6 @@ int main(int argc, char **argv){
   printf("UVCLIB: vidi: 0x%x\n", vidi);
   printf("UVCLIB: pidi: 0x%x\n", pidi); 
 
-  printf("")
 
   contol_bInterfaceNumber_mysetting = strtol(argv[3],&tmpptr,10);
   bEndpointAddress_mysetting = strtol(argv[4],&tmpptr,10);
