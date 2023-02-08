@@ -14,6 +14,8 @@ fi
 #====================================================
 fps=60
 
+dev_fname=video6
+
 contol_bInterfaceNumber_mysetting=0;
 bEndpointAddress_mysetting=133;
 bcdUVC_mysetting=256  # 0x100;
@@ -43,7 +45,7 @@ total_transfer_size_mysetting=98304;
 ex_num=6
 output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 640 480 \
+./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 ${dev_fname} 640 480 \
 ${contol_bInterfaceNumber_mysetting} \
 ${bEndpointAddress_mysetting} \
 ${bcdUVC_mysetting} \
@@ -105,7 +107,7 @@ ${output_dir}
 # ex_num=6
 # output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 1280 720 \
+# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 ${dev_fname} 1280 720 \
 # ${contol_bInterfaceNumber_mysetting} \
 # ${bEndpointAddress_mysetting} \
 # ${bcdUVC_mysetting} \
@@ -168,7 +170,7 @@ ${output_dir}
 # ex_num=6
 # output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 1280 960 \
+# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 ${dev_fname} 1280 960 \
 # ${contol_bInterfaceNumber_mysetting} \
 # ${bEndpointAddress_mysetting} \
 # ${bcdUVC_mysetting} \
