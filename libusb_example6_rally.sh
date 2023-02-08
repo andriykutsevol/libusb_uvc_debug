@@ -100,7 +100,7 @@ dwMaxPayloadTransferSize_mysetting=9216;
 
 
 endpoint_bytes_per_packet_mysetting=9216;
-bAlternateSetting_mysetting=8;
+bAlternateSetting_mysetting=9;
 bEndpointAddres_mysetting=129;
 total_transfer_size_mysetting=294912;
 
