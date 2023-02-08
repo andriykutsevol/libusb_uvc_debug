@@ -1426,7 +1426,7 @@ int main(int argc, char **argv){
   printf("=============================================\n");
   printf("AFTER 'libusb_submit_transfer'\n");
   printf("SLEEP 3 (5) STREAMING...\n");
-  sleep(5);   
+  sleep(10);   
   printf("=============================================\n");
   printf("=============================================\n");
 
