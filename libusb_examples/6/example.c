@@ -933,6 +933,11 @@ int main(int argc, char **argv){
   vidi = strtol(argv[1],&tmpptr,10);
   pidi = strtol(argv[2],&tmpptr,10);
 
+  printf("UVCLIB: vidi: 0x%x\n", vidi);
+  printf("UVCLIB: pidi: 0x%x\n", pidi); 
+
+  printf("")
+
   contol_bInterfaceNumber_mysetting = strtol(argv[3],&tmpptr,10);
   bEndpointAddress_mysetting = strtol(argv[4],&tmpptr,10);
   bcdUVC_mysetting = strtol(argv[5],&tmpptr,10);
@@ -1016,14 +1021,17 @@ int main(int argc, char **argv){
 
     libusb_get_device_descriptor(dev, &desc);
 
-    //printf("desc.idVendor: 0x%x\n", desc.idVendor);
-    //printf("desc.idProduct: 0x%x\n", desc.idProduct);
+    printf("UVCLIB: desc.idVendor: 0x%x\n", desc.idVendor);
+    printf("UVCLIB: desc.idProduct: 0x%x\n", desc.idProduct);
 
     if (desc.idVendor == vidi && desc.idProduct == pidi) {
       dev_found = 1;
       break;
     }
   }
+
+  printf("UVCLIB: vidi: 0x%x\n", vidi);
+  printf("UVCLIB: pidi: 0x%x\n", pidi);  
 
   if (!dev_found){
     printf("UVCLIB: ERROR: Device NOT Found\n");
