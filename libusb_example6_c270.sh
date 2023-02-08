@@ -294,6 +294,11 @@ fi
               # ret = libusb_set_interface_alt_setting(strmh->devh->usb_devh,
               #                                       altsetting->bInterfaceNumber,
               #                                       altsetting->bAlternateSetting); 
+              # lsusb:
+              # ENDPOINT: endpoint_idx 0, ALTSETTING(if_desc): 11, INTERFACE: 1    
+                # -----LOOKING FOR ENDPOINT COMPANION DESCTIPTOR ...-----
+                # endpoint_bytes_per_packet = ep_desc->wMaxPacketSize: 5116
+                # endpoint_bytes_per_packet = (endpoint_bytes_per_packet & 0x07ff) * (((endpoint_bytes_per_packet >> 11) & 3) + 1): 3060
 
         # uint8_t bEndpointAddres = 129;
         # size_t total_transfer_size = 97920;
@@ -341,10 +346,72 @@ fi
 
 
 
-#====================================================
-# 640x480
-#====================================================
+# #====================================================
+# # 640x480
+# #====================================================
+# fps=15
 
+# contol_bInterfaceNumber_mysetting=0;
+# bEndpointAddress_mysetting=135;
+# bcdUVC_mysetting=256  # 0x100;
+
+
+# bInterfaceNumber_mysetting=1;
+# bmHint_mysetting=1;
+# bFormatIndex_mysetting=1;
+# bFrameIndex_mysetting=1;
+# dwFrameInterval_mysetting=333333;
+# wKeyFrameRate_mysetting=0;
+# wPFrameRate_mysetting=0;
+# wCompQuality_mysetting=200;
+# wCompWindowSize_mysetting=0;
+# wDelay_mysetting=0;
+# dwMaxVideoFrameSize_mysetting=614400;
+# dwMaxPayloadTransferSize_mysetting=3060;
+
+
+# endpoint_bytes_per_packet_mysetting=3060;
+# bAlternateSetting_mysetting=11;
+# bEndpointAddres_mysetting=129;
+# total_transfer_size_mysetting=97920;
+
+# #------------------------------------------------------
+
+# ex_num=6
+# output_dir=`pwd`"/c270/libusb/${ex_num}"
+
+# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 640 480 \
+# ${contol_bInterfaceNumber_mysetting} \
+# ${bEndpointAddress_mysetting} \
+# ${bcdUVC_mysetting} \
+# ${bInterfaceNumber_mysetting} \
+# ${bmHint_mysetting} \
+# ${bFormatIndex_mysetting} \
+# ${bFrameIndex_mysetting} \
+# ${dwFrameInterval_mysetting} \
+# ${wKeyFrameRate_mysetting} \
+# ${wPFrameRate_mysetting} \
+# ${wCompQuality_mysetting} \
+# ${wCompWindowSize_mysetting} \
+# ${wDelay_mysetting} \
+# ${dwMaxVideoFrameSize_mysetting} \
+# ${dwMaxPayloadTransferSize_mysetting} \
+# ${endpoint_bytes_per_packet_mysetting} \
+# ${bAlternateSetting_mysetting} \
+# ${bEndpointAddres_mysetting} \
+# ${total_transfer_size_mysetting} \
+# ${fps} \
+# ${output_dir}
+
+
+
+
+
+
+#====================================================
+# 1280x720
+#====================================================
+fps=5
 
 contol_bInterfaceNumber_mysetting=0;
 bEndpointAddress_mysetting=135;
@@ -354,14 +421,14 @@ bcdUVC_mysetting=256  # 0x100;
 bInterfaceNumber_mysetting=1;
 bmHint_mysetting=1;
 bFormatIndex_mysetting=1;
-bFrameIndex_mysetting=1;
+bFrameIndex_mysetting=18;
 dwFrameInterval_mysetting=333333;
 wKeyFrameRate_mysetting=0;
 wPFrameRate_mysetting=0;
-wCompQuality_mysetting=200;
+wCompQuality_mysetting=2000;
 wCompWindowSize_mysetting=0;
 wDelay_mysetting=0;
-dwMaxVideoFrameSize_mysetting=614400;
+dwMaxVideoFrameSize_mysetting=1843200;
 dwMaxPayloadTransferSize_mysetting=3060;
 
 
@@ -371,13 +438,11 @@ bEndpointAddres_mysetting=129;
 total_transfer_size_mysetting=97920;
 
 #------------------------------------------------------
-fps=15
-#------------------------------------------------------
 
 ex_num=6
 output_dir=`pwd`"/c270/libusb/${ex_num}"
 
-./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 640 480 \
+./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 1280 720 \
 ${contol_bInterfaceNumber_mysetting} \
 ${bEndpointAddress_mysetting} \
 ${bcdUVC_mysetting} \
@@ -399,7 +464,6 @@ ${bEndpointAddres_mysetting} \
 ${total_transfer_size_mysetting} \
 ${fps} \
 ${output_dir}
-
 
 
 
