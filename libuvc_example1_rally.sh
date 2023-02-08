@@ -18,7 +18,7 @@ output_dir=`pwd`"/rally/libuvc/${ex_num}"
 
 
 
-./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 640 480 0 0 30 ${output_dir}
+# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 640 480 0 0 30 ${output_dir}
 
 # ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 160 120 0 1 30 ${output_dir}
 
@@ -44,11 +44,11 @@ output_dir=`pwd`"/rally/libuvc/${ex_num}"
 
 # ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1024 576 0 12 30 ${output_dir}
 
-# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1280 720 0 13 30 ${output_dir}
+./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1280 720 0 13 30 ${output_dir}
 
-# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1600 896 0 14 30 ${output_dir}
+./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1600 896 0 14 30 ${output_dir}
 
-# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1920 1080 0 15 30 ${output_dir}
+./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 video0 1920 1080 0 15 30 ${output_dir}
 
 
 
