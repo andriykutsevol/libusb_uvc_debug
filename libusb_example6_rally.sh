@@ -45,7 +45,7 @@ total_transfer_size_mysetting=98304;
 ex_num=6
 output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 ${dev_fname} 640 480 \
+./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 640 480 \
 ${contol_bInterfaceNumber_mysetting} \
 ${bEndpointAddress_mysetting} \
 ${bcdUVC_mysetting} \
@@ -107,7 +107,7 @@ ${output_dir}
 # ex_num=6
 # output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 ${dev_fname} 1280 720 \
+# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1280 720 \
 # ${contol_bInterfaceNumber_mysetting} \
 # ${bEndpointAddress_mysetting} \
 # ${bcdUVC_mysetting} \
@@ -170,7 +170,7 @@ ${output_dir}
 # ex_num=6
 # output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 ${dev_fname} 1280 960 \
+# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1280 960 \
 # ${contol_bInterfaceNumber_mysetting} \
 # ${bEndpointAddress_mysetting} \
 # ${bcdUVC_mysetting} \
