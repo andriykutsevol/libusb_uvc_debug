@@ -225,7 +225,7 @@ fi
             # Это эндпоинт нулевого интерфейса.
 
             # А так же это можно взять из:
-            #       !!!dgnet: UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer():  bEndpointAddress           
+            #       !!!dgnetz: UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer():  bEndpointAddress           
 
 
 
@@ -301,6 +301,9 @@ fi
                 # endpoint_bytes_per_packet = (endpoint_bytes_per_packet & 0x07ff) * (((endpoint_bytes_per_packet >> 11) & 3) + 1): 3060
 
         # uint8_t bEndpointAddres = 129;
+              # lsuvc:
+                  # ENDPOINT: endpoint_idx 0, ALTSETTING(if_desc): 11, INTERFACE: 1
+        
         # size_t total_transfer_size = 97920;
               # !!!dgnet: UVCLIB: total_transfer_size: 97920
                   # total_transfer_size = packets_per_transfer * endpoint_bytes_per_packet;
