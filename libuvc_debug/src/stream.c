@@ -1615,8 +1615,6 @@ uvc_error_t uvc_stream_get_frame(uvc_stream_handle_t *strmh,
 void uvc_stop_streaming(uvc_device_handle_t *devh) {
   uvc_stream_handle_t *strmh, *strmh_tmp;
 
-  printf("UVCLIB: uvc_stop_streaming() 1\n");
-
   DL_FOREACH_SAFE(devh->streams, strmh, strmh_tmp) {
     uvc_stream_close(strmh);
   }
@@ -1644,26 +1642,17 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
    */
   for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
     if(strmh->transfers[i] != NULL)
-      printf("UVCLIB: uvc_stop_streaming() 2\n");
       libusb_cancel_transfer(strmh->transfers[i]);
   }
 
   /* Wait for transfers to complete/cancel */
   do {
-    printf("UVCLIB: uvc_stop_streaming() 3\n");
     for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
-      printf("UVCLIB: uvc_stop_streaming() 4\n");
       if(strmh->transfers[i] != NULL)
-        printf("UVCLIB: uvc_stop_streaming() 5\n");
         break;
     }
-    if(i == LIBUVC_NUM_TRANSFER_BUFS ){
-      printf("break z\n");
+    if(i == LIBUVC_NUM_TRANSFER_BUFS )
       break;
-    }
-
-    printf("UVCLIB: uvc_stop_streaming() 6 z\n"); 
-
     pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
   } while(1);
   // Kick the user thread awake
@@ -1671,8 +1660,6 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
   pthread_mutex_unlock(&strmh->cb_mutex);
 
   /** @todo stop the actual stream, camera side? */
-
-  printf("UVCLIB: uvc_stop_streaming() 7\n");
 
   if (strmh->user_cb) {
     /* wait for the thread to stop (triggered by
