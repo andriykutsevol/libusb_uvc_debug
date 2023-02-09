@@ -1483,10 +1483,12 @@ int main(int argc, char **argv){
                             break;
                           }
                         }
-                        if(i == LIBUVC_NUM_TRANSFER_BUFS )
+                        if(i == LIBUVC_NUM_TRANSFER_BUFS ){
+                          printf("break z\n"); 
                           break;
+                        }
 
-                        printf("UVCLIB: uvc_stop_streaming() 6\n"); 
+                        printf("UVCLIB: uvc_stop_streaming() 6 z\n"); 
 
                         // !!! This will not work without logic in the "if ( resubmit )"
                         //pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
