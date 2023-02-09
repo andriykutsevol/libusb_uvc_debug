@@ -9,72 +9,8 @@ fi
 
 
 
-#====================================================
-# 640x480
-#====================================================
-fps=30
-
-dev_fname=video6
-
-contol_bInterfaceNumber_mysetting=0;
-bEndpointAddress_mysetting=133;
-bcdUVC_mysetting=256  # 0x100;
-
-
-bInterfaceNumber_mysetting=1;
-bmHint_mysetting=1;
-bFormatIndex_mysetting=1;
-bFrameIndex_mysetting=1;
-dwFrameInterval_mysetting=333333;
-wKeyFrameRate_mysetting=0;
-wPFrameRate_mysetting=0;
-wCompQuality_mysetting=0;
-wCompWindowSize_mysetting=0;
-wDelay_mysetting=0;
-dwMaxVideoFrameSize_mysetting=614400;
-dwMaxPayloadTransferSize_mysetting=3072;
-
-
-endpoint_bytes_per_packet_mysetting=3072;
-bAlternateSetting_mysetting=6;
-bEndpointAddres_mysetting=129;
-total_transfer_size_mysetting=98304;
-
-#------------------------------------------------------
-
-ex_num=6
-output_dir=`pwd`"/rally/libusb/${ex_num}"
-
-./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 640 480 \
-${contol_bInterfaceNumber_mysetting} \
-${bEndpointAddress_mysetting} \
-${bcdUVC_mysetting} \
-${bInterfaceNumber_mysetting} \
-${bmHint_mysetting} \
-${bFormatIndex_mysetting} \
-${bFrameIndex_mysetting} \
-${dwFrameInterval_mysetting} \
-${wKeyFrameRate_mysetting} \
-${wPFrameRate_mysetting} \
-${wCompQuality_mysetting} \
-${wCompWindowSize_mysetting} \
-${wDelay_mysetting} \
-${dwMaxVideoFrameSize_mysetting} \
-${dwMaxPayloadTransferSize_mysetting} \
-${endpoint_bytes_per_packet_mysetting} \
-${bAlternateSetting_mysetting} \
-${bEndpointAddres_mysetting} \
-${total_transfer_size_mysetting} \
-${fps} \
-${output_dir}
-
-
-
-
-
-
 # #====================================================
-# # 1280x720
+# # 640x480
 # #====================================================
 # fps=30
 
@@ -88,28 +24,28 @@ ${output_dir}
 # bInterfaceNumber_mysetting=1;
 # bmHint_mysetting=1;
 # bFormatIndex_mysetting=1;
-# bFrameIndex_mysetting=14;
+# bFrameIndex_mysetting=1;
 # dwFrameInterval_mysetting=333333;
 # wKeyFrameRate_mysetting=0;
 # wPFrameRate_mysetting=0;
 # wCompQuality_mysetting=0;
 # wCompWindowSize_mysetting=0;
 # wDelay_mysetting=0;
-# dwMaxVideoFrameSize_mysetting=1843200;
-# dwMaxPayloadTransferSize_mysetting=9216;
+# dwMaxVideoFrameSize_mysetting=614400;
+# dwMaxPayloadTransferSize_mysetting=3072;
 
 
-# endpoint_bytes_per_packet_mysetting=9216;
-# bAlternateSetting_mysetting=8;
+# endpoint_bytes_per_packet_mysetting=3072;
+# bAlternateSetting_mysetting=6;
 # bEndpointAddres_mysetting=129;
-# total_transfer_size_mysetting=294912;
+# total_transfer_size_mysetting=98304;
 
 # #------------------------------------------------------
 
 # ex_num=6
 # output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1280 720 \
+# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 640 480 \
 # ${contol_bInterfaceNumber_mysetting} \
 # ${bEndpointAddress_mysetting} \
 # ${bcdUVC_mysetting} \
@@ -131,6 +67,70 @@ ${output_dir}
 # ${total_transfer_size_mysetting} \
 # ${fps} \
 # ${output_dir}
+
+
+
+
+
+
+#====================================================
+# 1280x720
+#====================================================
+fps=30
+
+dev_fname=video6
+
+contol_bInterfaceNumber_mysetting=0;
+bEndpointAddress_mysetting=133;
+bcdUVC_mysetting=256  # 0x100;
+
+
+bInterfaceNumber_mysetting=1;
+bmHint_mysetting=1;
+bFormatIndex_mysetting=1;
+bFrameIndex_mysetting=14;
+dwFrameInterval_mysetting=333333;
+wKeyFrameRate_mysetting=0;
+wPFrameRate_mysetting=0;
+wCompQuality_mysetting=0;
+wCompWindowSize_mysetting=0;
+wDelay_mysetting=0;
+dwMaxVideoFrameSize_mysetting=1843200;
+dwMaxPayloadTransferSize_mysetting=9216;
+
+
+endpoint_bytes_per_packet_mysetting=9216;
+bAlternateSetting_mysetting=8;
+bEndpointAddres_mysetting=129;
+total_transfer_size_mysetting=294912;
+
+#------------------------------------------------------
+
+ex_num=6
+output_dir=`pwd`"/rally/libusb/${ex_num}"
+
+./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1280 720 \
+${contol_bInterfaceNumber_mysetting} \
+${bEndpointAddress_mysetting} \
+${bcdUVC_mysetting} \
+${bInterfaceNumber_mysetting} \
+${bmHint_mysetting} \
+${bFormatIndex_mysetting} \
+${bFrameIndex_mysetting} \
+${dwFrameInterval_mysetting} \
+${wKeyFrameRate_mysetting} \
+${wPFrameRate_mysetting} \
+${wCompQuality_mysetting} \
+${wCompWindowSize_mysetting} \
+${wDelay_mysetting} \
+${dwMaxVideoFrameSize_mysetting} \
+${dwMaxPayloadTransferSize_mysetting} \
+${endpoint_bytes_per_packet_mysetting} \
+${bAlternateSetting_mysetting} \
+${bEndpointAddres_mysetting} \
+${total_transfer_size_mysetting} \
+${fps} \
+${output_dir}
 
 
 # # $: ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 1280x720 -r 30 -i ./out.yuv ./output.avi
