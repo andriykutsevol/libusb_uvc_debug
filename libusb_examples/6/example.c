@@ -1465,13 +1465,13 @@ int main(int argc, char **argv){
                           printf("UVCLIB: uvc_stop_streaming() 2\n");
                           libusb_cancel_transfer(strmh->transfers[i]);
                       }
-                      printf("======================================\n");
-                      printf("======================================\n");     
-                      printf("UVCLIB: SLEEP(3) BEFORE LOOP\n");            
-                      printf("======================================\n");
-                      printf("======================================\n");
+                      // printf("======================================\n");
+                      // printf("======================================\n");     
+                      // printf("UVCLIB: SLEEP(3) BEFORE LOOP\n");            
+                      // printf("======================================\n");
+                      // printf("======================================\n");
 
-                      sleep(3);
+                      // sleep(3);
 
                       /* Wait for transfers to complete/cancel */
                       do {
