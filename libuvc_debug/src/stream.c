@@ -1644,9 +1644,9 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
    *   necessarily completed but they will be free'd in _uvc_stream_callback().
    */
   for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
-    //printf("UVCLIB: uvc_stop_streaming() 2, i: %d\n", i);
+    printf("UVCLIB: uvc_stop_streaming() 2, i: %d\n", i);
     if(strmh->transfers[i] != NULL){
-      //printf("UVCLIB: uvc_stop_streaming() 3, i: %d\n", i);
+      printf("UVCLIB: uvc_stop_streaming() 3, i: %d\n", i);
       libusb_cancel_transfer(strmh->transfers[i]);
     }
   }
@@ -1655,9 +1655,9 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
   do {
     printf("UVCLIB: uvc_stop_streaming() 4\n");
     for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
-      //printf("UVCLIB: uvc_stop_streaming() 5\n");
+      printf("UVCLIB: uvc_stop_streaming() 5\n");
       if(strmh->transfers[i] != NULL){
-        //printf("UVCLIB: uvc_stop_streaming() 6\n");
+        printf("UVCLIB: uvc_stop_streaming() 6\n");
         break;
       }
     }
