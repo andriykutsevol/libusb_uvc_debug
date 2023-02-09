@@ -1305,6 +1305,9 @@ int main(int argc, char **argv){
       strmh->meta_outbuf = malloc( LIBUVC_XFER_META_BUF_SIZE );
       strmh->meta_holdbuf = malloc( LIBUVC_XFER_META_BUF_SIZE );
 
+      pthread_mutex_init(&strmh->cb_mutex, NULL);
+      pthread_cond_init(&strmh->cb_cond, NULL);
+
   //================================================================
   //================================================================  
 
@@ -1491,7 +1494,7 @@ int main(int argc, char **argv){
                         printf("UVCLIB: uvc_stop_streaming() 6 z\n"); 
 
                         // !!! This will not work without logic in the "if ( resubmit )"
-                        //pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
+                        pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
                         sleep(0.2);
                       } while(1);
 
@@ -1528,12 +1531,12 @@ int main(int argc, char **argv){
                       ret = libusb_attach_kernel_driver(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
                     printf("UVCLIB: END: uvc_release_if() \n");
 
-              // pthread_cond_destroy(&strmh->cb_cond);
-              // pthread_mutex_destroy(&strmh->cb_mutex);
+              pthread_cond_destroy(&strmh->cb_cond);
+              pthread_mutex_destroy(&strmh->cb_mutex);
 
 
-              // DL_DELETE(strmh->devh->streams, strmh);
-              // free(strmh);
+              //DL_DELETE(strmh->devh->streams, strmh);
+              //free(strmh);
 
 
   //---------------------------------------------------
