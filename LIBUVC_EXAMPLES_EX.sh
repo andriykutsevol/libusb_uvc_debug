@@ -108,7 +108,6 @@ sleep 1
 
 cd ${binary_path}
 rm -fR ./out
-git pull
 make
 
 echo "================================="
