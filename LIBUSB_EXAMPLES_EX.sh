@@ -262,8 +262,8 @@ ${dwMaxPayloadTransferSize_mysetting} \
 ${endpoint_bytes_per_packet_mysetting} \
 ${bAlternateSetting_mysetting} \
 ${bEndpointAddres_mysetting} \
-${total_transfer_size_mysetting}# \
-#>> ${output_dir}/ex_out.txt 2>&1
+${total_transfer_size_mysetting} \
+>> ${output_dir}/ex_out.txt 2>&1
 
 
 cd ${output_dir}
