@@ -17,6 +17,9 @@ fi
     # sudo modprobe xhci_pci
     # v4l2-ctl --all --device /dev/video0
 
+# 3) ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 1280x720 -r 30 -i ./out.yuv ./output.avi
+
+
 #---------------------------------------------------------
 
 istcpdump=0

@@ -10,10 +10,20 @@ fi
 
 #---------------------------------------------------------
 # NOTES:
+# 1)
+    # Sometime it cannot change format from the first attempt, and you need to run test twice to make it works.
 
-# 1) ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 1280x720 -r 30 -i ./out.yuv ./output.avi
+# 2)
+    # sudo modprobe -r xhci_pci
+    # sudo modprobe xhci_pci
+    # v4l2-ctl --all --device /dev/video0
+
+# 3) ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 1280x720 -r 30 -i ./out.yuv ./output.avi
+
 
 #---------------------------------------------------------
+
+
 
 istcpdump=0
 
