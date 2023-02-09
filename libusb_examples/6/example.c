@@ -731,7 +731,7 @@ void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
 
   //---------------------------------------------
 
-  if ( resubmit ) {
+  if (resubmit) {
 
     printf("UVCLIB: CALLBACK _uvc_stream_callback 12: resubmit\n");
 
@@ -1416,13 +1416,24 @@ int main(int argc, char **argv){
 
   int transfer_id;
   for (transfer_id = 0; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; transfer_id++) {
-    printf("libusb_submit_transfer(): %d\n", transfer_id);
+    printf("UVCLIB: libusb_submit_transfer(): %d\n", transfer_id);
     ret = libusb_submit_transfer(strmh->transfers[transfer_id]);
     if (ret != UVC_SUCCESS) {
-      printf("libusb_submit_transfer failed: %d",ret);
+      printf("UVCLIB: ERROR: libusb_submit_transfer failed 1: %d",ret);
       break;
     }
   }
+
+
+  if ( ret != UVC_SUCCESS && transfer_id >= 0 ) {
+    printf("UVCLIB: ERROR: libusb_submit_transfer failed 2\n");
+    for ( ; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; transfer_id++) {
+      free ( strmh->transfers[transfer_id]->buffer );
+      libusb_free_transfer ( strmh->transfers[transfer_id]);
+      strmh->transfers[transfer_id] = 0;
+    }
+    ret = UVC_SUCCESS;
+  }  
 
 
   printf("=============================================\n");
