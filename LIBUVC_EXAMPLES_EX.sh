@@ -220,7 +220,8 @@ echo "========================" >> ${output_dir}/ex_out.txt 2>&1
 echo "========================" >> ${output_dir}/ex_out.txt 2>&1
 
 cd ${binary_path}
-./example_${example_number} ${device_vid} ${device_pid} ${fmt_index} ${frame_index} >> ${output_dir}/ex_out.txt 2>&1
+#./example_${example_number} ${device_vid} ${device_pid} ${fmt_index} ${frame_index} >> ${output_dir}/ex_out.txt 2>&1
+./example_${example_number} ${device_vid} ${device_pid} ${fmt_index} ${frame_index}
 cd ${output_dir}
 
 sleep 1
