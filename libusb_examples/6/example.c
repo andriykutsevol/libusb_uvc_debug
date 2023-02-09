@@ -1495,7 +1495,7 @@ int main(int argc, char **argv){
 
                         // !!! This will not work without logic in the "if ( resubmit )"
                         pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
-                        sleep(0.2);
+                        //sleep(0.2);
                       } while(1);
 
                       // Kick the user thread awake
