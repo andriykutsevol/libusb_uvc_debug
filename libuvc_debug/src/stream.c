@@ -939,8 +939,10 @@ void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
 
     /* Mark transfer as deleted. */
     for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
+      printf("!!!dgnet: UVCLIB: LIBUSB_TRANSFER_NO_DEVICE: i: %d\n", i);
       if(strmh->transfers[i] == transfer) {
         UVC_DEBUG("Freeing transfer %d (%p)", i, transfer);
+        printf("!!!dgnet: UVCLIB: LIBUSB_TRANSFER_NO_DEVICE: Freeing transfer %d (%p) \n", i, transfer);
         free(transfer->buffer);
         libusb_free_transfer(transfer);
         strmh->transfers[i] = NULL;
@@ -949,6 +951,7 @@ void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
     }
     if(i == LIBUVC_NUM_TRANSFER_BUFS ) {
       UVC_DEBUG("transfer %p not found; not freeing!", transfer);
+      printf("!!!dgnet: UVCLIB: transfer %p not found; not freeing!", transfer);
     }
 
     resubmit = 0;
@@ -1662,7 +1665,7 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
       }
     }
     if(i == LIBUVC_NUM_TRANSFER_BUFS ){
-      printf("break z\n");
+      printf("break z: i: %d, LIBUVC_NUM_TRANSFER_BUFS: %d\n", i, LIBUVC_NUM_TRANSFER_BUFS); 
       break;
     }
     

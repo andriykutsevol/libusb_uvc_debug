@@ -699,7 +699,7 @@ void LIBUSB_CALL _uvc_stream_callback(struct libusb_transfer *transfer) {
     for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
       printf("UVCLIB: LIBUSB_TRANSFER_NO_DEVICE: i: %d\n", i);
       if(strmh->transfers[i] == transfer) {
-        printf("UVCLIB: LIBUSB_TRANSFER_NO_DEVICE: Freeing transfer %d (%p)", i, transfer);
+        printf("UVCLIB: LIBUSB_TRANSFER_NO_DEVICE: Freeing transfer %d (%p) \n", i, transfer);
         free(transfer->buffer);
         libusb_free_transfer(transfer);
         strmh->transfers[i] = NULL;
@@ -1489,7 +1489,7 @@ int main(int argc, char **argv){
                           }
                         }
                         if(i == LIBUVC_NUM_TRANSFER_BUFS ){
-                          printf("break z\n"); 
+                          printf("break z: i: %d, LIBUVC_NUM_TRANSFER_BUFS: %d\n", i, LIBUVC_NUM_TRANSFER_BUFS); 
                           break;
                         }
 
