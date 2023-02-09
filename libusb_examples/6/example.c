@@ -1491,8 +1491,8 @@ int main(int argc, char **argv){
                         printf("UVCLIB: uvc_stop_streaming() 6 z\n"); 
 
                         // !!! This will not work without logic in the "if ( resubmit )"
-                        pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
-                        //sleep(0.2);
+                        //pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
+                        sleep(0.2);
                       } while(1);
 
                       // Kick the user thread awake
