@@ -1634,7 +1634,7 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
     return UVC_ERROR_INVALID_PARAM;
   }
 
-  //printf("UVCLIB: uvc_stop_streaming() 1: LIBUVC_NUM_TRANSFER_BUFS: %d\n", LIBUVC_NUM_TRANSFER_BUFS);
+  printf("UVCLIB: uvc_stop_streaming() 1: LIBUVC_NUM_TRANSFER_BUFS: %d\n", LIBUVC_NUM_TRANSFER_BUFS);
 
   strmh->running = 0;
 
