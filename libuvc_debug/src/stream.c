@@ -1655,9 +1655,9 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
   do {
     printf("UVCLIB: uvc_stop_streaming() 4\n");
     for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
-      printf("UVCLIB: uvc_stop_streaming() 5\n");
+      printf("UVCLIB: uvc_stop_streaming() 5, i: %d\n", i);
       if(strmh->transfers[i] != NULL){
-        printf("UVCLIB: uvc_stop_streaming() 6\n");
+        printf("UVCLIB: uvc_stop_streaming() 6, i: %d\n", i);
         break;
       }
     }
