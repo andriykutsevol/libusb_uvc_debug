@@ -1633,6 +1633,8 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
   if (!strmh->running)
     return UVC_ERROR_INVALID_PARAM;
 
+  printf("UVCLIB: uvc_stop_streaming() 1\n");
+
   strmh->running = 0;
 
   pthread_mutex_lock(&strmh->cb_mutex);
@@ -1641,12 +1643,15 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
    *   necessarily completed but they will be free'd in _uvc_stream_callback().
    */
   for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
-    if(strmh->transfers[i] != NULL)
+    if(strmh->transfers[i] != NULL){
+      printf("UVCLIB: uvc_stop_streaming() 2\n");
       libusb_cancel_transfer(strmh->transfers[i]);
+    }
   }
 
   /* Wait for transfers to complete/cancel */
   do {
+    printf("UVCLIB: uvc_stop_streaming() 3\n");
     for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
       if(strmh->transfers[i] != NULL)
         break;

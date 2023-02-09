@@ -1464,9 +1464,10 @@ int main(int argc, char **argv){
                       pthread_mutex_lock(&strmh->cb_mutex);
                       int i;
                       for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
-                        if(strmh->transfers[i] != NULL)
+                        if(strmh->transfers[i] != NULL){
                           printf("UVCLIB: uvc_stop_streaming() 2\n");
                           libusb_cancel_transfer(strmh->transfers[i]);
+                        }
                       }
                       // printf("======================================\n");
                       // printf("======================================\n");     
