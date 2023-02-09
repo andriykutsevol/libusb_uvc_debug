@@ -1458,14 +1458,15 @@ int main(int argc, char **argv){
       //   uvc_stream_close(strmh);
 
               if (strmh->running){
-                printf("UVCLIB: uvc_stop_streaming() 1\n");
+                printf("UVCLIB: uvc_stop_streaming() 1: LIBUVC_NUM_TRANSFER_BUFS: %d\n", LIBUVC_NUM_TRANSFER_BUFS);
                 //uvc_stream_stop(strmh);
                       strmh->running = 0;
                       pthread_mutex_lock(&strmh->cb_mutex);
                       int i;
                       for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
+                        printf("UVCLIB: uvc_stop_streaming() 2, i: %d\n", i);
                         if(strmh->transfers[i] != NULL){
-                          printf("UVCLIB: uvc_stop_streaming() 2\n");
+                          printf("UVCLIB: uvc_stop_streaming() 3, i: %d\n", i);
                           libusb_cancel_transfer(strmh->transfers[i]);
                         }
                       }
@@ -1479,11 +1480,11 @@ int main(int argc, char **argv){
 
                       /* Wait for transfers to complete/cancel */
                       do {
-                        printf("UVCLIB: uvc_stop_streaming() 3\n");
+                        printf("UVCLIB: uvc_stop_streaming() 4\n");
                         for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
-                          printf("UVCLIB: uvc_stop_streaming() 4\n");
+                          printf("UVCLIB: uvc_stop_streaming() 5, i: %d\n", i);
                           if(strmh->transfers[i] != NULL){
-                            printf("UVCLIB: uvc_stop_streaming() 5\n");
+                            printf("UVCLIB: uvc_stop_streaming() 6, i: %d\n", i);
                             break;
                           }
                         }
@@ -1492,7 +1493,7 @@ int main(int argc, char **argv){
                           break;
                         }
 
-                        printf("UVCLIB: uvc_stop_streaming() 6 z\n"); 
+                        printf("UVCLIB: uvc_stop_streaming() 7 z\n"); 
 
                         // !!! This will not work without logic in the "if ( resubmit )"
                         pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
@@ -1504,7 +1505,7 @@ int main(int argc, char **argv){
                       pthread_mutex_unlock(&strmh->cb_mutex);
 
 
-                      printf("UVCLIB: uvc_stop_streaming() 7\n");
+                      printf("UVCLIB: uvc_stop_streaming() 8\n");
 
                       /** @todo stop the actual stream, camera side? */
 

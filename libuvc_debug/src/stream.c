@@ -1633,7 +1633,7 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
   if (!strmh->running)
     return UVC_ERROR_INVALID_PARAM;
 
-  printf("UVCLIB: uvc_stop_streaming() 1\n");
+  printf("UVCLIB: uvc_stop_streaming() 1: LIBUVC_NUM_TRANSFER_BUFS: %d\n", LIBUVC_NUM_TRANSFER_BUFS);
 
   strmh->running = 0;
 
@@ -1643,19 +1643,20 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
    *   necessarily completed but they will be free'd in _uvc_stream_callback().
    */
   for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
+    printf("UVCLIB: uvc_stop_streaming() 2, i: %d\n", i);
     if(strmh->transfers[i] != NULL){
-      printf("UVCLIB: uvc_stop_streaming() 2\n");
+      printf("UVCLIB: uvc_stop_streaming() 3, i: %d\n", i);
       libusb_cancel_transfer(strmh->transfers[i]);
     }
   }
 
   /* Wait for transfers to complete/cancel */
   do {
-    printf("UVCLIB: uvc_stop_streaming() 3\n");
+    printf("UVCLIB: uvc_stop_streaming() 4\n");
     for(i=0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
-      printf("UVCLIB: uvc_stop_streaming() 4\n");
+      printf("UVCLIB: uvc_stop_streaming() 5\n");
       if(strmh->transfers[i] != NULL){
-        printf("UVCLIB: uvc_stop_streaming() 5\n");
+        printf("UVCLIB: uvc_stop_streaming() 6\n");
         break;
       }
     }
@@ -1664,7 +1665,7 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
       break;
     }
     
-    printf("UVCLIB: uvc_stop_streaming() 6 z\n"); 
+    printf("UVCLIB: uvc_stop_streaming() 7 z\n"); 
     
     pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
   } while(1);
@@ -1674,7 +1675,7 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
 
   /** @todo stop the actual stream, camera side? */
 
-  printf("UVCLIB: uvc_stop_streaming() 7\n");
+  printf("UVCLIB: uvc_stop_streaming() 8\n");
 
   if (strmh->user_cb) {
     /* wait for the thread to stop (triggered by
