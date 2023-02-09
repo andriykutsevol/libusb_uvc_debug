@@ -1666,7 +1666,7 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
       break;
     }
     
-    //printf("UVCLIB: uvc_stop_streaming() 7 z\n"); 
+    printf("UVCLIB: uvc_stop_streaming() 7 z\n"); 
     
     pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
   } while(1);
