@@ -15,7 +15,7 @@ fi
 # 2)
     # sudo modprobe -r xhci_pci
     # sudo modprobe xhci_pci
-    # v4l2-ctl --all --device /dev/${device_file}
+    # v4l2-ctl --all --device /dev/video0
 
 #---------------------------------------------------------
 
