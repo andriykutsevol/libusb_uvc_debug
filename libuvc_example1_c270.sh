@@ -56,9 +56,9 @@ mkdir -p ${slices_dir}
 
 # ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 1184 656 0 16 15 ${output_dir}
 
-# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 1280 720 0 17 15 ${output_dir}
+./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 1280 720 0 17 15 ${output_dir}
 
-# ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 1280 960 0 18 15 ${output_dir}
+./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 1280 960 0 18 15 ${output_dir}
 
 #-----------------------------------------------------------------------------------
 #MJPEG
