@@ -1494,8 +1494,8 @@ int main(int argc, char **argv){
                       } while(1);
 
                       // Kick the user thread awake
-                      pthread_cond_broadcast(&strmh->cb_cond);
-                      pthread_mutex_unlock(&strmh->cb_mutex);
+                      //pthread_cond_broadcast(&strmh->cb_cond);
+                      //pthread_mutex_unlock(&strmh->cb_mutex);
 
 
                       printf("UVCLIB: uvc_stop_streaming() 7\n");
