@@ -1481,15 +1481,18 @@ uvc_error_t uvc_stream_start(
     ret = libusb_submit_transfer(strmh->transfers[transfer_id]);
     if (ret != UVC_SUCCESS)
     {
-      UVC_DEBUG("libusb_submit_transfer failed: %d", ret);
+      UVC_DEBUG("!!!dgnet: libusb_submit_transfer failed: %d", ret);
+      printf("UVCLIB: ERROR: libusb_submit_transfer failed 1: %d",ret);
       break;
     }
   }
 
   if (ret != UVC_SUCCESS && transfer_id >= 0)
   {
+    printf("!!!dgnet: UVCLIB: ERROR: libusb_submit_transfer failed 2\n");
     for (; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; transfer_id++)
     {
+      printf("!!!dgnet: UVCLIB: FREE TRANSFER: %d\n", transfer_id);
       free(strmh->transfers[transfer_id]->buffer);
       libusb_free_transfer(strmh->transfers[transfer_id]);
       strmh->transfers[transfer_id] = 0;

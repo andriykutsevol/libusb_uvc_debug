@@ -1427,7 +1427,9 @@ int main(int argc, char **argv){
 
   if ( ret != UVC_SUCCESS && transfer_id >= 0 ) {
     printf("UVCLIB: ERROR: libusb_submit_transfer failed 2\n");
-    for ( ; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; transfer_id++) {
+    for ( ; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; transfer_id++) 
+    {
+      printf("!!!dgnet: UVCLIB: FREE TRANSFER: %d\n", transfer_id);
       free ( strmh->transfers[transfer_id]->buffer );
       libusb_free_transfer ( strmh->transfers[transfer_id]);
       strmh->transfers[transfer_id] = 0;
