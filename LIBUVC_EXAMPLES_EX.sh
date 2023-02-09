@@ -19,7 +19,7 @@ fi
 
 #---------------------------------------------------------
 
-istcpdump=1
+istcpdump=0
 
 #---------------------------------------------------------
 
@@ -241,7 +241,7 @@ fi
 
 dmesg >> ${output_dir}/dmesg.txt
 dmesg -c > /dev/null 2>&1
-clear
+#clear
 sync
 sync
 sleep 1
