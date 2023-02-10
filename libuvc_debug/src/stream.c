@@ -216,11 +216,12 @@ uvc_error_t uvc_query_stream_ctrl(
 
   printf("!!!dgnet: UVCLIB: uvc_query_stream_ctrl: devh->info->ctrl_if.bcdUVC(bcdUVC_mysetting): 0x%x\n", devh->info->ctrl_if.bcdUVC);
 
-  if (devh->info->ctrl_if.bcdUVC >= 0x0110)
+  if (devh->info->ctrl_if.bcdUVC >= 0x0110){
     len = 34;
     printf("!!!dgnet: UVCLIB: uvc_query_stream_ctrl: len = 34\n");
-  else
+  }else{
     len = 26;
+  }
 
   /* prepare for a SET transfer */
   if (req == UVC_SET_CUR)
