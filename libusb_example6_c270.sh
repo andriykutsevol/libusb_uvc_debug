@@ -264,21 +264,38 @@ fi
 # strmh->cur_ctrl.dwMaxVideoFrameSize = 614400;                         // Эту величину, мы видим где найти, она есть выше.
 # strmh->cur_ctrl.dwMaxPayloadTransferSize = 3060;                      // А эту где взять - ее нужно посчитать:
 
-    # Последний
-    # !!!dgnet: THE RESULT of libusb_control_transfer (now decode following a GET transfer)
-    # !!!dgnet: UVCLIB: probe: 1
-    # !!!dgnet: UVCLIB: ctrl->bmHint: 1
-    # !!!dgnet: UVCLIB: ctrl->bFormatIndex: 1
-    # !!!dgnet: UVCLIB: ctrl->bFrameIndex: 1
-    # !!!dgnet: UVCLIB: ctrl->dwFrameInterval: 333333
-    # !!!dgnet: UVCLIB: ctrl->wKeyFrameRate: 0
-    # !!!dgnet: UVCLIB: ctrl->wPFrameRate: 0
-    # !!!dgnet: UVCLIB: ctrl->wCompQuality: 2000
-    # !!!dgnet: UVCLIB: ctrl->wCompWindowSize: 0
-    # !!!dgnet: UVCLIB: ctrl->wDelay: 0
-    # !!!dgnet: UVCLIB: ctrl->dwMaxVideoFrameSize: 614400
-    # !!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize: 3060
-    # !!!dgnet: UVCLIB: ctrl->bInterfaceNumber: 1
+    # Последний !!!dgnet: START libusb_control_transfer
+            # !!!dgnet: UVCLIB: START uvc_claim_if(): 
+            # !!!dgnet: UVCLIB: uvc_stream_ctrl()
+            # !!!dgnet: UVCLIB: uvc_query_stream_ctrl(): REQUEST CODE: 1
+            # !!!dgnet: UVCLIB: probe: 0
+            # !!!dgnet: UVCLIB: ctrl->bmHint: 1
+            # !!!dgnet: UVCLIB: ctrl->bFormatIndex: 1
+            # !!!dgnet: UVCLIB: ctrl->bFrameIndex: 1
+            # !!!dgnet: UVCLIB: ctrl->dwFrameInterval: 333333
+            # !!!dgnet: UVCLIB: ctrl->wKeyFrameRate: 0
+            # !!!dgnet: UVCLIB: ctrl->wPFrameRate: 0
+            # !!!dgnet: UVCLIB: ctrl->wCompQuality: 2000
+            # !!!dgnet: UVCLIB: ctrl->wCompWindowSize: 0
+            # !!!dgnet: UVCLIB: ctrl->wDelay: 0
+            # !!!dgnet: UVCLIB: ctrl->dwMaxVideoFrameSize: 614400
+            # !!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize: 3060
+            # !!!dgnet: UVCLIB: ctrl->bInterfaceNumber: 1
+            # !!!dgnet: START libusb_control_transfer
+            # ...
+            # !!!dgnet: IT WAS A SET (UVC_SET_CUR): req != UVC_SET_CUR:  libusb_control_transfer
+            # !!!dgnet: UVCLIB: START: uvc_stream_start()
+            # !!!dgnet: UVCLIB: -----START ISOCHRONOUS TRANSFER-----
+            # ...
+
+                        #   /* do the transfer */
+                        #   err = libusb_control_transfer(
+                        #       devh->usb_devh,
+                        #       req == UVC_SET_CUR ? 0x21 : 0xA1,
+                        #       req,
+                        #       probe ? (UVC_VS_PROBE_CONTROL << 8) : (UVC_VS_COMMIT_CONTROL << 8),
+                        #       ctrl->bInterfaceNumber,
+                        #       buf, len, 0);            
 
 
 
@@ -296,9 +313,10 @@ fi
         # size_t packets_per_transfer = 32;
         # /* Size of packet transferable from the chosen endpoint */
         # size_t endpoint_bytes_per_packet = 3060;
+            # libusb_set_iso_packet_lengths(transfer, endpoint_bytes_per_packet);
 
 
-# 5)
+# 6)
 
         # uint8_t bAlternateSetting = 11;
               # !!!dgnet: UVCLIB: -----START ISOCHRONOUS TRANSFER-----

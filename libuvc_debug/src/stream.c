@@ -218,6 +218,7 @@ uvc_error_t uvc_query_stream_ctrl(
 
   if (devh->info->ctrl_if.bcdUVC >= 0x0110)
     len = 34;
+    printf("!!!dgnet: UVCLIB: uvc_query_stream_ctrl: len = 34\n");
   else
     len = 26;
 
@@ -250,22 +251,22 @@ uvc_error_t uvc_query_stream_ctrl(
   printf("!!!dgnet: UVCLIB: uvc_query_stream_ctrl(): REQUEST CODE: %x\n", req);
 
   printf("!!!dgnet: UVCLIB: probe: %d\n", probe);
-  printf("!!!dgnet: UVCLIB: ctrl->bmHint: %d\n", ctrl->bmHint);
-  printf("!!!dgnet: UVCLIB: ctrl->bFormatIndex: %d\n", ctrl->bFormatIndex);
-  printf("!!!dgnet: UVCLIB: ctrl->bFrameIndex: %d\n", ctrl->bFrameIndex);
-  printf("!!!dgnet: UVCLIB: ctrl->dwFrameInterval: %d\n", ctrl->dwFrameInterval);
-  printf("!!!dgnet: UVCLIB: ctrl->wKeyFrameRate: %d\n", ctrl->wKeyFrameRate);
-  printf("!!!dgnet: UVCLIB: ctrl->wPFrameRate: %d\n", ctrl->wPFrameRate);
-  printf("!!!dgnet: UVCLIB: ctrl->wCompQuality: %d\n", ctrl->wCompQuality);
-  printf("!!!dgnet: UVCLIB: ctrl->wCompWindowSize: %d\n", ctrl->wCompWindowSize);
-  printf("!!!dgnet: UVCLIB: ctrl->wDelay: %d\n", ctrl->wDelay);
-  printf("!!!dgnet: UVCLIB: ctrl->dwMaxVideoFrameSize: %d\n", ctrl->dwMaxVideoFrameSize);
-  printf("!!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize: %d\n", ctrl->dwMaxPayloadTransferSize);
-  printf("!!!dgnet: UVCLIB: ctrl->bInterfaceNumber: %d\n", ctrl->bInterfaceNumber);
+  printf("!!!dgnet: UVCLIB: ctrl->bmHint(bmHint_mysetting): %d\n", ctrl->bmHint);
+  printf("!!!dgnet: UVCLIB: ctrl->bFormatIndex(bFormatIndex_mysetting): %d\n", ctrl->bFormatIndex);
+  printf("!!!dgnet: UVCLIB: ctrl->bFrameIndex(bFrameIndex_mysettin): %d\n", ctrl->bFrameIndex);
+  printf("!!!dgnet: UVCLIB: ctrl->dwFrameInterval(dwFrameInterval_mysetting;): %d\n", ctrl->dwFrameInterval);
+  printf("!!!dgnet: UVCLIB: ctrl->wKeyFrameRate(wKeyFrameRate_mysetting): %d\n", ctrl->wKeyFrameRate);
+  printf("!!!dgnet: UVCLIB: ctrl->wPFrameRate(wPFrameRate_mysetting): %d\n", ctrl->wPFrameRate);
+  printf("!!!dgnet: UVCLIB: ctrl->wCompQuality(wCompQuality_mysetting): %d\n", ctrl->wCompQuality);
+  printf("!!!dgnet: UVCLIB: ctrl->wCompWindowSize(wCompWindowSize_mysetting): %d\n", ctrl->wCompWindowSize);
+  printf("!!!dgnet: UVCLIB: ctrl->wDelay(wDelay_mysetting): %d\n", ctrl->wDelay);
+  printf("!!!dgnet: UVCLIB: ctrl->dwMaxVideoFrameSize(dwMaxVideoFrameSize_mysetting): %d\n", ctrl->dwMaxVideoFrameSize);
+  printf("!!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize(wMaxPayloadTransferSize_mysetting): %d\n", ctrl->dwMaxPayloadTransferSize);
+  printf("!!!dgnet: UVCLIB: ctrl->bInterfaceNumber (bInterfaceNumber_streaming_mysetting): %d\n", ctrl->bInterfaceNumber);
 
   if (len == 34)
   {
-
+    printf("!!!dgnet: UVCLIB: uvc_query_stream_ctrl: len = 34\n");
     printf("!!!dgnet: UVCLIB: ctrl->dwClockFrequency: %d\n", ctrl->dwClockFrequency);
     printf("!!!dgnet: UVCLIB: ctrl->bmFramingInfo: %d\n", ctrl->bmFramingInfo);
     printf("!!!dgnet: UVCLIB: ctrl->bPreferredVersion: %d\n", ctrl->bPreferredVersion);
@@ -1417,8 +1418,9 @@ uvc_error_t uvc_stream_start(
       goto fail;
     }
 
-    printf("!!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bInterfaceNumber %d\n", altsetting->bInterfaceNumber);
-    printf("!!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bAlternateSetting %d\n", altsetting->bAlternateSetting);
+    printf("!!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bInterfaceNumber(bInterfaceNumber_streaming_mysetting ???) %d\n", altsetting->bInterfaceNumber);
+    printf("!!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bAlternateSetting(bAlternateSetting_mysetting) %d\n", altsetting->bAlternateSetting);
+    printf("!!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): format_desc->parent->bEndpointAddress(bEndpointAddress_iso_mysetting) %d\n", format_desc->parent->bEndpointAddress);
 
     /* Select the altsetting */
     ret = libusb_set_interface_alt_setting(strmh->devh->usb_devh,
@@ -1430,8 +1432,8 @@ uvc_error_t uvc_stream_start(
       goto fail;
     }
 
-    printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet: %d\n", endpoint_bytes_per_packet);
-    printf("!!!dgnet: UVCLIB: total_transfer_size: %d\n", total_transfer_size);
+    printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet(endpoint_bytes_per_packet_mysetting): %d\n", endpoint_bytes_per_packet);
+    printf("!!!dgnet: UVCLIB: total_transfer_size(total_transfer_size_mysetting): %d\n", total_transfer_size);
 
     /* Set up the transfers */
     for (transfer_id = 0; transfer_id < LIBUVC_NUM_TRANSFER_BUFS; ++transfer_id)

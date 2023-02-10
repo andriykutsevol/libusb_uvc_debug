@@ -25,26 +25,26 @@ uint8_t bEndpointAddress_interrupt_mysetting;     //(+)
 
 uint16_t bcdUVC_mysetting;                        //(+)
 
-uint8_t bInterfaceNumber_streaming_mysetting;
-uint16_t bmHint_mysetting;
-uint8_t bFormatIndex_mysetting;
-uint8_t bFrameIndex_mysetting;
-uint32_t dwFrameInterval_mysetting;
-uint16_t wKeyFrameRate_mysetting;
-uint16_t wPFrameRate_mysetting;
-uint16_t wCompQuality_mysetting;
-uint16_t wCompWindowSize_mysetting;
-uint16_t wDelay_mysetting;
-uint32_t dwMaxVideoFrameSize_mysetting;
-uint32_t dwMaxPayloadTransferSize_mysetting;
+uint8_t bInterfaceNumber_streaming_mysetting;     //(+)
+uint16_t bmHint_mysetting;                        //(+)
+uint8_t bFormatIndex_mysetting;                   //(+)
+uint8_t bFrameIndex_mysetting;                    //(+)
+uint32_t dwFrameInterval_mysetting;               //(+)
+uint16_t wKeyFrameRate_mysetting;                 //(+)
+uint16_t wPFrameRate_mysetting;                   //(+)
+uint16_t wCompQuality_mysetting;                  //(+)
+uint16_t wCompWindowSize_mysetting;               //(+)
+uint16_t wDelay_mysetting;                        //(+)
+uint32_t dwMaxVideoFrameSize_mysetting;           //(+)
+uint32_t dwMaxPayloadTransferSize_mysetting;      //(+)
 
-size_t endpoint_bytes_per_packet_mysetting;
+size_t endpoint_bytes_per_packet_mysetting;       //(+)
 
-uint8_t bAlternateSetting_mysetting;
+uint8_t bAlternateSetting_mysetting;              //(+)
 
-uint8_t bEndpointAddress_iso_mysetting;
+uint8_t bEndpointAddress_iso_mysetting;           //(+)
 
-size_t total_transfer_size_mysetting;
+size_t total_transfer_size_mysetting;             //(+)
 
 
 //================================================================
