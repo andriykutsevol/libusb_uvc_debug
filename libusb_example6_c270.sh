@@ -339,13 +339,13 @@ fi
 
 
 
-# uint8_t contol_bInterfaceNumber_mysetting = 0;
+# uint8_t bInterfaceNumber_contol_mysetting = 0;
 
-# uint8_t bEndpointAddress_mysetting = 135;
+# uint8_t bEndpointAddress_interrupt_mysetting = 135;
 
 # uint16_t bcdUVC_mysetting = 0x100; // 256
 
-# uint8_t bInterfaceNumber_mysetting = 1;
+# uint8_t bInterfaceNumber_streaming_mysetting = 1;
 # uint16_t bmHint_mysetting = 1;
 # uint8_t bFormatIndex_mysetting = 1;
 # uint8_t bFrameIndex_mysetting = 1;
@@ -362,7 +362,7 @@ fi
 
 # uint8_t bAlternateSetting_mysetting = 11;
 
-# uint8_t bEndpointAddres_mysetting = 129;
+# uint8_t bEndpointAddress_iso_mysetting = 129;
 
 # size_t total_transfer_size_mysetting = 97920;
 
@@ -374,12 +374,12 @@ fi
 #====================================================
 fps=15
 
-contol_bInterfaceNumber_mysetting=0;
-bEndpointAddress_mysetting=135;
+bInterfaceNumber_contol_mysetting=0;
+bEndpointAddress_interrupt_mysetting=135;
 bcdUVC_mysetting=256  # 0x100;
 
 
-bInterfaceNumber_mysetting=1;
+bInterfaceNumber_streaming_mysetting=1;
 bmHint_mysetting=1;
 bFormatIndex_mysetting=1;
 bFrameIndex_mysetting=1;
@@ -395,7 +395,7 @@ dwMaxPayloadTransferSize_mysetting=3060;
 
 endpoint_bytes_per_packet_mysetting=3060;
 bAlternateSetting_mysetting=11;
-bEndpointAddres_mysetting=129;
+bEndpointAddress_iso_mysetting=129;
 total_transfer_size_mysetting=97920;
 
 #------------------------------------------------------
@@ -404,10 +404,10 @@ ex_num=6
 output_dir=`pwd`"/c270/libusb/${ex_num}"
 
 ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 640 480 \
-${contol_bInterfaceNumber_mysetting} \
-${bEndpointAddress_mysetting} \
+${bInterfaceNumber_contol_mysetting} \
+${bEndpointAddress_interrupt_mysetting} \
 ${bcdUVC_mysetting} \
-${bInterfaceNumber_mysetting} \
+${bInterfaceNumber_streaming_mysetting} \
 ${bmHint_mysetting} \
 ${bFormatIndex_mysetting} \
 ${bFrameIndex_mysetting} \
@@ -421,7 +421,7 @@ ${dwMaxVideoFrameSize_mysetting} \
 ${dwMaxPayloadTransferSize_mysetting} \
 ${endpoint_bytes_per_packet_mysetting} \
 ${bAlternateSetting_mysetting} \
-${bEndpointAddres_mysetting} \
+${bEndpointAddress_iso_mysetting} \
 ${total_transfer_size_mysetting} \
 ${fps} \
 ${output_dir}
@@ -436,12 +436,12 @@ ${output_dir}
 #====================================================
 fps=5
 
-contol_bInterfaceNumber_mysetting=0;
-bEndpointAddress_mysetting=135;
+bInterfaceNumber_contol_mysetting=0;
+bEndpointAddress_interrupt_mysetting=135;
 bcdUVC_mysetting=256  # 0x100;
 
 
-bInterfaceNumber_mysetting=1;
+bInterfaceNumber_streaming_mysetting=1;
 bmHint_mysetting=1;
 bFormatIndex_mysetting=1;
 bFrameIndex_mysetting=18;
@@ -457,7 +457,7 @@ dwMaxPayloadTransferSize_mysetting=3060;
 
 endpoint_bytes_per_packet_mysetting=3060;
 bAlternateSetting_mysetting=11;
-bEndpointAddres_mysetting=129;
+bEndpointAddress_iso_mysetting=129;
 total_transfer_size_mysetting=97920;
 
 #------------------------------------------------------
@@ -466,10 +466,10 @@ ex_num=6
 output_dir=`pwd`"/c270/libusb/${ex_num}"
 
 ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 1280 720 \
-${contol_bInterfaceNumber_mysetting} \
-${bEndpointAddress_mysetting} \
+${bInterfaceNumber_contol_mysetting} \
+${bEndpointAddress_interrupt_mysetting} \
 ${bcdUVC_mysetting} \
-${bInterfaceNumber_mysetting} \
+${bInterfaceNumber_streaming_mysetting} \
 ${bmHint_mysetting} \
 ${bFormatIndex_mysetting} \
 ${bFrameIndex_mysetting} \
@@ -483,7 +483,7 @@ ${dwMaxVideoFrameSize_mysetting} \
 ${dwMaxPayloadTransferSize_mysetting} \
 ${endpoint_bytes_per_packet_mysetting} \
 ${bAlternateSetting_mysetting} \
-${bEndpointAddres_mysetting} \
+${bEndpointAddress_iso_mysetting} \
 ${total_transfer_size_mysetting} \
 ${fps} \
 ${output_dir}
@@ -499,12 +499,12 @@ ${output_dir}
 #====================================================
 fps=5
 
-contol_bInterfaceNumber_mysetting=0;
-bEndpointAddress_mysetting=135;
+bInterfaceNumber_contol_mysetting=0;
+bEndpointAddress_interrupt_mysetting=135;
 bcdUVC_mysetting=256  # 0x100;
 
 
-bInterfaceNumber_mysetting=1;
+bInterfaceNumber_streaming_mysetting=1;
 bmHint_mysetting=1;
 bFormatIndex_mysetting=1;
 bFrameIndex_mysetting=19;
@@ -520,7 +520,7 @@ dwMaxPayloadTransferSize_mysetting=3060;
 
 endpoint_bytes_per_packet_mysetting=3060;
 bAlternateSetting_mysetting=11;
-bEndpointAddres_mysetting=129;
+bEndpointAddress_iso_mysetting=129;
 total_transfer_size_mysetting=97920;
 
 #------------------------------------------------------
@@ -529,10 +529,10 @@ ex_num=6
 output_dir=`pwd`"/c270/libusb/${ex_num}"
 
 ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2085 video0 1280 960 \
-${contol_bInterfaceNumber_mysetting} \
-${bEndpointAddress_mysetting} \
+${bInterfaceNumber_contol_mysetting} \
+${bEndpointAddress_interrupt_mysetting} \
 ${bcdUVC_mysetting} \
-${bInterfaceNumber_mysetting} \
+${bInterfaceNumber_streaming_mysetting} \
 ${bmHint_mysetting} \
 ${bFormatIndex_mysetting} \
 ${bFrameIndex_mysetting} \
@@ -546,7 +546,7 @@ ${dwMaxVideoFrameSize_mysetting} \
 ${dwMaxPayloadTransferSize_mysetting} \
 ${endpoint_bytes_per_packet_mysetting} \
 ${bAlternateSetting_mysetting} \
-${bEndpointAddres_mysetting} \
+${bEndpointAddress_iso_mysetting} \
 ${total_transfer_size_mysetting} \
 ${fps} \
 ${output_dir}
