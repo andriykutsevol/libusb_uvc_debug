@@ -16,12 +16,12 @@ fi
 
 # dev_fname=video6
 
-# contol_bInterfaceNumber_mysetting=0;
-# bEndpointAddress_mysetting=133;
+# bInterfaceNumber_contol_mysetting=0;
+# bEndpointAddress_interrupt_mysetting=133;
 # bcdUVC_mysetting=256  # 0x100;
 
 
-# bInterfaceNumber_mysetting=1;
+# bAlternateSetting_mysetting=1;
 # bmHint_mysetting=1;
 # bFormatIndex_mysetting=1;
 # bFrameIndex_mysetting=1;
@@ -37,7 +37,7 @@ fi
 
 # endpoint_bytes_per_packet_mysetting=3072;
 # bAlternateSetting_mysetting=6;
-# bEndpointAddres_mysetting=129;
+# bEndpointAddress_iso_mysetting=129;
 # total_transfer_size_mysetting=98304;
 
 # #------------------------------------------------------
@@ -46,10 +46,10 @@ fi
 # output_dir=`pwd`"/rally/libusb/${ex_num}"
 
 # ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 640 480 \
-# ${contol_bInterfaceNumber_mysetting} \
-# ${bEndpointAddress_mysetting} \
+# ${bInterfaceNumber_contol_mysetting} \
+# ${bEndpointAddress_interrupt_mysetting} \
 # ${bcdUVC_mysetting} \
-# ${bInterfaceNumber_mysetting} \
+# ${bAlternateSetting_mysetting} \
 # ${bmHint_mysetting} \
 # ${bFormatIndex_mysetting} \
 # ${bFrameIndex_mysetting} \
@@ -63,7 +63,7 @@ fi
 # ${dwMaxPayloadTransferSize_mysetting} \
 # ${endpoint_bytes_per_packet_mysetting} \
 # ${bAlternateSetting_mysetting} \
-# ${bEndpointAddres_mysetting} \
+# ${bEndpointAddress_iso_mysetting} \
 # ${total_transfer_size_mysetting} \
 # ${fps} \
 # ${output_dir}
@@ -80,12 +80,12 @@ fi
 
 # dev_fname=video6
 
-# contol_bInterfaceNumber_mysetting=0;
-# bEndpointAddress_mysetting=133;
+# bInterfaceNumber_contol_mysetting=0;
+# bEndpointAddress_interrupt_mysetting=133;
 # bcdUVC_mysetting=256  # 0x100;
 
 
-# bInterfaceNumber_mysetting=1;
+# bAlternateSetting_mysetting=1;
 # bmHint_mysetting=1;
 # bFormatIndex_mysetting=1;
 # bFrameIndex_mysetting=14;
@@ -101,7 +101,7 @@ fi
 
 # endpoint_bytes_per_packet_mysetting=9216;
 # bAlternateSetting_mysetting=8;
-# bEndpointAddres_mysetting=129;
+# bEndpointAddress_iso_mysetting=129;
 # total_transfer_size_mysetting=294912;
 
 # #------------------------------------------------------
@@ -110,10 +110,10 @@ fi
 # output_dir=`pwd`"/rally/libusb/${ex_num}"
 
 # ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1280 720 \
-# ${contol_bInterfaceNumber_mysetting} \
-# ${bEndpointAddress_mysetting} \
+# ${bInterfaceNumber_contol_mysetting} \
+# ${bEndpointAddress_interrupt_mysetting} \
 # ${bcdUVC_mysetting} \
-# ${bInterfaceNumber_mysetting} \
+# ${bAlternateSetting_mysetting} \
 # ${bmHint_mysetting} \
 # ${bFormatIndex_mysetting} \
 # ${bFrameIndex_mysetting} \
@@ -127,7 +127,7 @@ fi
 # ${dwMaxPayloadTransferSize_mysetting} \
 # ${endpoint_bytes_per_packet_mysetting} \
 # ${bAlternateSetting_mysetting} \
-# ${bEndpointAddres_mysetting} \
+# ${bEndpointAddress_iso_mysetting} \
 # ${total_transfer_size_mysetting} \
 # ${fps} \
 # ${output_dir}
@@ -152,12 +152,12 @@ fps=30
 
 dev_fname=video6
 
-contol_bInterfaceNumber_mysetting=0;
-bEndpointAddress_mysetting=135;
+bInterfaceNumber_contol_mysetting=0;
+bEndpointAddress_interrupt_mysetting=135;
 bcdUVC_mysetting=256  # 0x100;
 
 
-bInterfaceNumber_mysetting=1;
+bAlternateSetting_mysetting=1;
 bmHint_mysetting=1;
 bFormatIndex_mysetting=1;
 bFrameIndex_mysetting=16;
@@ -173,7 +173,7 @@ dwMaxPayloadTransferSize_mysetting=18432;
 
 endpoint_bytes_per_packet_mysetting=18432;
 bAlternateSetting_mysetting=11;
-bEndpointAddres_mysetting=129;
+bEndpointAddress_iso_mysetting=129;
 total_transfer_size_mysetting=589824;
 
 #------------------------------------------------------
@@ -182,10 +182,10 @@ ex_num=6
 output_dir=`pwd`"/rally/libusb/${ex_num}"
 
 ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1920 1080 \
-${contol_bInterfaceNumber_mysetting} \
-${bEndpointAddress_mysetting} \
+${bInterfaceNumber_contol_mysetting} \
+${bEndpointAddress_interrupt_mysetting} \
 ${bcdUVC_mysetting} \
-${bInterfaceNumber_mysetting} \
+${bAlternateSetting_mysetting} \
 ${bmHint_mysetting} \
 ${bFormatIndex_mysetting} \
 ${bFrameIndex_mysetting} \
@@ -199,7 +199,7 @@ ${dwMaxVideoFrameSize_mysetting} \
 ${dwMaxPayloadTransferSize_mysetting} \
 ${endpoint_bytes_per_packet_mysetting} \
 ${bAlternateSetting_mysetting} \
-${bEndpointAddres_mysetting} \
+${bEndpointAddress_iso_mysetting} \
 ${total_transfer_size_mysetting} \
 ${fps} \
 ${output_dir}
