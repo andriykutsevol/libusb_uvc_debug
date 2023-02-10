@@ -153,7 +153,7 @@ fps=30
 dev_fname=video6
 
 bInterfaceNumber_contol_mysetting=0;
-bEndpointAddress_interrupt_mysetting=135;
+bEndpointAddress_interrupt_mysetting=133;
 bcdUVC_mysetting=256  # 0x100;
 
 
