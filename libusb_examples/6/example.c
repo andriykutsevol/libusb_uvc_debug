@@ -25,7 +25,7 @@ uint8_t bEndpointAddress_interrupt_mysetting;
 
 uint16_t bcdUVC_mysetting;
 
-uint8_t bInterfaceNumber_mysetting;
+uint8_t bInterfaceNumber_streaming_mysetting;
 uint16_t bmHint_mysetting;
 uint8_t bFormatIndex_mysetting;
 uint8_t bFrameIndex_mysetting;
@@ -940,7 +940,7 @@ int main(int argc, char **argv){
   bInterfaceNumber_contol_mysetting = strtol(argv[3],&tmpptr,10);
   bEndpointAddress_interrupt_mysetting = strtol(argv[4],&tmpptr,10);
   bcdUVC_mysetting = strtol(argv[5],&tmpptr,10);
-  bInterfaceNumber_mysetting = strtol(argv[6],&tmpptr,10);
+  bInterfaceNumber_streaming_mysetting = strtol(argv[6],&tmpptr,10);
   bmHint_mysetting = strtol(argv[7],&tmpptr,10);
   bFormatIndex_mysetting = strtol(argv[8],&tmpptr,10);
   bFrameIndex_mysetting = strtol(argv[9],&tmpptr,10);
@@ -1073,14 +1073,14 @@ int main(int argc, char **argv){
 
   printf("UVCLIB: START uvc_claim_if(): \n");
 
-      uint8_t contol_bInterfaceNumber = bInterfaceNumber_contol_mysetting;
+      uint8_t bInterfaceNumber_contol = bInterfaceNumber_contol_mysetting;
 
-      ret = libusb_detach_kernel_driver(usb_devh, contol_bInterfaceNumber);
+      ret = libusb_detach_kernel_driver(usb_devh, bInterfaceNumber_contol);
 
       if (ret == UVC_SUCCESS || ret == LIBUSB_ERROR_NOT_FOUND || ret == LIBUSB_ERROR_NOT_SUPPORTED) {
-        printf("UVCLIB: claiming contol interface: %d\n", contol_bInterfaceNumber);
+        printf("UVCLIB: claiming contol interface: %d\n", bInterfaceNumber_contol);
 
-        ret = libusb_claim_interface(usb_devh, contol_bInterfaceNumber);
+        ret = libusb_claim_interface(usb_devh, bInterfaceNumber_contol);
 
         if (ret < 0) {
             printf("Error claiming Control interface: %s\n", libusb_error_name(ret));
@@ -1186,7 +1186,7 @@ int main(int argc, char **argv){
   enum uvc_req_code req = UVC_SET_CUR;
 
 
-  strmh->cur_ctrl.bInterfaceNumber = bInterfaceNumber_mysetting;
+  strmh->cur_ctrl.bInterfaceNumber = bInterfaceNumber_streaming_mysetting;
   strmh->cur_ctrl.bmHint = bmHint_mysetting;
   strmh->cur_ctrl.bFormatIndex = bFormatIndex_mysetting;
   strmh->cur_ctrl.bFrameIndex = bFrameIndex_mysetting;
@@ -1226,8 +1226,8 @@ int main(int argc, char **argv){
           ret = libusb_detach_kernel_driver(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
 
           if (ret == UVC_SUCCESS || ret == LIBUSB_ERROR_NOT_FOUND || ret == LIBUSB_ERROR_NOT_SUPPORTED) {
-            printf("UVCLIB: claiming streaming interface: %d\n", strmh->cur_ctrl.bInterfaceNumber);
 
+            printf("UVCLIB: claiming streaming interface: %d\n", strmh->cur_ctrl.bInterfaceNumber);
             ret = libusb_claim_interface(usb_devh, strmh->cur_ctrl.bInterfaceNumber);
 
             if (ret < 0) {
@@ -1573,12 +1573,12 @@ int main(int argc, char **argv){
           printf("UVCLIB: START: uvc_release_if()\n");
             printf("UVCLIB: uvc_release_if() 1: libusb_set_interface_alt_setting()\n");
             // libusb_set_interface_alt_setting(devh->usb_devh, idx, 0);
-            libusb_set_interface_alt_setting(usb_devh, contol_bInterfaceNumber, 0);
+            libusb_set_interface_alt_setting(usb_devh, bInterfaceNumber_contol, 0);
             printf("UVCLIB: uvc_release_if() 2\n");
             // ret = libusb_release_interface(devh->usb_devh, idx);
-            ret = libusb_release_interface(usb_devh, contol_bInterfaceNumber);
+            ret = libusb_release_interface(usb_devh, bInterfaceNumber_contol);
             // ret = libusb_attach_kernel_driver(devh->usb_devh, idx);
-            ret = libusb_attach_kernel_driver(usb_devh, contol_bInterfaceNumber);
+            ret = libusb_attach_kernel_driver(usb_devh, bInterfaceNumber_contol);
           printf("UVCLIB: END: uvc_release_if() \n");
 
 
