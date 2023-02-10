@@ -206,14 +206,14 @@ fi
 # Руками устанавливаем:
 
 # 0)
-      # uint8_t contol_bInterfaceNumber = 0;          # Нулевой интерфейс всегда контрольный.
+      # uint8_t contol_bInterfaceNumber = 0;          # Нулевой интерфейс всегда контрольный.                                             (bInterfaceNumber_contol_mysetting)
 
             # ret = libusb_detach_kernel_driver(usb_devh, contol_bInterfaceNumber);
             # ret = libusb_claim_interface(usb_devh, contol_bInterfaceNumber);
 
 
 # 1)
-      # uint8_t bEndpointAddress = 135;
+      # uint8_t bEndpointAddress = 135;                                                                                                   (bEndpointAddress_interrupt_mysetting)
 
                               #   libusb_fill_interrupt_transfer(status_xfer,
                               #                                 usb_devh,
@@ -244,25 +244,25 @@ fi
 
 
 # 2)
-# uint16_t bcdUVC = 0x100;
+# uint16_t bcdUVC = 0x100;                                                                                                                (bcdUVC_mysetting)
       # lsuvc: bcdUVC = SW_TO_SHORT(&buffer_ci[3]): 100
 # uint8_t probe = 0;
 # enum uvc_req_code req = UVC_SET_CUR;
 
 
 # 3)
-# strmh->cur_ctrl.bInterfaceNumber = 1;
-# strmh->cur_ctrl.bmHint = 1;
-# strmh->cur_ctrl.bFormatIndex = 1;
-# strmh->cur_ctrl.bFrameIndex = 1;
-# strmh->cur_ctrl.dwFrameInterval = 333333;
-# strmh->cur_ctrl.wKeyFrameRate = 0;
-# strmh->cur_ctrl.wPFrameRate = 0;
-# strmh->cur_ctrl.wCompQuality = 200;
-# strmh->cur_ctrl.wCompWindowSize = 0;
-# strmh->cur_ctrl.wDelay = 0;
-# strmh->cur_ctrl.dwMaxVideoFrameSize = 614400;                         // Эту величину, мы видим где найти, она есть выше.
-# strmh->cur_ctrl.dwMaxPayloadTransferSize = 3060;                      // А эту где взять - ее нужно посчитать:
+# strmh->cur_ctrl.bInterfaceNumber = 1;                                                                                                   (bInterfaceNumber_streaming_mysetting)
+# strmh->cur_ctrl.bmHint = 1;                                                                                                             (bmHint_mysetting)
+# strmh->cur_ctrl.bFormatIndex = 1;                                                                                                       (bFormatIndex_mysetting)
+# strmh->cur_ctrl.bFrameIndex = 1;                                                                                                        (bFrameIndex_mysetting)
+# strmh->cur_ctrl.dwFrameInterval = 333333;                                                                                               (dwFrameInterval_mysetting)                                                        
+# strmh->cur_ctrl.wKeyFrameRate = 0;                                                                                                      (wKeyFrameRate_mysetting)
+# strmh->cur_ctrl.wPFrameRate = 0;                                                                                                        (wPFrameRate_mysetting)
+# strmh->cur_ctrl.wCompQuality = 200;                                                                                                     (wCompQuality_mysetting)
+# strmh->cur_ctrl.wCompWindowSize = 0;                                                                                                    (wCompWindowSize_mysetting)
+# strmh->cur_ctrl.wDelay = 0;                                                                                                             (wDelay_mysetting)
+# strmh->cur_ctrl.dwMaxVideoFrameSize = 614400;                         // Эту величину, мы видим где найти, она есть выше.               (dwMaxVideoFrameSize_mysetting)
+# strmh->cur_ctrl.dwMaxPayloadTransferSize = 3060;                      // А эту где взять - ее нужно посчитать:                          (dwMaxPayloadTransferSize_mysetting)
 
     # Последний !!!dgnet: START libusb_control_transfer
             # !!!dgnet: UVCLIB: START uvc_claim_if(): 
@@ -312,13 +312,13 @@ fi
         # /* Number of packets per transfer */
         # size_t packets_per_transfer = 32;
         # /* Size of packet transferable from the chosen endpoint */
-        # size_t endpoint_bytes_per_packet = 3060;
+        # size_t endpoint_bytes_per_packet = 3060;                                                                                                          (endpoint_bytes_per_packet_mysettin)
             # libusb_set_iso_packet_lengths(transfer, endpoint_bytes_per_packet);
 
 
 # 6)
 
-        # uint8_t bAlternateSetting = 11;
+        # uint8_t bAlternateSetting = 11;                                                                                                                   (bAlternateSetting_mysettin)
               # !!!dgnet: UVCLIB: -----START ISOCHRONOUS TRANSFER-----
               # ...
               # !!!dgnet: UVCLIB: libusb_set_interface_alt_setting(): altsetting->bAlternateSetting 11
@@ -331,7 +331,7 @@ fi
                 # endpoint_bytes_per_packet = ep_desc->wMaxPacketSize: 5116
                 # endpoint_bytes_per_packet = (endpoint_bytes_per_packet & 0x07ff) * (((endpoint_bytes_per_packet >> 11) & 3) + 1): 3060
 
-        # uint8_t bEndpointAddres = 129;
+        # uint8_t bEndpointAddres = 129;                                                                                                                   (bEndpointAddress_iso_mysetting)
               # lsuvc:
                   # ENDPOINT: endpoint_idx 0, ALTSETTING(if_desc): 11, INTERFACE: 1
 
@@ -342,7 +342,7 @@ fi
 
 
         
-        # size_t total_transfer_size = 97920;
+        # size_t total_transfer_size = 97920;                                                                                                               (total_transfer_size_mysetting)
               # !!!dgnet: UVCLIB: total_transfer_size: 97920
                   # total_transfer_size = packets_per_transfer * endpoint_bytes_per_packet;
 
