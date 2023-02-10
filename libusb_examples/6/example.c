@@ -1357,6 +1357,12 @@ int main(int argc, char **argv){
   struct libusb_transfer *transfer;
 
 
+    printf("UVCLIB: libusb_set_interface_alt_setting(): strmh->cur_ctrl.bInterfaceNumber(bInterfaceNumber_streaming_mysetting ???) %d\n", strmh->cur_ctrl.bInterfaceNumber);
+    printf("UVCLIB: libusb_set_interface_alt_setting(): bAlternateSetting(bAlternateSetting_mysetting) %d\n", bAlternateSetting);
+    printf("UVCLIB: libusb_set_interface_alt_setting(): bEndpointAddress_iso(bEndpointAddress_iso_mysetting) %d\n", bEndpointAddress_iso);
+
+
+
 
   ret = libusb_set_interface_alt_setting(usb_devh, strmh->cur_ctrl.bInterfaceNumber, bAlternateSetting);
 
