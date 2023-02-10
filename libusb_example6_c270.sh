@@ -208,8 +208,21 @@ fi
 # 0)
       # uint8_t contol_bInterfaceNumber = 0;          # Нулевой интерфейс всегда контрольный.
 
+            # ret = libusb_detach_kernel_driver(usb_devh, contol_bInterfaceNumber);
+            # ret = libusb_claim_interface(usb_devh, contol_bInterfaceNumber);
+
+
 # 1)
       # uint8_t bEndpointAddress = 135;
+
+                              #   libusb_fill_interrupt_transfer(status_xfer,
+                              #                                 usb_devh,
+                              #                                 bEndpointAddress,
+                              #                                 status_buf,
+                              #                                 sizeof(status_buf),
+                              #                                 _uvc_status_callback_my,
+                              #                                 devh,
+                              #                                 0);
 
             # Это берется из lsuvc:
 
@@ -303,6 +316,13 @@ fi
         # uint8_t bEndpointAddres = 129;
               # lsuvc:
                   # ENDPOINT: endpoint_idx 0, ALTSETTING(if_desc): 11, INTERFACE: 1
+
+                        #     libusb_fill_iso_transfer(
+                        #       transfer, usb_devh, bEndpointAddres,
+                        #       strmh->transfer_bufs[transfer_id],
+                        #       total_transfer_size, packets_per_transfer, _uvc_stream_callback, (void*) strmh, 5000);
+
+
         
         # size_t total_transfer_size = 97920;
               # !!!dgnet: UVCLIB: total_transfer_size: 97920

@@ -21,7 +21,7 @@
 
 uint8_t contol_bInterfaceNumber_mysetting;
 
-uint8_t bEndpointAddress_mysetting;
+uint8_t interrupt_bEndpointAddress_mysetting;
 
 uint16_t bcdUVC_mysetting;
 
@@ -42,7 +42,7 @@ size_t endpoint_bytes_per_packet_mysetting;
 
 uint8_t bAlternateSetting_mysetting;
 
-uint8_t bEndpointAddres_mysetting;
+uint8_t iso_bEndpointAddress_mysetting;
 
 size_t total_transfer_size_mysetting;
 
@@ -938,7 +938,7 @@ int main(int argc, char **argv){
 
 
   contol_bInterfaceNumber_mysetting = strtol(argv[3],&tmpptr,10);
-  bEndpointAddress_mysetting = strtol(argv[4],&tmpptr,10);
+  interrupt_bEndpointAddress_mysetting = strtol(argv[4],&tmpptr,10);
   bcdUVC_mysetting = strtol(argv[5],&tmpptr,10);
   bInterfaceNumber_mysetting = strtol(argv[6],&tmpptr,10);
   bmHint_mysetting = strtol(argv[7],&tmpptr,10);
@@ -954,7 +954,7 @@ int main(int argc, char **argv){
   dwMaxPayloadTransferSize_mysetting = strtol(argv[17],&tmpptr,10);
   endpoint_bytes_per_packet_mysetting = strtol(argv[18],&tmpptr,10);
   bAlternateSetting_mysetting = strtol(argv[19],&tmpptr,10);
-  bEndpointAddres_mysetting = strtol(argv[20],&tmpptr,10);
+  iso_bEndpointAddress_mysetting = strtol(argv[20],&tmpptr,10);
   total_transfer_size_mysetting = strtol(argv[21],&tmpptr,10);
 
 
@@ -1111,7 +1111,7 @@ int main(int argc, char **argv){
 
   struct libusb_transfer *status_xfer = NULL;
   uint8_t status_buf[32];
-  uint8_t bEndpointAddress = bEndpointAddress_mysetting;
+  uint8_t interrupt_bEndpointAddress = interrupt_bEndpointAddress_mysetting;
 
   status_xfer = libusb_alloc_transfer(0);
 
@@ -1120,12 +1120,12 @@ int main(int argc, char **argv){
     return -1;
   }
 
-  printf("UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer() \n");
+  printf("UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer(): interrupt_bEndpointAddress: %d \n", interrupt_bEndpointAddress);
 
 
   libusb_fill_interrupt_transfer(status_xfer,
                                 usb_devh,
-                                bEndpointAddress,
+                                interrupt_bEndpointAddress,
                                 status_buf,
                                 sizeof(status_buf),
                                 _uvc_status_callback_my,
@@ -1350,7 +1350,7 @@ int main(int argc, char **argv){
 
 
   uint8_t bAlternateSetting = bAlternateSetting_mysetting;
-  uint8_t bEndpointAddres = bEndpointAddres_mysetting;
+  uint8_t iso_bEndpointAddress = iso_bEndpointAddress_mysetting;
   size_t total_transfer_size = total_transfer_size_mysetting;
   
 
@@ -1391,7 +1391,7 @@ int main(int argc, char **argv){
     // _uvc_stream_callback: callback function to be invoked on transfer completion
     // 500: timeout for the transfer in milliseconds
     libusb_fill_iso_transfer(
-      transfer, usb_devh, bEndpointAddres,
+      transfer, usb_devh, iso_bEndpointAddress,
       strmh->transfer_bufs[transfer_id],
       total_transfer_size, packets_per_transfer, _uvc_stream_callback, (void*) strmh, 5000);
 
