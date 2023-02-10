@@ -157,7 +157,7 @@ bEndpointAddress_interrupt_mysetting=133;
 bcdUVC_mysetting=256  # 0x100;
 
 
-bAlternateSetting_mysetting=1;
+bInterfaceNumber_streaming_mysetting=1;
 bmHint_mysetting=1;
 bFormatIndex_mysetting=1;
 bFrameIndex_mysetting=16;
@@ -185,7 +185,7 @@ output_dir=`pwd`"/rally/libusb/${ex_num}"
 ${bInterfaceNumber_contol_mysetting} \
 ${bEndpointAddress_interrupt_mysetting} \
 ${bcdUVC_mysetting} \
-${bAlternateSetting_mysetting} \
+${bInterfaceNumber_streaming_mysetting} \
 ${bmHint_mysetting} \
 ${bFormatIndex_mysetting} \
 ${bFrameIndex_mysetting} \
