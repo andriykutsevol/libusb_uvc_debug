@@ -1293,6 +1293,8 @@ int main(int argc, char **argv){
               stream_buf, len, 0
           );
           //================================================================
+
+          sleep(3);
                       
           printf("UVCLIB: END: uvc_query_stream_ctrl()\n");    
       printf("UVCLIB: END uvc_stream_ctrl()\n");
