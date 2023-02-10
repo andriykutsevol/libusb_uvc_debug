@@ -214,6 +214,8 @@ uvc_error_t uvc_query_stream_ctrl(
 
   memset(buf, 0, sizeof(buf));
 
+  printf("!!!dgnet: UVCLIB: uvc_query_stream_ctrl: devh->info->ctrl_if.bcdUVC(bcdUVC_mysetting): 0x%x\n", devh->info->ctrl_if.bcdUVC);
+
   if (devh->info->ctrl_if.bcdUVC >= 0x0110)
     len = 34;
   else

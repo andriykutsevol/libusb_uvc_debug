@@ -19,11 +19,11 @@
 //================================================================
 //================================================================
 
-uint8_t bInterfaceNumber_contol_mysetting;
+uint8_t bInterfaceNumber_contol_mysetting;        //(+)
 
-uint8_t bEndpointAddress_interrupt_mysetting;
+uint8_t bEndpointAddress_interrupt_mysetting;     //(+)
 
-uint16_t bcdUVC_mysetting;
+uint16_t bcdUVC_mysetting;                        //(+)
 
 uint8_t bInterfaceNumber_streaming_mysetting;
 uint16_t bmHint_mysetting;

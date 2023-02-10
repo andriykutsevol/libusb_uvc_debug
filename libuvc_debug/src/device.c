@@ -398,7 +398,7 @@ static uvc_error_t uvc_open_internal(
 
   UVC_DEBUG("claiming control interface %d", internal_devh->info->ctrl_if.bInterfaceNumber);
 
-  printf("!!!dgnet: UVCLIB: uvc_open_internal() 3: uvc_claim_if(): bInterfaceNumber: %d \n", internal_devh->info->ctrl_if.bInterfaceNumber);
+  printf("!!!dgnet: UVCLIB: uvc_open_internal() 3: uvc_claim_if(): bInterfaceNumber(bInterfaceNumber_contol_mysetting): %d \n", internal_devh->info->ctrl_if.bInterfaceNumber);
   ret = uvc_claim_if(internal_devh, internal_devh->info->ctrl_if.bInterfaceNumber);
   printf("!!!dgnet: UVCLIB: uvc_open_internal() 4 \n");
 
@@ -419,7 +419,7 @@ static uvc_error_t uvc_open_internal(
       goto fail;
     }
 
-    printf("!!!dgnetz: UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer():  bEndpointAddress: %d\n", internal_devh->info->ctrl_if.bEndpointAddress);
+    printf("!!!dgnetz: UVCLIB: uvc_open_internal() 6: libusb_fill_interrupt_transfer():  bEndpointAddress(bEndpointAddress_interrupt_mysetting): %d\n", internal_devh->info->ctrl_if.bEndpointAddress);
 
     libusb_fill_interrupt_transfer(internal_devh->status_xfer,
                                    usb_devh,
@@ -1270,6 +1270,7 @@ uvc_error_t uvc_parse_vc_header(uvc_device_t *dev,
     + (block[3] >> 4) * 10 + (block[3] & 0x0f);
   */
 
+  printf("!!!dgnet: UVCLIB: uvc_parse_vc_header: info->ctrl_if.bcdUVC(bcdUVC_mysetting): 0x%x\n", info->ctrl_if.bcdUVC);
   info->ctrl_if.bcdUVC = SW_TO_SHORT(&block[3]);
 
   switch (info->ctrl_if.bcdUVC) {
