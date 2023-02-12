@@ -1167,7 +1167,7 @@ int main(int argc, char **argv){
 
 
   printf("UVCLIB: SLEEP(5) BEFORE START STREAMING SETTING UP\n");
-  sleep(5);
+  //sleep(5);
 
 
   //================================================================
@@ -1294,7 +1294,7 @@ int main(int argc, char **argv){
           );
           //================================================================
 
-          sleep(5);
+          //sleep(5);
                       
           printf("UVCLIB: END: uvc_query_stream_ctrl()\n");    
       printf("UVCLIB: END uvc_stream_ctrl()\n");
@@ -1378,7 +1378,7 @@ int main(int argc, char **argv){
   printf("=============================================\n");
   printf("UVCLIB: END: uvc_stream_start()\n");
   printf("SLEEP 1(5) Before 'libusb_alloc_transfer', 'libusb_fill_iso_transfer' \n");
-  sleep(5);
+  //sleep(5);
   printf("=============================================\n");
   printf("=============================================\n");
 
@@ -1412,7 +1412,7 @@ int main(int argc, char **argv){
   printf("=============================================\n");
   printf("AFTER 'libusb_alloc_transfer', 'libusb_fill_iso_transfer' \n");
   printf("SLEEP 2(5) Before 'libusb_submit_transfer'\n");
-  sleep(5);
+  //sleep(5);
   printf("=============================================\n");
   printf("=============================================\n");  
 
@@ -1518,7 +1518,6 @@ int main(int argc, char **argv){
 
                         // !!! This will not work without logic in the "if ( resubmit )"
                         pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
-                        //sleep(0.2);
                       } while(1);
 
                       // Kick the user thread awake
