@@ -262,7 +262,7 @@ uvc_error_t uvc_query_stream_ctrl(
   printf("!!!dgnet: UVCLIB: ctrl->wCompWindowSize(wCompWindowSize_mysetting): %d\n", ctrl->wCompWindowSize);
   printf("!!!dgnet: UVCLIB: ctrl->wDelay(wDelay_mysetting): %d\n", ctrl->wDelay);
   printf("!!!dgnet: UVCLIB: ctrl->dwMaxVideoFrameSize(dwMaxVideoFrameSize_mysetting): %d\n", ctrl->dwMaxVideoFrameSize);
-  printf("!!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize(wMaxPayloadTransferSize_mysetting): %d\n", ctrl->dwMaxPayloadTransferSize);
+  printf("!!!dgnet: UVCLIB: ctrl->dwMaxPayloadTransferSize(dwMaxPayloadTransferSize_mysetting): %d\n", ctrl->dwMaxPayloadTransferSize);
   printf("!!!dgnet: UVCLIB: ctrl->bInterfaceNumber (bInterfaceNumber_streaming_mysetting): %d\n", ctrl->bInterfaceNumber);
 
   if (len == 34)

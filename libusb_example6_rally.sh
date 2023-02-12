@@ -21,7 +21,7 @@ bEndpointAddress_interrupt_mysetting=133;
 bcdUVC_mysetting=256  # 0x100;
 
 
-bAlternateSetting_mysetting=1;
+bInterfaceNumber_streaming_mysetting=1;
 bmHint_mysetting=1;
 bFormatIndex_mysetting=1;
 bFrameIndex_mysetting=1;
@@ -30,7 +30,7 @@ wKeyFrameRate_mysetting=0;
 wPFrameRate_mysetting=0;
 wCompQuality_mysetting=0;
 wCompWindowSize_mysetting=0;
-wDelay_mysetting=0;
+wDelay_mysetting=24576;
 dwMaxVideoFrameSize_mysetting=614400;
 dwMaxPayloadTransferSize_mysetting=3072;
 
@@ -45,7 +45,7 @@ total_transfer_size_mysetting=98304;
 ex_num=6
 output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 640 480 \
+./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1920 1080 \
 ${bInterfaceNumber_contol_mysetting} \
 ${bEndpointAddress_interrupt_mysetting} \
 ${bcdUVC_mysetting} \
@@ -67,7 +67,6 @@ ${bEndpointAddress_iso_mysetting} \
 ${total_transfer_size_mysetting} \
 ${fps} \
 ${output_dir}
-
 
 
 
