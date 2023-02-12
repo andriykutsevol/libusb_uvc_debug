@@ -53,7 +53,7 @@ total_transfer_size_mysetting=1572864;
 ex_num=6
 output_dir=`pwd`"/${dev_folder}/libusb/${ex_num}"
 
-./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_folder} ${width} ${height} \
+./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_fname} ${width} ${height} \
 ${bInterfaceNumber_contol_mysetting} \
 ${bEndpointAddress_interrupt_mysetting} \
 ${bcdUVC_mysetting} \
