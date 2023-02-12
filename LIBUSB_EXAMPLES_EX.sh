@@ -127,7 +127,7 @@ echo "=============================" >> ${output_dir}/ex_out.txt 2>&1
 #======================================================
 
 dmesg -c > /dev/null 2>&1
-clear
+#clear
 sleep 1
 
 
@@ -164,7 +164,7 @@ modprobe -r uvcvideo
 echo "" >>  ${output_dir}/dmesg.txt
 dmesg >> ${output_dir}/dmesg.txt
 dmesg -c > /dev/null 2>&1
-clear
+#clear
 
 
 echo "" >>  ${output_dir}/dmesg.txt
@@ -180,7 +180,7 @@ fi
 #-------------------------------
 
 dmesg -c > /dev/null 2>&1
-clear
+#clear
 sleep 3
 
 #======================================================
@@ -211,7 +211,7 @@ fi
 #-------------------------------
 
 dmesg -c > /dev/null 2>&1
-clear
+#clear
 sleep 3
 
 #======================================================
@@ -305,7 +305,7 @@ fi
 
 dmesg >> ${output_dir}/dmesg.txt
 dmesg -c > /dev/null 2>&1
-clear
+#clear
 sync
 sync
 sleep 1
