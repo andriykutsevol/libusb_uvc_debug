@@ -108,7 +108,7 @@ ${output_dir}
 # ex_num=6
 # output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 640 480 \
+# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1280 720 \
 # ${bInterfaceNumber_contol_mysetting} \
 # ${bEndpointAddress_interrupt_mysetting} \
 # ${bcdUVC_mysetting} \
