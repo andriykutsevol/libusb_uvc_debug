@@ -1166,8 +1166,8 @@ int main(int argc, char **argv){
   printf("==============================================\n");
 
 
-  printf("UVCLIB: SLEEP(1) BEFORE START STREAMING SETTING UP\n");
-  sleep(1);
+  printf("UVCLIB: SLEEP(5) BEFORE START STREAMING SETTING UP\n");
+  sleep(5);
 
 
   //================================================================
@@ -1294,7 +1294,7 @@ int main(int argc, char **argv){
           );
           //================================================================
 
-          sleep(3);
+          sleep(5);
                       
           printf("UVCLIB: END: uvc_query_stream_ctrl()\n");    
       printf("UVCLIB: END uvc_stream_ctrl()\n");
@@ -1377,8 +1377,8 @@ int main(int argc, char **argv){
   printf("=============================================\n");
   printf("=============================================\n");
   printf("UVCLIB: END: uvc_stream_start()\n");
-  printf("SLEEP 1(1) Before 'libusb_alloc_transfer', 'libusb_fill_iso_transfer' \n");
-  sleep(1);
+  printf("SLEEP 1(5) Before 'libusb_alloc_transfer', 'libusb_fill_iso_transfer' \n");
+  sleep(5);
   printf("=============================================\n");
   printf("=============================================\n");
 
@@ -1411,8 +1411,8 @@ int main(int argc, char **argv){
   printf("=============================================\n");
   printf("=============================================\n");
   printf("AFTER 'libusb_alloc_transfer', 'libusb_fill_iso_transfer' \n");
-  printf("SLEEP 2(1) Before 'libusb_submit_transfer'\n");
-  sleep(1);
+  printf("SLEEP 2(5) Before 'libusb_submit_transfer'\n");
+  sleep(5);
   printf("=============================================\n");
   printf("=============================================\n");  
 
