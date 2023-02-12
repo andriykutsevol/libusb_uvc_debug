@@ -235,11 +235,11 @@ cd ${working_dir}
 
 slices_dir=${working_dir}/slices
 #sudo rm -rf ${slices_dir}/*
-sudo rm -rf {dev_name}_slice.tar.gz
+sudo rm -rf {dev_folder}_slice.tar.gz
 mkdir -p ${slices_dir}
 
 
-./make_slice.sh ${working_dir} ${dev_name}
-cp ./${dev_name}_slice.tar.gz ${slices_dir}/
-rm -rf ./${dev_name}_slice.tar.gz
-rm -rf ./${dev_name}_slice
+./make_slice.sh ${working_dir} ${dev_folder}
+cp ./${dev_folder}_slice.tar.gz ${slices_dir}/
+rm -rf ./${dev_folder}_slice.tar.gz
+rm -rf ./${dev_folder}_slice
