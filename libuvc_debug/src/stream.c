@@ -254,7 +254,7 @@ uvc_error_t uvc_query_stream_ctrl(
   printf("!!!dgnet: UVCLIB: probe: %d\n", probe);
   printf("!!!dgnet: UVCLIB: ctrl->bmHint(bmHint_mysetting): %d\n", ctrl->bmHint);
   printf("!!!dgnet: UVCLIB: ctrl->bFormatIndex(bFormatIndex_mysetting): %d\n", ctrl->bFormatIndex);
-  printf("!!!dgnet: UVCLIB: ctrl->bFrameIndex(bFrameIndex_mysettin): %d\n", ctrl->bFrameIndex);
+  printf("!!!dgnet: UVCLIB: ctrl->bFrameIndex(bFrameIndex_mysetting): %d\n", ctrl->bFrameIndex);
   printf("!!!dgnet: UVCLIB: ctrl->dwFrameInterval(dwFrameInterval_mysetting;): %d\n", ctrl->dwFrameInterval);
   printf("!!!dgnet: UVCLIB: ctrl->wKeyFrameRate(wKeyFrameRate_mysetting): %d\n", ctrl->wKeyFrameRate);
   printf("!!!dgnet: UVCLIB: ctrl->wPFrameRate(wPFrameRate_mysetting): %d\n", ctrl->wPFrameRate);
