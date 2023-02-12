@@ -7,6 +7,10 @@ if [ "$EUID" -ne 0 ]
 fi
 
 
+    # sudo modprobe -r xhci_pci
+    # sudo modprobe xhci_pci
+    # v4l2-ctl --all --device /dev/video0
+
 
 
 #====================================================
@@ -14,7 +18,7 @@ fi
 #====================================================
 fps=15
 
-dev_fname=video6
+dev_fname=video0
 
 bInterfaceNumber_contol_mysetting=0;
 bEndpointAddress_interrupt_mysetting=131;
@@ -45,7 +49,7 @@ total_transfer_size_mysetting=1572864;
 ex_num=6
 output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 640 480 \
+./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_fname} 640 480 \
 ${bInterfaceNumber_contol_mysetting} \
 ${bEndpointAddress_interrupt_mysetting} \
 ${bcdUVC_mysetting} \
@@ -108,7 +112,7 @@ ${output_dir}
 # ex_num=6
 # output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1280 720 \
+# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_fname} 1280 720 \
 # ${bInterfaceNumber_contol_mysetting} \
 # ${bEndpointAddress_interrupt_mysetting} \
 # ${bcdUVC_mysetting} \
@@ -180,7 +184,7 @@ ${output_dir}
 # ex_num=6
 # output_dir=`pwd`"/rally/libusb/${ex_num}"
 
-# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 1920 1080 \
+# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_fname} 1920 1080 \
 # ${bInterfaceNumber_contol_mysetting} \
 # ${bEndpointAddress_interrupt_mysetting} \
 # ${bcdUVC_mysetting} \
@@ -224,7 +228,7 @@ ${output_dir}
 working_dir=`pwd`
 cd ${working_dir}
 
-dev_name="rally"
+dev_name="google"
 slices_dir=${working_dir}/slices
 #sudo rm -rf ${slices_dir}/*
 sudo rm -rf {dev_name}_slice.tar.gz

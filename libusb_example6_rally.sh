@@ -7,6 +7,10 @@ if [ "$EUID" -ne 0 ]
 fi
 
 
+    # sudo modprobe -r xhci_pci
+    # sudo modprobe xhci_pci
+    # v4l2-ctl --all --device /dev/video0
+
 
 
 # #====================================================
