@@ -12,11 +12,15 @@ fi
     # v4l2-ctl --all --device /dev/video0
 
 
+dev_folder="google"
+
 
 #====================================================
 # 640x480
 #====================================================
 fps=15
+width=640
+height=480
 
 dev_fname=video0
 
@@ -47,9 +51,9 @@ total_transfer_size_mysetting=1572864;
 #------------------------------------------------------
 
 ex_num=6
-output_dir=`pwd`"/rally/libusb/${ex_num}"
+output_dir=`pwd`"/${dev_folder}/libusb/${ex_num}"
 
-./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_fname} 640 480 \
+./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_folder} ${width} ${height} \
 ${bInterfaceNumber_contol_mysetting} \
 ${bEndpointAddress_interrupt_mysetting} \
 ${bcdUVC_mysetting} \
@@ -228,7 +232,7 @@ ${output_dir}
 working_dir=`pwd`
 cd ${working_dir}
 
-dev_name="google"
+
 slices_dir=${working_dir}/slices
 #sudo rm -rf ${slices_dir}/*
 sudo rm -rf {dev_name}_slice.tar.gz
