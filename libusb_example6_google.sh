@@ -15,144 +15,12 @@ fi
 dev_folder="google"
 
 
-#====================================================
-# 640x480
-#====================================================
-fps=30
-width=640
-height=480
-
-dev_fname=video0
-
-bInterfaceNumber_contol_mysetting=0;
-bEndpointAddress_interrupt_mysetting=131;
-bcdUVC_mysetting=256  # 0x100;
-
-
-bInterfaceNumber_streaming_mysetting=1;
-bmHint_mysetting=1;
-bFormatIndex_mysetting=1;
-bFrameIndex_mysetting=1;
-dwFrameInterval_mysetting=166666;
-wKeyFrameRate_mysetting=0;
-wPFrameRate_mysetting=0;
-wCompQuality_mysetting=0;
-wCompWindowSize_mysetting=0;
-wDelay_mysetting=32;
-dwMaxVideoFrameSize_mysetting=4147200;
-dwMaxPayloadTransferSize_mysetting=49152;
-
-
-endpoint_bytes_per_packet_mysetting=49152;
-bAlternateSetting_mysetting=6;
-bEndpointAddress_iso_mysetting=129;
-total_transfer_size_mysetting=1572864;
-
-#------------------------------------------------------
-
-ex_num=6
-output_dir=`pwd`"/${dev_folder}/libusb/${ex_num}"
-
-./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_fname} ${width} ${height} \
-${bInterfaceNumber_contol_mysetting} \
-${bEndpointAddress_interrupt_mysetting} \
-${bcdUVC_mysetting} \
-${bInterfaceNumber_streaming_mysetting} \
-${bmHint_mysetting} \
-${bFormatIndex_mysetting} \
-${bFrameIndex_mysetting} \
-${dwFrameInterval_mysetting} \
-${wKeyFrameRate_mysetting} \
-${wPFrameRate_mysetting} \
-${wCompQuality_mysetting} \
-${wCompWindowSize_mysetting} \
-${wDelay_mysetting} \
-${dwMaxVideoFrameSize_mysetting} \
-${dwMaxPayloadTransferSize_mysetting} \
-${endpoint_bytes_per_packet_mysetting} \
-${bAlternateSetting_mysetting} \
-${bEndpointAddress_iso_mysetting} \
-${total_transfer_size_mysetting} \
-${fps} \
-${output_dir}
-
-
-
-
-
-
-#====================================================
-# 1920x1080
-#====================================================
-fps=30
-width=1920
-height=1080
-
-dev_fname=video0
-
-bInterfaceNumber_contol_mysetting=0;
-bEndpointAddress_interrupt_mysetting=131
-bcdUVC_mysetting=256  # 0x100;
-
-
-bInterfaceNumber_streaming_mysetting=1
-bmHint_mysetting=1
-bFormatIndex_mysetting=1
-bFrameIndex_mysetting=1
-dwFrameInterval_mysetting=166666
-wKeyFrameRate_mysetting=0
-wPFrameRate_mysetting=0
-wCompQuality_mysetting=0
-wCompWindowSize_mysetting=0
-wDelay_mysetting=32
-dwMaxVideoFrameSize_mysetting=4147200
-dwMaxPayloadTransferSize_mysetting=49152
-
-
-endpoint_bytes_per_packet_mysetting=49152
-bAlternateSetting_mysetting=6
-bEndpointAddress_iso_mysetting=129
-total_transfer_size_mysetting=11572864
-
-#------------------------------------------------------
-
-ex_num=6
-output_dir=`pwd`"/${dev_folder}/libusb/${ex_num}"
-
-./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_fname} ${width} ${height} \
-${bInterfaceNumber_contol_mysetting} \
-${bEndpointAddress_interrupt_mysetting} \
-${bcdUVC_mysetting} \
-${bInterfaceNumber_streaming_mysetting} \
-${bmHint_mysetting} \
-${bFormatIndex_mysetting} \
-${bFrameIndex_mysetting} \
-${dwFrameInterval_mysetting} \
-${wKeyFrameRate_mysetting} \
-${wPFrameRate_mysetting} \
-${wCompQuality_mysetting} \
-${wCompWindowSize_mysetting} \
-${wDelay_mysetting} \
-${dwMaxVideoFrameSize_mysetting} \
-${dwMaxPayloadTransferSize_mysetting} \
-${endpoint_bytes_per_packet_mysetting} \
-${bAlternateSetting_mysetting} \
-${bEndpointAddress_iso_mysetting} \
-${total_transfer_size_mysetting} \
-${fps} \
-${output_dir}
-
-
-
-
-
-
 # #====================================================
-# # 1280x720
+# # 640x480
 # #====================================================
 # fps=30
-# width=1280
-# height=720
+# width=640
+# height=480
 
 # dev_fname=video0
 
@@ -164,7 +32,7 @@ ${output_dir}
 # bInterfaceNumber_streaming_mysetting=1;
 # bmHint_mysetting=1;
 # bFormatIndex_mysetting=1;
-# bFrameIndex_mysetting=2;
+# bFrameIndex_mysetting=1;
 # dwFrameInterval_mysetting=166666;
 # wKeyFrameRate_mysetting=0;
 # wPFrameRate_mysetting=0;
@@ -207,6 +75,138 @@ ${output_dir}
 # ${total_transfer_size_mysetting} \
 # ${fps} \
 # ${output_dir}
+
+
+
+
+
+
+#====================================================
+# 1920x1080
+#====================================================
+fps=30
+width=1920
+height=1080
+
+dev_fname=video0
+
+bInterfaceNumber_contol_mysetting=0;
+bEndpointAddress_interrupt_mysetting=131
+bcdUVC_mysetting=256  # 0x100;
+
+
+bInterfaceNumber_streaming_mysetting=1
+bmHint_mysetting=1
+bFormatIndex_mysetting=1
+bFrameIndex_mysetting=1
+dwFrameInterval_mysetting=166666
+wKeyFrameRate_mysetting=0
+wPFrameRate_mysetting=0
+wCompQuality_mysetting=0
+wCompWindowSize_mysetting=0
+wDelay_mysetting=32
+dwMaxVideoFrameSize_mysetting=4147200
+dwMaxPayloadTransferSize_mysetting=49152
+
+
+endpoint_bytes_per_packet_mysetting=49152
+bAlternateSetting_mysetting=6
+bEndpointAddress_iso_mysetting=129
+total_transfer_size_mysetting=1572864
+
+# #------------------------------------------------------
+
+# ex_num=6
+# output_dir=`pwd`"/${dev_folder}/libusb/${ex_num}"
+
+# ./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_fname} ${width} ${height} \
+# ${bInterfaceNumber_contol_mysetting} \
+# ${bEndpointAddress_interrupt_mysetting} \
+# ${bcdUVC_mysetting} \
+# ${bInterfaceNumber_streaming_mysetting} \
+# ${bmHint_mysetting} \
+# ${bFormatIndex_mysetting} \
+# ${bFrameIndex_mysetting} \
+# ${dwFrameInterval_mysetting} \
+# ${wKeyFrameRate_mysetting} \
+# ${wPFrameRate_mysetting} \
+# ${wCompQuality_mysetting} \
+# ${wCompWindowSize_mysetting} \
+# ${wDelay_mysetting} \
+# ${dwMaxVideoFrameSize_mysetting} \
+# ${dwMaxPayloadTransferSize_mysetting} \
+# ${endpoint_bytes_per_packet_mysetting} \
+# ${bAlternateSetting_mysetting} \
+# ${bEndpointAddress_iso_mysetting} \
+# ${total_transfer_size_mysetting} \
+# ${fps} \
+# ${output_dir}
+
+
+
+
+
+
+#====================================================
+# 1280x720
+#====================================================
+fps=30
+width=1280
+height=720
+
+dev_fname=video0
+
+bInterfaceNumber_contol_mysetting=0;
+bEndpointAddress_interrupt_mysetting=131;
+bcdUVC_mysetting=256  # 0x100;
+
+
+bInterfaceNumber_streaming_mysetting=1;
+bmHint_mysetting=1;
+bFormatIndex_mysetting=1;
+bFrameIndex_mysetting=2;
+dwFrameInterval_mysetting=166666;
+wKeyFrameRate_mysetting=0;
+wPFrameRate_mysetting=0;
+wCompQuality_mysetting=0;
+wCompWindowSize_mysetting=0;
+wDelay_mysetting=32;
+dwMaxVideoFrameSize_mysetting=1843200;
+dwMaxPayloadTransferSize_mysetting=32768;
+
+
+endpoint_bytes_per_packet_mysetting=49152;
+bAlternateSetting_mysetting=6;
+bEndpointAddress_iso_mysetting=129;
+total_transfer_size_mysetting=1572864;        # 32768 * 32 = 1048576
+
+#------------------------------------------------------
+
+ex_num=6
+output_dir=`pwd`"/${dev_folder}/libusb/${ex_num}"
+
+./LIBUSB_EXAMPLES_EX.sh ${ex_num} 6353 20510 ${dev_fname} ${width} ${height} \
+${bInterfaceNumber_contol_mysetting} \
+${bEndpointAddress_interrupt_mysetting} \
+${bcdUVC_mysetting} \
+${bInterfaceNumber_streaming_mysetting} \
+${bmHint_mysetting} \
+${bFormatIndex_mysetting} \
+${bFrameIndex_mysetting} \
+${dwFrameInterval_mysetting} \
+${wKeyFrameRate_mysetting} \
+${wPFrameRate_mysetting} \
+${wCompQuality_mysetting} \
+${wCompWindowSize_mysetting} \
+${wDelay_mysetting} \
+${dwMaxVideoFrameSize_mysetting} \
+${dwMaxPayloadTransferSize_mysetting} \
+${endpoint_bytes_per_packet_mysetting} \
+${bAlternateSetting_mysetting} \
+${bEndpointAddress_iso_mysetting} \
+${total_transfer_size_mysetting} \
+${fps} \
+${output_dir}
 
 
 # # $: ffmpeg -f rawvideo -pix_fmt yuyv422 -s:v 1280x720 -r 30 -i ./out.yuv ./output.avi

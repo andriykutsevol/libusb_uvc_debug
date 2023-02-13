@@ -1365,16 +1365,21 @@ uvc_error_t uvc_stream_start(
       altsetting = interface->altsetting + alt_idx;
       endpoint_bytes_per_packet = 0;
 
+      printf("!!!dgnet: UVCLIB: alt_idx: %d, altsetting: %d, endpoint_bytes_per_packet: %d\n", alt_idx, altsetting, endpoint_bytes_per_packet);
+
       /* Find the endpoint with the number specified in the VS header */
       for (ep_idx = 0; ep_idx < altsetting->bNumEndpoints; ep_idx++)
       {
         endpoint = altsetting->endpoint + ep_idx;
+
+        printf("!!!dgnet: UVCLIB: ep_idx: %d, endpoint: %d\n", ep_idx, endpoint);
 
         struct libusb_ss_endpoint_companion_descriptor *ep_comp = 0;
         libusb_get_ss_endpoint_companion_descriptor(NULL, endpoint, &ep_comp);
         if (ep_comp)
         {
           endpoint_bytes_per_packet = ep_comp->wBytesPerInterval;
+          printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 1: %d\n", endpoint_bytes_per_packet);
           libusb_free_ss_endpoint_companion_descriptor(ep_comp);
           break;
         }
@@ -1384,12 +1389,18 @@ uvc_error_t uvc_stream_start(
           {
             endpoint_bytes_per_packet = endpoint->wMaxPacketSize;
             // wMaxPacketSize: [unused:2 (multiplier-1):3 size:11]
+            printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 2: %d\n", endpoint_bytes_per_packet);
+
             endpoint_bytes_per_packet = (endpoint_bytes_per_packet & 0x07ff) *
                                         (((endpoint_bytes_per_packet >> 11) & 3) + 1);
+
+             printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 3: %d\n", endpoint_bytes_per_packet);                            
             break;
           }
         }
       }
+
+      printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet: %d\n", endpoint_bytes_per_packet);
 
       if (endpoint_bytes_per_packet >= config_bytes_per_packet)
       {
@@ -1401,11 +1412,13 @@ uvc_error_t uvc_stream_start(
 
         printf("!!!dgnet: UVCLIB: packets_per_transfer 1: %d\n", packets_per_transfer);
 
+
         /* But keep a reasonable limit: Otherwise we start dropping data */
         if (packets_per_transfer > 32)
           packets_per_transfer = 32;
 
         printf("!!!dgnet: UVCLIB: packets_per_transfer 2 : %d\n", packets_per_transfer);
+
 
         total_transfer_size = packets_per_transfer * endpoint_bytes_per_packet;
         break;
