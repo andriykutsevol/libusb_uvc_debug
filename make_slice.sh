@@ -29,7 +29,7 @@ cp -r ./${target_dir} ./${target_dir}_slice
 
 cd ./${target_dir}_slice
 
-find . -type f -name 'out' -exec rm -rf {} +
+#find . -type f -name 'out' -exec rm -rf {} +
 find . -type f -name 'tcpdump1.pcap' -exec rm -rf {} +
 find . -type f -name 'tcpdump2.pcap' -exec rm -rf {} +
 find . -type f -name 'tcpdump3.pcap' -exec rm -rf {} +
