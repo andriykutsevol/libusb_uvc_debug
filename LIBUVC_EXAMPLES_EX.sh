@@ -49,12 +49,12 @@ height=${6}
 fmt_index=${7}
 frame_index=${8}
 fps=${9}
-output_dir=${10}"/"$width"x"$height
+output_dir=${10}"/"${width}"x"${height}
 host_results=`pwd`/host/host_results
 binary_path=`pwd`"/libuvc_debug/build"
 root_dir=`pwd`
 
-
+v4l2-ctl --device /dev/${device_file} --set-fmt-video=width=${width},height=${height},pixelformat=YUYV
 
 #---------------------------------------------------------
 
