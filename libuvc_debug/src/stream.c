@@ -1382,9 +1382,8 @@ uvc_error_t uvc_stream_start(
           printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 1: %d\n", endpoint_bytes_per_packet);
           libusb_free_ss_endpoint_companion_descriptor(ep_comp);
           break;
-        }
-        else
-        {
+        
+        }else{
           if (endpoint->bEndpointAddress == format_desc->parent->bEndpointAddress)
           {
             endpoint_bytes_per_packet = endpoint->wMaxPacketSize;

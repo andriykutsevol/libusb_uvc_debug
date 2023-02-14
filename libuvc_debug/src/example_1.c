@@ -246,6 +246,8 @@ int main(int argc, char **argv) {
       /* Print out the result */
       uvc_print_stream_ctrl(&ctrl, stderr);
 
+      sleep(1);
+
       if (res < 0) {
         printf("EXAMPLE: ERROR: uvc_get_stream_ctrl_format_size()");
         uvc_perror(res, "get_mode"); /* device doesn't provide a matching stream */
