@@ -55,6 +55,13 @@ dev_fname=video6
 
 
 
+
+
+
+
+
+
+
  ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 640 480 1 0 30 ${output_dir}
 
  ./LIBUVC_EXAMPLES_EX.sh ${ex_num} 1133 2177 ${dev_fname} 160 120 1 1 30 ${output_dir}
