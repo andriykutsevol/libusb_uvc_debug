@@ -340,9 +340,8 @@ uvc_error_t uvc_query_stream_ctrl(
       printf("!!!dgnet: UVCLIB: ctrl->bMinVersion: %d\n", ctrl->bMinVersion);
       printf("!!!dgnet: UVCLIB: ctrl->bMaxVersion: %d\n", ctrl->bMaxVersion);
     }
-  }
-  else
-  {
+
+  }else{
 
     printf("!!!dgnet: IT WAS A SET (UVC_SET_CUR): req != UVC_SET_CUR:  libusb_control_transfer\n");
 
@@ -568,66 +567,101 @@ uvc_error_t uvc_get_stream_ctrl_format_size(
     int width, int height,
     int fps)
 {
+  
+  
+  printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 1: width: %d, heigh: %d, fps: %d, uvc_frame_format: %d\n", width, height, fps, cf);
+
+  
   uvc_streaming_interface_t *stream_if;
+
+  printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 2: find a matching frame descriptor and interval \n");
 
   /* find a matching frame descriptor and interval */
   DL_FOREACH(devh->info->stream_ifs, stream_if)
   {
+    
+    printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 3: <<DL_FOREACH(devh->info->stream_ifs, stream_if)>> \n");
     uvc_format_desc_t *format;
 
     DL_FOREACH(stream_if->format_descs, format)
     {
+      
+      printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 4: <<DL_FOREACH(stream_if->format_descs, format)>> \n");
+      
       uvc_frame_desc_t *frame;
 
-      if (!_uvc_frame_format_matches_guid(cf, format->guidFormat))
+      if (!_uvc_frame_format_matches_guid(cf, format->guidFormat)){
+        printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 5: CONTINUE <<!_uvc_frame_format_matches_guid(cf, format->guidFormat)>> \n");
         continue;
+      }
 
       DL_FOREACH(format->frame_descs, frame)
       {
-        if (frame->wWidth != width || frame->wHeight != height)
+        printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 6: <<DL_FOREACH(format->frame_descs, frame)>> \n");
+        
+        if (frame->wWidth != width || frame->wHeight != height){
+          printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 7: CONTINUE <<frame->wWidth != width || frame->wHeight != height>> \n");
           continue;
+        }
 
         uint32_t *interval;
 
         ctrl->bInterfaceNumber = stream_if->bInterfaceNumber;
         UVC_DEBUG("claiming streaming interface %d", stream_if->bInterfaceNumber);
+        printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 8: claiming streaming interface %d \n", stream_if->bInterfaceNumber);
         uvc_claim_if(devh, ctrl->bInterfaceNumber);
         /* get the max values */
-        printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size()\n");
+        printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 9 :get the max values \n");
+        printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 10: uvc_query_stream_ctrl()\n");
         uvc_query_stream_ctrl(devh, ctrl, 1, UVC_GET_MAX);
 
         if (frame->intervals)
         {
-          for (interval = frame->intervals; *interval; ++interval)
-          {
-            // allow a fps rate of zero to mean "accept first rate available"
-            if (10000000 / *interval == (unsigned int)fps || fps == 0)
-            {
+              printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 11: There is <<(frame->intervals)>>\n");
+              for (interval = frame->intervals; *interval; ++interval)
+              {
+                printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 12: interval: %d\n", interval);
+                // allow a fps rate of zero to mean "accept first rate available"
+                if (10000000 / *interval == (unsigned int)fps || fps == 0)
+                {
+                      printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 13: <<(10000000 / *interval == (unsigned int)fps || fps == 0)>>\n");
+                      ctrl->bmHint = (1 << 0); /* don't negotiate interval */
+                      ctrl->bFormatIndex = format->bFormatIndex;
+                      ctrl->bFrameIndex = frame->bFrameIndex;
+                      ctrl->dwFrameInterval = *interval;
+                      printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 15: Begin ctrl fill: \n");
+                      printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 15: ctrl->bmHint: %d\n", ctrl->bmHint);
+                      printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 15: ctrl->bFormatIndex: %d\n", ctrl->bFormatIndex);
+                      printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 15: ctrl->bFrameIndex: %d\n", ctrl->bFrameIndex);
+                      printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 15: ctrl->dwFrameInterval: %d\n", ctrl->dwFrameInterval);
+                      printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 15: GOTO FOUND\n", ctrl->dwFrameInterval);
 
-              ctrl->bmHint = (1 << 0); /* don't negotiate interval */
-              ctrl->bFormatIndex = format->bFormatIndex;
-              ctrl->bFrameIndex = frame->bFrameIndex;
-              ctrl->dwFrameInterval = *interval;
+                      goto found;
+                }
+              }
 
-              goto found;
-            }
-          }
-        }
-        else
-        {
-          uint32_t interval_100ns = 10000000 / fps;
-          uint32_t interval_offset = interval_100ns - frame->dwMinFrameInterval;
+        }else{
 
-          if (interval_100ns >= frame->dwMinFrameInterval && interval_100ns <= frame->dwMaxFrameInterval && !(interval_offset && (interval_offset % frame->dwFrameIntervalStep)))
-          {
+              printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 16: There is NO <<(frame->intervals)>>\n");
 
-            ctrl->bmHint = (1 << 0);
-            ctrl->bFormatIndex = format->bFormatIndex;
-            ctrl->bFrameIndex = frame->bFrameIndex;
-            ctrl->dwFrameInterval = interval_100ns;
+              uint32_t interval_100ns = 10000000 / fps;
+              uint32_t interval_offset = interval_100ns - frame->dwMinFrameInterval;
 
-            goto found;
-          }
+              if (interval_100ns >= frame->dwMinFrameInterval && interval_100ns <= frame->dwMaxFrameInterval && !(interval_offset && (interval_offset % frame->dwFrameIntervalStep)))
+              {
+                    ctrl->bmHint = (1 << 0);
+                    ctrl->bFormatIndex = format->bFormatIndex;
+                    ctrl->bFrameIndex = frame->bFrameIndex;
+                    ctrl->dwFrameInterval = interval_100ns;
+
+                    printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 17: Begin ctrl fill: \n");
+                    printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 17: ctrl->bmHint: %d\n", ctrl->bmHint);
+                    printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 17: ctrl->bFormatIndex: %d\n", ctrl->bFormatIndex);
+                    printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 17: ctrl->bFrameIndex: %d\n", ctrl->bFrameIndex);
+                    printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 17: ctrl->dwFrameInterval: %d\n", ctrl->dwFrameInterval);                    
+                    printf("!!!dgnet: UVCLIB: uvc_get_stream_ctrl_format_size() 17: GOTO FOUND\n");
+                    goto found;
+              }
         }
       }
     }
@@ -637,7 +671,7 @@ uvc_error_t uvc_get_stream_ctrl_format_size(
   return UVC_ERROR_INVALID_MODE;
 
 found:
-  printf("!!!dgnet: ERROR: uvc_get_stream_ctrl_format_size(): uvc_probe_stream_ctrl()\n");
+  printf("!!!dgnet: uvc_get_stream_ctrl_format_size(): uvc_probe_stream_ctrl()\n");
   return uvc_probe_stream_ctrl(devh, ctrl);
 }
 
@@ -1362,66 +1396,68 @@ uvc_error_t uvc_stream_start(
      * packet sizes are increasing. */
     for (alt_idx = 0; alt_idx < interface->num_altsetting; alt_idx++)
     {
-      altsetting = interface->altsetting + alt_idx;
-      endpoint_bytes_per_packet = 0;
+            altsetting = interface->altsetting + alt_idx;
+            endpoint_bytes_per_packet = 0;
 
-      printf("!!!dgnet: UVCLIB: alt_idx: %d, altsetting: %d, endpoint_bytes_per_packet: %d\n", alt_idx, altsetting, endpoint_bytes_per_packet);
+            printf("!!!dgnet: UVCLIB: alt_idx: %d, altsetting: %d, endpoint_bytes_per_packet: %d\n", alt_idx, altsetting, endpoint_bytes_per_packet);
 
-      /* Find the endpoint with the number specified in the VS header */
-      for (ep_idx = 0; ep_idx < altsetting->bNumEndpoints; ep_idx++)
-      {
-        endpoint = altsetting->endpoint + ep_idx;
+            /* Find the endpoint with the number specified in the VS header */
+            for (ep_idx = 0; ep_idx < altsetting->bNumEndpoints; ep_idx++)
+            {
+                        endpoint = altsetting->endpoint + ep_idx;
 
-        printf("!!!dgnet: UVCLIB: ep_idx: %d, endpoint: %d\n", ep_idx, endpoint);
+                        printf("!!!dgnet: UVCLIB: ep_idx: %d, endpoint: %d\n", ep_idx, endpoint);
 
-        struct libusb_ss_endpoint_companion_descriptor *ep_comp = 0;
-        libusb_get_ss_endpoint_companion_descriptor(NULL, endpoint, &ep_comp);
-        if (ep_comp)
-        {
-          endpoint_bytes_per_packet = ep_comp->wBytesPerInterval;
-          printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 1: %d\n", endpoint_bytes_per_packet);
-          libusb_free_ss_endpoint_companion_descriptor(ep_comp);
-          break;
-        
-        }else{
-          if (endpoint->bEndpointAddress == format_desc->parent->bEndpointAddress)
-          {
-            endpoint_bytes_per_packet = endpoint->wMaxPacketSize;
-            // wMaxPacketSize: [unused:2 (multiplier-1):3 size:11]
-            printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 2: %d\n", endpoint_bytes_per_packet);
+                        struct libusb_ss_endpoint_companion_descriptor *ep_comp = 0;
+                        libusb_get_ss_endpoint_companion_descriptor(NULL, endpoint, &ep_comp);
+                        if (ep_comp)
+                        {
+                              endpoint_bytes_per_packet = ep_comp->wBytesPerInterval;
+                              printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 1: %d\n", endpoint_bytes_per_packet);
+                              libusb_free_ss_endpoint_companion_descriptor(ep_comp);
+                              break;
+                        
+                        }else{
+                              if (endpoint->bEndpointAddress == format_desc->parent->bEndpointAddress)
+                              {
+                                    endpoint_bytes_per_packet = endpoint->wMaxPacketSize;
+                                    // wMaxPacketSize: [unused:2 (multiplier-1):3 size:11]
+                                    printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 2: %d\n", endpoint_bytes_per_packet);
 
-            endpoint_bytes_per_packet = (endpoint_bytes_per_packet & 0x07ff) *
-                                        (((endpoint_bytes_per_packet >> 11) & 3) + 1);
+                                    endpoint_bytes_per_packet = (endpoint_bytes_per_packet & 0x07ff) *
+                                                                (((endpoint_bytes_per_packet >> 11) & 3) + 1);
 
-             printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 3: %d\n", endpoint_bytes_per_packet);                            
-            break;
-          }
-        }
-      }
+                                    printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 3: %d\n", endpoint_bytes_per_packet);                            
+                                    break;
+                              }
+                        }
+            }
 
-      printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet: %d\n", endpoint_bytes_per_packet);
+            printf("!!!dgnet: UVCLIB: endpoint_bytes_per_packet 4: %d\n", endpoint_bytes_per_packet);
 
-      if (endpoint_bytes_per_packet >= config_bytes_per_packet)
-      {
-        /* Transfers will be at most one frame long: Divide the maximum frame size
-         * by the size of the endpoint and round up */
-        packets_per_transfer = (ctrl->dwMaxVideoFrameSize +
-                                endpoint_bytes_per_packet - 1) /
-                               endpoint_bytes_per_packet;
+            if (endpoint_bytes_per_packet >= config_bytes_per_packet)
+            {
+              /* Transfers will be at most one frame long: Divide the maximum frame size
+              * by the size of the endpoint and round up */
+              packets_per_transfer = (ctrl->dwMaxVideoFrameSize +
+                                      endpoint_bytes_per_packet - 1) /
+                                    endpoint_bytes_per_packet;
 
-        printf("!!!dgnet: UVCLIB: packets_per_transfer 1: %d\n", packets_per_transfer);
-
-
-        /* But keep a reasonable limit: Otherwise we start dropping data */
-        if (packets_per_transfer > 32)
-          packets_per_transfer = 32;
-
-        printf("!!!dgnet: UVCLIB: packets_per_transfer 2 : %d\n", packets_per_transfer);
+              printf("!!!dgnet: UVCLIB: packets_per_transfer 1: %d\n", packets_per_transfer);
 
 
-        total_transfer_size = packets_per_transfer * endpoint_bytes_per_packet;
-        break;
-      }
+              /* But keep a reasonable limit: Otherwise we start dropping data */
+              if (packets_per_transfer > 32)
+                packets_per_transfer = 32;
+
+              printf("!!!dgnet: UVCLIB: packets_per_transfer 2 : %d\n", packets_per_transfer);
+
+
+              total_transfer_size = packets_per_transfer * endpoint_bytes_per_packet;
+              break;
+            }else{
+              printf("!!!dgnet: UVCLIB: <<endpoint_bytes_per_packet >= config_bytes_per_packet>> STIL DO NOT MEET: check next alt_idx\n");
+            }
     }
 
     /* If we searched through all the altsettings and found nothing usable */
