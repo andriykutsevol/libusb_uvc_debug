@@ -252,7 +252,7 @@ static int read_frame(void) {
  * See https://www.gnu.org/software/libc/manual/html_node/Waiting-for-I_002fO.html
  */
 static void main_loop(void) {
-  unsigned int count = 600; // Record 200 frames
+  unsigned int count = 200; // Record 200 frames
   while(count-- > 0) {
 
     fd_set fds;
