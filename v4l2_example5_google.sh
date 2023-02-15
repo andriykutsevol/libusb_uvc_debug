@@ -15,5 +15,5 @@ working_dir=`pwd`
 cd ${working_dir}
 ./V4L2_EXAMPLES_EX.sh 5 6353 20510 video2 1280 720 0 -1 60 ${output_dir}
 
-cd ${working_dir}
-./V4L2_EXAMPLES_EX.sh 5 6353 20510 video2 640 480 0 -1 60 ${output_dir}
+# cd ${working_dir}
+# ./V4L2_EXAMPLES_EX.sh 5 6353 20510 video2 640 480 0 -1 60 ${output_dir}
