@@ -237,7 +237,31 @@ fi
 dmesg >> ${output_dir}/dmesg.txt
 dmesg -c > /dev/null 2>&1
 clear
+sync
+sync
 sleep 1
+
+
+#======================================================
+
+
+mkdir -p ${output_dir}/host_results
+
+sudo chmod -R a+rwx ${host_results}
+sudo chmod -R a+rwx ${output_dir}
+
+#======================================================
+    # If we run this on host - it will be empty files.
+# sudo cat /dev/null > ${host_results}/D_output.txt
+# sudo cat /dev/null > ${host_results}/dmesg_host.txt
+sudo echo "" > ${host_results}/D_output.txt
+sudo echo "" > ${host_results}/dmesg_host.txt
+
+if [ "$(ls -A ${output_dir}/host_results)" ]; then
+    echo "Copy host_resluts to output_dir"
+    cp ${host_results}/* ${output_dir}/host_results/
+fi
+
 
 # #======================================================
 

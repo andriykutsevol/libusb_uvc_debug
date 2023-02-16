@@ -263,14 +263,6 @@ if [ "$(ls -A ${output_dir}/host_results)" ]; then
 fi
 
 
-#======================================================
-
-sync
-sync
-sync
-sleep 1
-
-
 # #======================================================
 
 # tar --exclude='*.pcap' -czf ./${videon}.tar.gz ./*
