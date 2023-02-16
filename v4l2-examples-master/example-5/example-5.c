@@ -254,6 +254,7 @@ static int read_frame(void) {
 static void main_loop(void) {
   unsigned int count = 200; // Record 200 frames
   while(count-- > 0) {
+    printf("while: count: %d\n", count);
 
     fd_set fds;
     struct timeval tv;
@@ -293,10 +294,11 @@ static void main_loop(void) {
         //exit(EXIT_FAILURE);
         exit(errno);
       }
-
-      if (read_frame())
-	// Go to next iterartion of fhe while loop; 0 means no frame is ready in the outgoing queue.
-	break;
+      printf("loop: try read_frame()\n");
+      if (read_frame()){
+	      // Go to next iterartion of fhe while loop; 0 means no frame is ready in the outgoing queue.
+	      break;
+      }
     }
   }
   

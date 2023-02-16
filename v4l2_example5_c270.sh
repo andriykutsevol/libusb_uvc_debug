@@ -13,10 +13,10 @@ working_dir=`pwd`
 dev_file="video0"
 
 cd ${working_dir}
-./V4L2_EXAMPLES_EX.sh 5 6353 20510 ${dev_file} 1280 720 0 -1 30 ${output_dir}
+./V4L2_EXAMPLES_EX.sh 5 6353 20510 ${dev_file} 1280 720 0 -1 10 ${output_dir}
 
 cd ${working_dir}
-./V4L2_EXAMPLES_EX.sh 5 6353 20510 ${dev_file} 1280 960 0 -1 30 ${output_dir}
+./V4L2_EXAMPLES_EX.sh 5 6353 20510 ${dev_file} 1280 960 0 -1 10 ${output_dir}
 
 
 # cd ${working_dir}
