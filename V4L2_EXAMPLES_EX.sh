@@ -49,6 +49,7 @@ fmt_index=${7}
 frame_index=${8}
 fps=${9}
 output_dir=${10}"/"$width"x"$height
+host_results=`pwd`/host/host_results
 binary_path=`pwd`"/v4l2-examples-master/example-${example_number}"
 root_dir=`pwd`
 
@@ -68,6 +69,7 @@ echo "binary_path:          " ${binary_path}
 #binary_path:           /home/dgnet/experiment/3/libuvc_debug/build
 
 mkdir -p ${output_dir}
+mkdir -p ${host_results}
 rm -f ${output_dir}/*
 rm -f ${binary_path}/out
 
