@@ -56,15 +56,6 @@ root_dir=`pwd`
 
 v4l2-ctl --device /dev/${device_file} --set-fmt-video=width=${width},height=${height},pixelformat=YUYV
 
-#---------------------------------------------------------
-
-clear
-echo "new new new new new new new new"
-echo "new new new new new new new new"
-
-#---------------------------------------------------------
-
-
 
 echo "example number:       " ${example_number}
 echo "device_vidpid:        " ${device_vidpid}

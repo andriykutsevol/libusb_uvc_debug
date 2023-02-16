@@ -50,7 +50,7 @@ output_dir=${10}"/"$width"x"$height
 binary_path=`pwd`"/v4l2-examples-master/example-${example_number}"
 root_dir=`pwd`
 
-
+v4l2-ctl --device /dev/${device_file} --set-fmt-video=width=${width},height=${height},pixelformat=YUYV
 
 echo "example number:       " ${example_number}
 echo "device_vidpid:        " ${device_vidpid}
@@ -109,9 +109,14 @@ sleep 5
 
 cd ${root_dir}
 
-# modprobe usbmon
-# tcpdump -i usbmon0 -w ${output_dir}/tcpdump1.pcap &
-# tcpdump1_pid=$!
+#-------------------------------
+# tcpdump
+if [ ${istcpdump} -ne "0" ]; then
+    modprobe usbmon
+    tcpdump -i usbmon0 -w ${output_dir}/tcpdump1.pcap &
+    tcpdump1_pid=$!
+fi 
+#-------------------------------
 
 
 echo "modprobe -r uvcvideo" >  ${output_dir}/dmesg.txt
@@ -125,8 +130,16 @@ clear
 echo "" >>  ${output_dir}/dmesg.txt
 echo "" >>  ${output_dir}/dmesg.txt
 
-# echo "kill tcpdump1: $tcpdump1_pid"
-# kill -9 $tcpdump1_pid
+
+#-------------------------------
+# tcpdump
+if [ ${istcpdump} -ne "0" ]; then
+    echo "kill tcpdump1: $tcpdump1_pid"
+    kill -9 $tcpdump1_pid
+
+fi 
+#-------------------------------
+
 
 dmesg -c > /dev/null 2>&1
 clear
@@ -134,9 +147,14 @@ sleep 3
 
 #======================================================
 
-# modprobe usbmon
-# tcpdump -i usbmon0 -w ${output_dir}/tcpdump2.pcap &
-# tcpdump2_pid=$!
+#-------------------------------
+# tcpdump
+if [ ${istcpdump} -ne "0" ]; then
+    modprobe usbmon
+    tcpdump -i usbmon0 -w ${output_dir}/tcpdump2.pcap &
+    tcpdump2_pid=$!
+fi 
+#-------------------------------
 
 
 echo "sudo modprobe uvcvideo" >>  ${output_dir}/dmesg.txt
@@ -147,8 +165,13 @@ dmesg >> ${output_dir}/dmesg.txt
 
 sleep 3
 
-# echo "kill tcpdump2: $tcpdump2_pid"
-# kill -9 $tcpdump2_pid
+#-------------------------------
+# tcpdump
+if [ ${istcpdump} -ne "0" ]; then
+    echo "kill tcpdump2: $tcpdump2_pid"
+    kill -9 $tcpdump2_pid
+fi 
+#-------------------------------
 
 dmesg -c > /dev/null 2>&1
 clear
@@ -163,9 +186,14 @@ echo "example-"${example_number} >> ${output_dir}/dmesg.txt
 echo "" >>  ${output_dir}/dmesg.txt
 
 
-# modprobe usbmon
-# tcpdump -i usbmon0 -w ${output_dir}/tcpdump3.pcap &
-# tcpdump3_pid=$!
+#-------------------------------
+# tcpdump
+if [ ${istcpdump} -ne "0" ]; then
+    modprobe usbmon
+    tcpdump -i usbmon0 -w ${output_dir}/tcpdump3.pcap &
+    tcpdump3_pid=$!
+fi 
+#-------------------------------
 
 
 #======================================================
@@ -195,8 +223,13 @@ cp ${binary_path}/out ${output_dir}
 #======================================================
 
 sleep 1
-# echo "kill tcpdump3: $tcpdump3_pid"
-# kill -9 $tcpdump3_pid
+#-------------------------------
+# tcpdump
+if [ ${istcpdump} -ne "0" ]; then
+    echo "kill tcpdump3: $tcpdump3_pid"
+    kill -9 $tcpdump3_pid
+fi 
+#-------------------------------
 
 
 dmesg >> ${output_dir}/dmesg.txt
