@@ -11,7 +11,7 @@ ex_num=5
 dev_name="rally"
 dev_file="video6"
 
-output_dir=`pwd`"/${dev_file}/v4l2-examples/${ex_num}"
+output_dir=`pwd`"/${dev_name}/v4l2-examples/${ex_num}"
 
 
 #-----------------------------------------------------------------------------------
