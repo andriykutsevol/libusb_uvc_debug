@@ -70,8 +70,8 @@ echo "binary_path:          " ${binary_path}
 
 mkdir -p ${output_dir}
 mkdir -p ${host_results}
-rm -f ${output_dir}/*
-rm -f ${binary_path}/out
+rm -fR ${output_dir}/*
+rm -fR ${binary_path}/out
 
 
 #======================================================
@@ -99,7 +99,7 @@ sleep 1
 #======================================================
 
 cd ${binary_path}
-rm -f ./out
+rm -fR ./out
 #git pull
 make
 
