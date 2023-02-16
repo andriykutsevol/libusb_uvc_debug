@@ -7,7 +7,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 
-ex_num=1
+ex_num=5
 dev_name="c270"
 dev_file="video0"
 
