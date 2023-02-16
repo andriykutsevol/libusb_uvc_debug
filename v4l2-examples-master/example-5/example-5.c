@@ -260,6 +260,7 @@ static void main_loop(void) {
     struct timeval tv;
     int r;
     for (;;) {
+      printf("loop 1\n");
       // Clear the set of file descriptors to monitor, then add the fd for our device
       FD_ZERO(&fds);
       FD_SET(fd, &fds);
@@ -281,20 +282,26 @@ static void main_loop(void) {
        */
       r = select(fd + 1, &fds, NULL, NULL, &tv);
 
-      if (-1 == r) {
-        if (EINTR == errno)
-          continue;
+       printf("loop 2\n");
 
+      if (-1 == r) {
+        if (EINTR == errno){
+           printf("loop 3\n");
+          continue;
+        }
+
+        printf("loop 4\n");
 	      perror("select");
 	      exit(errno);
       }
 
       if (0 == r) {
+        printf("loop 5\n");
         fprintf (stderr, "select timeout\n");
         //exit(EXIT_FAILURE);
         exit(errno);
       }
-      printf("loop: try read_frame()\n");
+      printf("loop 6: try read_frame()\n");
       if (read_frame()){
 	      // Go to next iterartion of fhe while loop; 0 means no frame is ready in the outgoing queue.
 	      break;
