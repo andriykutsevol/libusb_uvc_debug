@@ -2,7 +2,7 @@
 # sudo pacman -S base-devel cmake bc kmod libelf pahole cpio perl tar xz xmlto python-sphinx python-sphinx_rtd_theme graphviz imagemagick git texlive-latexextra
 #qemu
 # sudo pacman -S tcpdump base-devel cmake spice-protocol ceph libiscsi glusterfs python-sphinx xfsprogs ninja virglrenderer brltty pahole --overwrite "*"
-# sudo pacman -S ffmpeg 
+# sudo pacman -S ffmpeg v4l-utils guvcview
 
 makepkg --skipinteg --skipchecksums --skippgpcheck -o
 makepkg --skipinteg --skipchecksums --skippgpcheck -ef
