@@ -19,13 +19,13 @@ echo "================================="
 echo "================================="
 
 
-cd ${path_to_kernel}
-makepkg --skipinteg --skipchecksums --skippgpcheck -ef
+# cd ${path_to_kernel}
+# makepkg --skipinteg --skipchecksums --skippgpcheck -ef
 
 
-echo "================================="
-echo "================================="
-echo "================================="
+# echo "================================="
+# echo "================================="
+# echo "================================="
 
 
-sudo pacman -U linux-zen-5.19.13.zen1-1-x86_64.pkg.tar.zst
+# sudo pacman -U linux-zen-5.19.13.zen1-1-x86_64.pkg.tar.zst
