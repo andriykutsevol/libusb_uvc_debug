@@ -7,7 +7,8 @@ if [ "$EUID" -eq 0 ]
 fi
 
 
-path_to_kernel="/home/dgnet/kernel/v5.19.13-zen1_qemu_libusb_ex"
+# path_to_kernel="/home/dgnet/kernel/v5.19.13-zen1_qemu_libusb_ex"
+path_to_kernel="/home/dgnet/kernel"
 
 cd ${path_to_kernel}/src/zen-kernel
 # This taken from PKGBUILD
