@@ -34,6 +34,13 @@ fi
 #     (v4l2-dev.h) 
 # and it can either be allocated dynamically or embedded in another larger struct.
 
+# VS
+
+# devio.c  --  User space communication with USB devices.
+    # It allows user space programs/"drivers" to communicate directly
+    # with USB devices without intervening kernel driver.
+
+
 #---------------------------------------------------------
 
 
