@@ -6,8 +6,6 @@ if [ "$EUID" -eq 0 ]
   exit
 fi
 
-# sudo pacman -S base-devel bc kmod libelf pahole cpio perl tar xz xmlto python-sphinx python-sphinx_rtd_theme graphviz imagemagick git texlive-latexextra
-
 
 path_to_kernel="/home/dgnet/kernel/v5.19.13-zen1_qemu_libusb_ex"
 

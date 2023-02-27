@@ -1,4 +1,50 @@
+#kernel
+# sudo pacman -S base-devel cmake bc kmod libelf pahole cpio perl tar xz xmlto python-sphinx python-sphinx_rtd_theme graphviz imagemagick git texlive-latexextra
+#qemu
+# sudo pacman -S tcpdump base-devel cmake spice-protocol ceph libiscsi glusterfs python-sphinx xfsprogs ninja virglrenderer brltty pahole --overwrite "*"
+# sudo pacman -S ffmpeg 
+
+makepkg --skipinteg --skipchecksums --skippgpcheck -o
+makepkg --skipinteg --skipchecksums --skippgpcheck -ef
+
+
+
 git clone https://github.com/andriykutsevol/libusb_uvc_debug.git
+
+----------------------------------
+
+cd ./libuvc_debug/
+mkdir ./Build
+cd ./build
+make
+
+----------------------------------
+
+./libusb_build.sh
+
+----------------------------------
+
+cd v4l2-examples-master/example-5
+make
+
+
+----------------------------------
+
+1) We are using “Virtual Machine Manager” (VM Manager).
+
+2) Install the guest OS as usual.
+
+3) In the VM Manager set the “Controller USB” Model to “USB 3”          !!!
+
+4) In the MV Manager go to “Overview” and edit XML file.
+
+4.1) Set the first line to:
+
+<domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
+
+
+----------------------------------
+
 
 <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
 ...
@@ -12,7 +58,18 @@ git clone https://github.com/andriykutsevol/libusb_uvc_debug.git
 </qemu:commandline>
 
 
+----------------------------------
 
+<domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
+...
+<qemu:commandline>
+    <qemu:arg value='--usbspoof'/>
+    <qemu:arg value='from=07ca:1113,to=046d:0876'/>
+    <qemu:arg value='--usbspoof'/>
+    <qemu:arg value='from=17e9:ff00,to=17e9:ff13'/>
+  </qemu:commandline>
+
+----------------------------------
 
 
 
