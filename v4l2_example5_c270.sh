@@ -11,7 +11,7 @@ ex_num=5
 dev_name="c270"
 dev_file="video0"
 
-output_dir=`pwd`"/${dev_file}/v4l2-examples/${ex_num}"
+output_dir=`pwd`"/${dev_name}/v4l2-examples/${ex_num}"
 
 
 #-----------------------------------------------------------------------------------
